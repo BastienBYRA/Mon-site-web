@@ -1,0 +1,38 @@
+# Include
+include .env
+
+# Variables
+APP_VERSION := $(shell cat version)
+
+# Targets
+serve:
+	cd website && jekyll serve --trace --livereload
+
+build:
+	cd website && bundle exec jekyll build
+
+docker-build:
+	docker build -t $(DOCKER_USERNAME)/$(DOCKER_IMAGE):$(APP_VERSION) .
+
+docker-push:
+	docker push $USERNAME/$IMAGE_NAME:${APP_VERSION}
+
+update-patch:
+	@echo "Updating patch version..."
+	OLD_VERSION := $(shell cat version)
+	NEW_VERSION := $(shell echo $(OLD_VERSION) | awk -F '.' '{$$3=$$3+1; print}' OFS='.')
+	echo $(NEW_VERSION) > version
+
+update-minor:
+	@echo "Updating minor version..."
+	OLD_VERSION := $(shell cat version)
+	NEW_VERSION := $(shell echo $(OLD_VERSION) | awk -F '.' '{$$2=$$2+1; $$3=0; print}' OFS='.')
+	echo $(NEW_VERSION) > version
+
+update-major:
+	@echo "Updating major version..."
+	OLD_VERSION := $(shell cat version)
+	NEW_VERSION := $(shell echo $(OLD_VERSION) | awk -F '.' '{$$1=$$1+1; $$2=0; $$3=0; print}' OFS='.')
+	echo $(NEW_VERSION) > version
+
+deploy: build docker-build docker-push

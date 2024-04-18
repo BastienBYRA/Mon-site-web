@@ -1,4 +1,10 @@
 */*/node_modules
 node_modules
+
+# Angular / Java code, useless for now
 backend
 frontend
+
+# Build related folders/files for Jekyll
+website/_site
+website/.jekyll-cache
