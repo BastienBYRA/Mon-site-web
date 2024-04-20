@@ -5,11 +5,13 @@ include .env
 APP_VERSION := $(shell cat version)
 
 # Targets
+run:
+	cd website && npm run start
 serve:
-	cd website && jekyll serve --trace --livereload
+	cd website && npm run start
 
 build:
-	cd website && bundle exec jekyll build
+	cd website && npx @11ty/eleventy --input=. --output=_site
 
 docker-build:
 	docker build -t $(DOCKER_USERNAME)/$(DOCKER_IMAGE):$(APP_VERSION) .

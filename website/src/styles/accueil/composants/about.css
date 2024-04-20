@@ -1,0 +1,27 @@
+
+
+.about-container h1 {
+    text-decoration: underline;
+    text-decoration-color: blueviolet;
+}
+
+.about-container {
+    padding-top: 60px;
+    padding-left: 300px;
+    padding-right: 300px;
+    padding-bottom: 80px;
+    color: rgb(227, 227, 227);
+    background-color: rgb(38, 38, 38);
+}
+
+.about-container p {
+    font-size: 20px;
+}
+
+.tldr-text {
+    margin-top: 70px;
+}
+
+.about-container p {
+    letter-spacing: 0.6px;
+}

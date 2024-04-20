@@ -1,0 +1,36 @@
+header {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(37, 37, 37);
+    padding: 25px;
+    align-items: center;
+    gap: 50px;
+    padding-left: 150px;
+    padding-right: 150px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    border-bottom: 1px white solid;
+}
+
+.header-right {
+    display: flex;
+    gap: 20px;
+}
+
+header a {
+    /* color: rgb(189, 189, 189); */
+    color: white;
+}
+
+.header-main-link {
+    transition: color 0.2s;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.header-main-link:hover {
+    color: blueviolet;
+    text-decoration: none;
+}
