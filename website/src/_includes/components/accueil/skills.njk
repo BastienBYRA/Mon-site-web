@@ -1,0 +1,15 @@
+<div class="skills-container">
+    <h2>Mes compétences</h2>
+
+    {% for category in competencesList -%}
+        <h3>{{ category.category }}</h3>
+        <ul>
+            {% for skill in category.skills -%}
+                <li>
+                    <img src="{{ skill.image }}" alt="{{ skill.name }}">
+                    <span>{{ skill.name }}</span>
+                </li>
+            {% endfor -%}
+        </ul>
+    {% endfor -%}
+</div>

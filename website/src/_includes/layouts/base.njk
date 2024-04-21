@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/{{css_file}}.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>{{ title }}</title>
   </head>
   <body>
-    {% include "components/header.njk" %}
-      {% block content %} 
-          {{ content | safe }}
-      {% endblock %}
-    {% include "components/footer.njk" %}    
+    {# <video class="background-video" src="assets/hero.mp4" autoplay="" loop="" playsinline="" style="opacity: 0.8;"> #}
+      {% include "components/header.njk" %}
+        {% block content %} 
+            {{ content | safe }}
+        {% endblock %}
+      {% include "components/footer.njk" %}
+    {# </video> #}
   </body>
 </html>

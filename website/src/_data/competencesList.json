@@ -1,0 +1,93 @@
+[
+    {
+        "category": "DevOps",
+        "skills": [
+            {
+                "name": "Gitlab CI/CD",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Prometheus",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Docker",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Terraform",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Kubernetes",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Helm",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Grafana",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Loki",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Ansible",
+                "image": "link-to-image"
+            }
+        ]
+    },
+    {
+        "category": "Langage de Programmation",
+        "skills": [
+            {
+                "name": "JavaScript",
+                "image": "link-to-image"
+            },
+            {
+                "name": "React",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Bash",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Python",
+                "image": "link-to-image"
+            },
+            {
+                "name": "C# / .NET",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Node.js",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Java",
+                "image": "link-to-image"
+            }
+        ]
+    },
+    {
+        "category": "Autres",
+        "skills": [
+            {
+                "name": "Linux",
+                "image": "link-to-image"
+            },
+            {
+                "name": "Git",
+                "image": "link-to-image"
+            },
+            {
+                "name": "SQL",
+                "image": "link-to-image"
+            }
+        ]
+    }
+]
