@@ -1,15 +1,41 @@
 <div class="skills-container">
     <h2>Mes compétences</h2>
+    <p class="text-skill-tip">Cliquer sur une compétence pour en savoir plus !</p>
 
-    {% for category in competencesList -%}
-        <h3>{{ category.category }}</h3>
-        <ul>
-            {% for skill in category.skills -%}
-                <li>
-                    <img src="{{ skill.image }}" alt="{{ skill.name }}">
-                    <span>{{ skill.name }}</span>
-                </li>
-            {% endfor -%}
-        </ul>
-    {% endfor -%}
+    {# <div class="skills-container-grid">
+        {% for category in competencesList -%}
+            <div class="skills-name-skills-separator">
+                <h3>{{ category.category }}</h3>
+                <div class="skills-list-grid">
+                    {% for skill in category.skills -%}
+                        <div class="skills-logo-name">
+                            <img class="skills-logo" src="https://cdn.worldvectorlogo.com/logos/gitlab.svg" alt="{{ skill.name }}">
+                            <span>{{ skill.name }}</span>
+                        </div>
+                    {% endfor -%}
+                </div>
+            </div>
+        {% endfor -%}
+    </div> #}
+
+    <div class="skills-content">
+        {% for category in competencesList -%}
+            <div class="skills-content-container">
+                <h3>{{ category.category }}</h3>
+                <div class="grid-test">
+                    {% for skill in category.skills -%}
+                        <div>
+                            {# <img src="{{ skill.image }}" alt="{{ skill.name }}"> #}
+                            <a class="skills-logo-name">
+                                <img class="skills-logo" src="https://cdn.worldvectorlogo.com/logos/gitlab.svg" alt="{{ skill.name }}">
+                                <span>{{ skill.name }}</span>
+                            </a>
+                            
+                        </div>
+                    {% endfor -%}
+                </div>
+                
+            </div>
+        {% endfor -%}
+    </div>
 </div>
