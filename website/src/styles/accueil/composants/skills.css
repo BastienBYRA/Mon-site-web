@@ -3,8 +3,12 @@
     padding-left: 300px;
     padding-right: 300px;
     padding-bottom: 80px;
-    color: rgb(16, 16, 48);
-    background-color: rgb(217, 209, 221);
+    /* color: rgb(16, 16, 48); */
+    color: rgb(217, 209, 221);
+    /* background-color: rgb(217, 209, 221); */
+    background-image: url("../../../assets/Background-Blue-Black.jpg");
+    /* filter: blur(8px);
+    -webkit-filter: blur(8px); */
 }
 
 .skills-container h2 {
@@ -59,13 +63,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: ease-in-out 0.2s
+}
+
+.skills-logo-name:hover {
+    transform: scale(1.05);
 }
 
 .grid-test {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-auto-rows: auto;
     gap: 10px;
+    text-align: center;
+    row-gap: 20px;
 }
 
 .text-skill-tip {
@@ -75,19 +86,26 @@
 
 .skills-content {
     padding-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: auto;
+    gap: 20px;
 }
 
 .skills-content-container {
-    border: 2px solid rgb(196, 190, 199);
+    border: 2px solid rgb(23, 23, 23);
     border-radius: .75rem;
-    background-color: rgb(196, 190, 199);
+    /* background-color: rgba(196, 190, 199, 0.6); */
+    background-color: rgba(44, 44, 44, 0.6);
     margin-bottom: 30px;
     padding-bottom: 20px;
     transition: background-color 0.2s;
 }
 
 .skills-content-container:hover {
-    background-color: rgb(181, 175, 184);
+    /* background-color: rgb(181, 175, 184); */
+    /* background-color: rgba(44, 44, 44, 0.8); */
+    background-color: rgba(29, 29, 29, 0.6);
 }
 
 .skills-content-container h3 {
@@ -95,3 +113,29 @@
     text-decoration: underline;
     text-decoration-color: blueviolet;
 }
+
+.skills-row-span-focus {
+    grid-row: span 2;
+}
+
+/* .skills-content-container {
+    position: relative;
+    border-radius: .75rem;
+    background-color: rgba(44, 44, 44, 0.6);
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    transition: background-color 0.2s;
+    z-index: 1;
+}
+
+.skills-content-container::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    bottom: -2px;
+    left: -2px;
+    background: linear-gradient(to right, red, orange);
+    border-radius: .75rem;
+    z-index: -1;
+} */

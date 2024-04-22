@@ -3,7 +3,8 @@ header {
     display: flex;
     justify-content: space-between;
     background-color: rgb(37, 37, 37);
-    padding: 25px;
+    /* padding: 25px; */
+    padding: 13px;
     align-items: center;
     gap: 50px;
     padding-left: 150px;

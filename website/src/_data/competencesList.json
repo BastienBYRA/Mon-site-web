@@ -4,39 +4,39 @@
         "skills": [
             {
                 "name": "Gitlab CI/CD",
-                "image": "link-to-image"
+                "image": "../assets/skills/Gitlab.svg"
             },
             {
                 "name": "Prometheus",
-                "image": "link-to-image"
+                "image": "../assets/skills/Prometheus.svg"
             },
             {
                 "name": "Docker",
-                "image": "link-to-image"
+                "image": "../assets/skills/Docker.svg"
             },
             {
                 "name": "Terraform",
-                "image": "link-to-image"
+                "image": "../assets/skills/Terraform.svg"
             },
             {
                 "name": "Kubernetes",
-                "image": "link-to-image"
+                "image": "../assets/skills/Kubernetes.svg"
             },
             {
                 "name": "Helm",
-                "image": "link-to-image"
+                "image": "../assets/skills/Helm.png"
             },
             {
                 "name": "Grafana",
-                "image": "link-to-image"
+                "image": "../assets/skills/Grafana.svg"
             },
             {
                 "name": "Loki",
-                "image": "link-to-image"
+                "image": "../assets/skills/Loki.png"
             },
             {
                 "name": "Ansible",
-                "image": "link-to-image"
+                "image": "../assets/skills/Ansible.png"
             }
         ]
     },
@@ -45,31 +45,35 @@
         "skills": [
             {
                 "name": "JavaScript",
-                "image": "link-to-image"
+                "image": "../assets/skills/JavaScript.svg"
             },
             {
                 "name": "React",
-                "image": "link-to-image"
+                "image": "../assets/skills/React.svg"
             },
             {
                 "name": "Bash",
-                "image": "link-to-image"
+                "image": "../assets/skills/Bash.svg"
             },
             {
                 "name": "Python",
-                "image": "link-to-image"
+                "image": "../assets/skills/Python.png"
             },
             {
-                "name": "C# / .NET",
-                "image": "link-to-image"
+                "name": "C#",
+                "image": "../assets/skills/Csharp.svg"
+            },
+            {
+                "name": "ASP.NET",
+                "image": "../assets/skills/NET.svg"
             },
             {
                 "name": "Node.js",
-                "image": "link-to-image"
+                "image": "../assets/skills/Nodejs.svg"
             },
             {
                 "name": "Java",
-                "image": "link-to-image"
+                "image": "../assets/skills/Java.svg"
             }
         ]
     },
@@ -78,15 +82,15 @@
         "skills": [
             {
                 "name": "Linux",
-                "image": "link-to-image"
+                "image": "../assets/skills/Linux.svg"
             },
             {
                 "name": "Git",
-                "image": "link-to-image"
+                "image": "../assets/skills/Git.svg"
             },
             {
                 "name": "SQL",
-                "image": "link-to-image"
+                "image": "../assets/skills/SQL.svg"
             }
         ]
     }

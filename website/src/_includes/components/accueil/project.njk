@@ -1,0 +1,24 @@
+<div class="projects-container">
+    <h2>Mes projets</h2>
+    <p class="text-skill-tip">Cliquer sur un projet pour en savoir plus !</p>
+
+    <div class="projects-content">
+        {% for category in competencesList -%}
+            <div class="projects-content-container">
+                <h3>{{ category.category }}</h3>
+                <div class="grid-test">
+                    {% for skill in category.skills -%}
+                        <div>
+                            <a class="projects-logo-name">
+                                <img class="projects-logo" src="{{ skill.image }}" alt="{{ skill.name }}">
+                                <span>{{ skill.name }}</span>
+                            </a>
+                        </div>
+                    {% endfor -%}
+                </div>    
+            </div>
+        {% endfor -%}
+    </div>
+
+    <a>Voir tout mes projets</a>
+</div>

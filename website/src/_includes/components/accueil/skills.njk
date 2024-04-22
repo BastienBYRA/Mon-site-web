@@ -20,21 +20,18 @@
 
     <div class="skills-content">
         {% for category in competencesList -%}
-            <div class="skills-content-container">
+            <div class="skills-content-container {% if category.category == "DevOps" %}skills-row-span-focus{% endif %}">
                 <h3>{{ category.category }}</h3>
                 <div class="grid-test">
                     {% for skill in category.skills -%}
                         <div>
-                            {# <img src="{{ skill.image }}" alt="{{ skill.name }}"> #}
                             <a class="skills-logo-name">
-                                <img class="skills-logo" src="https://cdn.worldvectorlogo.com/logos/gitlab.svg" alt="{{ skill.name }}">
+                                <img class="skills-logo" src="{{ skill.image }}" alt="{{ skill.name }}">
                                 <span>{{ skill.name }}</span>
                             </a>
-                            
                         </div>
                     {% endfor -%}
-                </div>
-                
+                </div>    
             </div>
         {% endfor -%}
     </div>
