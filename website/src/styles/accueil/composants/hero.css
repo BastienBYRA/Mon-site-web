@@ -78,3 +78,8 @@
     width: 40px;
     transition: width 0.2s;
 }
+
+.hero-about {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

@@ -1,9 +1,21 @@
 <div class="projects-container">
     <h2>Mes projets</h2>
     <p class="text-skill-tip">Cliquer sur un projet pour en savoir plus !</p>
-
+    
     <div class="projects-content">
-        {% for category in competencesList -%}
+        {% for project in projectsList -%}
+            <div class="projects-flex">
+                <h3>{{project.name}}</h3>
+                <p>{{project.shortDescription}}</p>
+                <div>
+
+                </div>
+            </div>
+        {% endfor -%}
+    </div>
+
+    {# <div class="projects-content">
+        {% for project in projectsList -%}
             <div class="projects-content-container">
                 <h3>{{ category.category }}</h3>
                 <div class="grid-test">
@@ -18,7 +30,7 @@
                 </div>    
             </div>
         {% endfor -%}
-    </div>
+    </div> #}
 
     <a>Voir tout mes projets</a>
 </div>

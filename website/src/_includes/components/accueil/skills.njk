@@ -20,9 +20,12 @@
 
     <div class="skills-content">
         {% for category in competencesList -%}
-            <div class="skills-content-container {% if category.category == "DevOps" %}skills-row-span-focus{% endif %}">
+            <div class="skills-content-container
+                {% if category.category == "DevOps" %}skills-row-take-2-row{% endif %}
+                {% if category.category == "Soft skills" %}skills-row-take-full-column{% endif %}
+            ">
                 <h3>{{ category.category }}</h3>
-                <div class="grid-test">
+                <div class="skills-grid-{{ category.sizeCategory }}">
                     {% for skill in category.skills -%}
                         <div>
                             <a class="skills-logo-name">

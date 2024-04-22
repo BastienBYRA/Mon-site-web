@@ -45,6 +45,19 @@ h2 {
     text-decoration-color: blueviolet;
 }
 
+.underline {
+    text-decoration: underline;
+}
+
+.underline-orangered {
+    text-decoration: underline;
+    text-decoration-color: orangered;
+}
+
+.none {
+    display: none;
+}
+
 /* body :not(header) a:active {
     color: orangered;
 }

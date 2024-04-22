@@ -5,8 +5,9 @@ Le projet Digit-Acteon est un projet interne à l'entreprise Acteon Satelec qui 
 
 ## Mes taches, mes objectifs
 
-- Réaliser des interfaces visuelle simple mais efficace permettant de réaliser toutes les actions nécéssaire à chaque ateliers sans provoquer de ralentissement / de gène.
-
+- Réaliser des interfaces visuelle simple et efficace permettant de réaliser toutes les actions nécéssaire à chaque ateliers sans provoquer de ralentissement / de gène.
+- Simplifier les processus pour permettre au utilisateurs de pouvoir réaliser leur action le plus rapidement possible
+- 
 
 # Observabilité
 

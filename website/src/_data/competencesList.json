@@ -1,6 +1,7 @@
 [
     {
         "category": "DevOps",
+        "sizeCategory": "small",
         "skills": [
             {
                 "name": "Gitlab CI/CD",
@@ -42,6 +43,7 @@
     },
     {
         "category": "Langage de Programmation",
+        "sizeCategory": "small",
         "skills": [
             {
                 "name": "JavaScript",
@@ -79,6 +81,7 @@
     },
     {
         "category": "Autres",
+        "sizeCategory": "small",
         "skills": [
             {
                 "name": "Linux",

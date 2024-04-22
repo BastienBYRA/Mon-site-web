@@ -1,12 +1,56 @@
 <div class="about-container">
 
-    <h2>A propos de moi ; Une petite histoire</h2>
+    <h2>A propos de moi.</h2>
 
-    <p>Depuis mon enfance, j'ai nourri une passion pour l'informatique, tout d'abord grâce aux jeux vidéo, puis à Internet de manière plus générale, de cette passion est né mon désir d'en apprendre plus sur l'informatique, de savoir ce qui fait fonctionner les services web que l'on utilise tout les jours au quotidien.</p>
-    <p>De cette passion, et ne sachant pas quel métier je voulais faire plus tard, je me suis dirigé vers une école d'informatique, dans ce que je pensais être un Bac Pro visant à formé des developpeurs, comme la moitié de ma classe à l'époque. Quelle fut notre surprise d'apprendre que l'on est dans une école de Réseau et Électronique !</p>
-    <p>Avec un diplôme et des câbles RJ45 en main, je me suis dirigé (cette fois c'est la bonne) vers un BTS dans lequel je pourrais apprendre le code, et la magie derrière les sites web et logiciels que j'utilise tous les jours.</p>
-    <p>Trois ans, une Licence Pro et une alternance d'un an sont passés ainsi, pendant lesquels j'ai appris comment on mène un projet informatique à bien, comment on conçoit des solutions web, Java, C#, JavaScript, Python, SQL, le RGPD... Plus rien ne m'échappe ! Pourtant, je n'ai jamais vraiment su comment gérer ce qui est autour, le avant et après avoir tapé mon code.</p>
-    <p>Démangé d'acquérir ces connaissances, j'ai continué mon cursus scolaire et professionnel dans cette direction, pour finalement acquérir ce savoir.</p>
-    {# <p><span class="text-bold">TLDR</span> : Maintenant, je code des Hello World sur la prod, et si la prod tombe, je me déconnecte de Teams !</p> #}
+    {# <p>Je suis un "Ingénieur" DevOps, plongé dans le monde du developpement informatique depuis maintenant 3 ans</p> #}
+    {# <h2>A propos de moi ; Une petite histoire</h2> #}
+    <p>Dans ma jeunesse, j'ai nourri une passion pour l'informatique, tout d'abord grâce aux jeux vidéo, puis à Internet de manière plus générale, de cette passion est né mon désir d'en apprendre plus sur l'informatique, de savoir ce qui fait fonctionner les services informatique que l'on utilise tout les jours au quotidien.</p>
+    <p>De cette passion, j'ai suivi un cursus m'ayant fait passer du réseau et de l'electronique au developpement informatique jusqu'a finalement devenir Ingénieur DevOps.</p>
+    <p>Sur mon temps libre, j'aime lire et écrire, à propos de tout et de rien, j'aime jouer à des jeux vidéo solo, cozy ou tactique, j'aime expérimenter, comprendre, et apprendre de nouvelles choses.</p>
     
+    <button class="about-show-story" status="inactive">Une petite histoire sur mon parcours</button>
+    <div class="about-story none">
+        <p>Plus jeune, je ne savais pas vraiment ou aller, sans réel idée et ma passion pour l'informatique, je me suis diriger vers un Bac Pro qui, moi comme la moitié de ma classe à l'époque, nous a été vendu comme une école de code, une école ou on allait comprendre l'envers du décors du web. Quelle fut notre surprise d'apprendre que l'on est dans une école de Réseau et Électronique !</p>
+        <p>Avec un Bac Pro et des câbles RJ45 en main, je me suis dirigé (cette fois c'est la bonne) vers un BTS dans lequel je pourrais apprendre le code, et la magie derrière les sites web et logiciels que j'utilise tous les jours.</p>
+        <p>Trois ans, une Licence Pro et une alternance d'un an sont passés ainsi, pendant lesquels j'ai appris comment on mène un projet informatique à bien, comment on conçoit des solutions web, Java, C#, JavaScript, Python, SQL, la cybersécurité, le RGPD... Plus rien ne m'échappe ! Pourtant, je n'ai jamais vraiment su comment est géré ce qui est autour, le avant et après avoir tapé mon code.</p>
+        <p>Démangé d'acquérir ces connaissances, j'ai continué mon cursus scolaire et professionnel dans cette direction, pour finalement acquérir ce savoir.</p>
+    </div>
+        
 </div>
+
+<script>
+    const button = document.querySelector('.about-show-story');
+    const story = document.querySelector('.about-story');
+
+    button.addEventListener('click', () => {
+    if (button.getAttribute('status') === 'inactive') {
+        button.setAttribute('status', 'active');
+        story.classList.remove('none');
+    } else {
+        button.setAttribute('status', 'inactive');
+        story.classList.add('none');
+    }
+    });
+</script>
+
+{# <script>
+    function checkElementVisibility() {
+        var element = document.querySelector('.about-container h2');
+        var position = element.getBoundingClientRect();
+
+        // check whether the element is in the viewport
+        if(position.top >= 90 && position.bottom <= window.innerHeight) {
+            element.classList.add('slide-in');
+        }
+
+        console.log(position.top)
+    }
+
+    
+
+    // call the function when the page is loaded
+    checkElementVisibility();
+
+    // call the function when the page is scrolled
+    window.addEventListener('scroll', checkElementVisibility);
+</script> #}
