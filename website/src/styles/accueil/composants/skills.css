@@ -6,9 +6,12 @@
     /* color: rgb(16, 16, 48); */
     color: rgb(217, 209, 221);
     /* background-color: rgb(217, 209, 221); */
-    background-image: url("../../../assets/Background-Blue-Black.jpg");
+    background-image: url("../../../assets/background/bg-windows-blue-black.jpg");
     /* filter: blur(8px);
     -webkit-filter: blur(8px); */
+    /* background-size: cover; */
+    background-repeat: no-repeat;
+    /* background-position: top; */
 }
 
 .skills-container h2 {

@@ -50,18 +50,15 @@
     border-color: rgb(113, 36, 186); */
     background-color: white;
     border-color: rgb(113, 36, 186);
-    color: blueviolet
+    color: blueviolet;
+    cursor: pointer;
 }
 
-/* .about-story {
-    border: 2px solid rgb(62, 62, 62);
+.about-story {
+    /* border: 2px solid rgb(62, 62, 62);
     border-radius: 30px;
     background-color: rgb(62, 62, 62);
     padding-left: 20px;
-    padding-right: 20px;
-    margin-top: 24px
+    padding-right: 20px; */
+    margin-top: 30px
 }
-
-.about-story p {
-    font-size: 18px;
-} */

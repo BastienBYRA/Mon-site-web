@@ -6,6 +6,7 @@
         "period": "Avril 2024 - En cours",
         "role": "Developpeur Full-Stack & DevOps",
         "img": "",
+        "urlName": "portfolio",
         "technologies": [
             {
                 "title": "Eleventy / 11ty",
@@ -31,7 +32,8 @@
         "longDescription": "TODO",
         "period": "Aout 2022 - Septembre 2023",
         "role": "Developpeur Full-Stack",
-        "img": "",
+        "img": "ACTEON.png",
+        "urlName": "acteon-satelec-digit-acteon",
         "technologies": [
             {
                 "title": "C#",
@@ -40,6 +42,14 @@
             {
                 "title": "ASP.NET",
                 "img": "NET.svg"
+            },
+            {
+                "title": "JavaScript",
+                "img": "JavaScript.svg"
+            },
+            {
+                "title": "SQL Server",
+                "img": "SQL.svg"
             },
             {
                 "title": "HTML",
@@ -54,16 +64,8 @@
                 "img": "Bootstrap.svg"
             },
             {
-                "title": "JavaScript",
-                "img": "JS.svg"
-            },
-            {
                 "title": "JQuery",
                 "img": "JQuery.png"
-            },
-            {
-                "title": "SQL Server",
-                "img": "SQLServer.png"
             },
             {
                 "title": "Git",
@@ -77,31 +79,32 @@
         "longDescription": "TODO",
         "period": "Septembre 2023 - Septembre 2025",
         "role": "DevOps",
-        "img": "",
+        "img": "OBSERVABILITE.png",
+        "urlName": "observabilite",
         "technologies": [
             {
                 "title": "Prometheus",
-                "img": "Python.svg"
+                "img": "Prometheus.svg"
             },
             {
                 "title": "Loki",
-                "img": "Docker.svg"
+                "img": "Loki.png"
             },
             {
                 "title": "Grafana",
-                "img": "Docker.svg"
-            },
-            {
-                "title": "Alertmanager",
-                "img": "Docker.svg"
+                "img": "Grafana.svg"
             },
             {
                 "title": "Docker",
                 "img": "Docker.svg"
             },
             {
+                "title": "Alertmanager",
+                "img": "Alertmanager.svg"
+            },
+            {
                 "title": "Kubernetes",
-                "img": "Docker.svg"
+                "img": "Kubernetes.svg"
             },
             {
                 "title": "Git",
@@ -115,11 +118,12 @@
         "longDescription": "TODO",
         "period": "Juin 2032 - Juillet 2023",
         "role": "Developpeur Backend Python",
-        "img": "",
+        "img": "WATTSTACK.png",
+        "urlName": "wattstack",
         "technologies": [
             {
                 "title": "Python",
-                "img": "Python.svg"
+                "img": "Python.png"
             },
             {
                 "title": "Docker",

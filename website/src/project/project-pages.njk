@@ -1,0 +1,11 @@
+---
+pagination:
+  data: projectsList
+  size: 1
+  alias: project
+permalink: "project/{{ project.urlName | slugify }}/"
+layout: layouts/accueil.njk
+title: Accueil
+---
+
+{{ project.name }}
