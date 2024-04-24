@@ -14,4 +14,12 @@ Le projet Digit-Acteon est un projet interne à l'entreprise Acteon Satelec qui 
 ## Schéma
 ## Outils utilisé, pourquoi
 
+
+
+
 # Site portfolio
+
+## Présentation
+Ce projet est un condensé de mes connaissances dans le métier du developpement informatique ainsi que celui de DevOps, c'est un site web statique ayant pour but de remplir la fonction de Blog ainsi que de Portfolio.
+
+De la conception à la création du site, au deploiement et plus encore, ce projet à aussi pour but d'etre mon terrain de jeu et d'expérimentation pour les différentes choses que je veux tester (tant du coté Dev de Ops) : Docker, Kubernetes, utilisation des Makefile, deploiement sur un cloud provider, gestion de la VM est de ce qui est dessus (WAF, firewall...), utilisation de Opentelemetry... et bien plus encore.

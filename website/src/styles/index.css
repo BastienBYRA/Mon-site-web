@@ -8,7 +8,7 @@
 /* Global CSS */
 html {
     font-family: 'Manrope';
-    font-size: large;
+    /* font-size: large; */
 }
 
 body {
@@ -20,7 +20,7 @@ a:hover {
     color: white
 }
 
-scrollbar-color {
+.scrollbar-color {
     scrollbar-color: blueviolet;
 }
 
@@ -34,11 +34,11 @@ h1 {
     text-decoration-color: blueviolet;
 }
 
-h1:hover {
+/* h1:hover {
     color: blueviolet;
     text-decoration: underline;
     text-decoration-color: rgb(27, 27, 27);;
-}
+} */
 
 h2 {
     text-decoration: underline;
@@ -77,6 +77,10 @@ h2 {
     border-color: rgb(113, 36, 186);
     color: blueviolet;
     cursor: pointer;
+}
+
+a:has(.purple-white-btn) {
+    text-decoration: none;
 }
 
 .center {

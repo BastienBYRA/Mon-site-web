@@ -7,6 +7,10 @@
     background-color: rgb(38, 38, 38);
 }
 
+.about-container h2 {
+    font-size: 32px;
+}
+
 .about-container p {
     font-size: 20px;
 }

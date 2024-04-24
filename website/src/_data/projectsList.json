@@ -2,11 +2,18 @@
     {
         "name": "Portfolio",
         "shortDescription": "Mon site web, utilisant mes connaissance de Developpeur et de DevOps",
-        "longDescription": "TODO",
+        "longDescription": "Ce projet est un condensé de mes connaissances dans le métier du developpement informatique ainsi que celui de DevOps, c'est un site web statique ayant pour but de remplir la fonction de Blog ainsi que de Portfolio.\n\nDe la conception à la création du site, au deploiement et plus encore, ce projet à aussi pour but d'etre mon terrain de jeu et d'expérimentation pour les différentes choses que je veux tester (tant du coté Dev de Ops) : Docker, Kubernetes, utilisation des Makefile, deploiement sur un cloud provider, gestion de la VM est de ce qui est dessus (WAF, firewall...), utilisation de Opentelemetry... et bien plus encore.",
         "period": "Avril 2024 - En cours",
         "role": "Developpeur Full-Stack & DevOps",
         "img": "",
         "urlName": "portfolio",
+        "objectif": "Réaliser un site web statique pour présenter mes articles et mon portfolio",
+        "projectImage": [
+            {
+                "title": "Page d'accueil",
+                "img": "home.png"
+            }
+        ],
         "technologies": [
             {
                 "title": "Eleventy / 11ty",

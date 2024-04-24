@@ -2,7 +2,8 @@ header {
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    background-color: rgb(37, 37, 37);
+    /* background-color: rgb(37, 37, 37); */
+    background-color: rgb(51 50 50);
     /* padding: 25px; */
     padding: 13px;
     align-items: center;
@@ -12,7 +13,7 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    border-bottom: 1px white solid;
+    /* border-bottom: 1px white solid; */
     z-index: 1000;
 }
 
