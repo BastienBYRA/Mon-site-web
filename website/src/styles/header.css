@@ -2,9 +2,7 @@ header {
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    /* background-color: rgb(37, 37, 37); */
-    background-color: rgb(51 50 50);
-    /* padding: 25px; */
+    background-color: white;
     padding: 13px;
     align-items: center;
     gap: 50px;
@@ -13,19 +11,24 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    /* border-bottom: 1px white solid; */
+    border-bottom: 1px rgba(0, 0, 0, 0.080) solid;
     z-index: 1000;
 }
 
 .header-right {
     display: flex;
-    gap: 20px;
+    gap: 25px;
+    font-size: 18px;
 }
 
 header a {
-    /* color: rgb(189, 189, 189); */
-    color: white;
     text-decoration: none;
+    color: black
+}
+
+header a:hover {
+    text-underline-offset: 7px;
+    text-decoration-thickness: 2px;
 }
 
 .header-main-link {

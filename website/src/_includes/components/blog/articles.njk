@@ -1,0 +1,64 @@
+{# <div class="blog-content-container">
+    {% set counter = 1 %} 
+    {% for article in articlesList -%}
+        {% if counter == 1 %}
+            <div class="blog-main-article"> UTILISE FLEX
+                <img src="" /> 
+                <div>
+                    <h2>Title</h2>
+                    <p>Description</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="blog-sub-article">
+                
+            </div>
+        {% endif %}
+
+        <p>Est-ce que je fais un call to action ?</p>
+    {% set counter = counter + 1 %}
+    {% endfor -%}
+</div> #}
+
+{# <div class="blog-content-container">
+    {% set firstArticle = collections.article[0] %}
+    <div class="blog-main-article"> UTILISE FLEX
+        <img src="" /> 
+        <div>
+            <h2>Title</h2>
+            <p>Description</p>
+        </div>
+    </div>
+</div> #}
+
+<div class="blog-content-container">
+    {% if collections.article.length > 0 %}
+        {% set counter = 1 %} 
+        {% for article in collections.article | reverse -%}
+            {% if counter == 1 %}
+            <div class="blog-main-article">
+                <div class="blog-main-image">
+                    <img src="assets/blog/{{article.data.filename}}/{{article.data.image}}" alt="{{article.data.title}}" /> 
+                </div>
+                <div class="blog-main-content">
+                    <p class="article-date">{{article.data.dateText}}</p>
+                    <h2>{{article.data.title}}</h2>
+                    <p class="article-description">{{article.data.description}}</p>
+                </div>
+            </div>
+            {% set counter = counter + 1 %} 
+            {% endif %}
+        {% endfor -%}
+    {% endif %}
+
+    {# {% if collections.article.length > 1 %}
+        {% for article in collections.article | reverse -%}
+            <h1>{{article.data.title}}</h1>
+            <p>{{loop.index0}}</p>
+        {% endfor -%}
+    {% endif %} #}
+
+
+    
+    <h2>{{firstArticle.data.title}}</h2>
+</div>

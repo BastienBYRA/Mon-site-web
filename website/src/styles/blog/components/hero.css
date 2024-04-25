@@ -1,0 +1,28 @@
+.blog-hero-container {
+    padding-top: 95px;
+    padding-left: 300px;
+    padding-right: 300px;
+    padding-bottom: 80px;
+    /* background-color: #3C51B4; */
+    /* background-color: #b14747; */
+    /* background: linear-gradient(#e66465, #9198e5); */
+    /* background: rgb(2,0,36);
+    background: -moz-linear-gradient(103deg, rgba(2,0,36,1) 7%, rgba(86,9,121,1) 25%, rgba(201,125,242,1) 95%);
+    background: -webkit-linear-gradient(103deg, rgba(2,0,36,1) 7%, rgba(86,9,121,1) 25%, rgba(201,125,242,1) 95%);
+    background: linear-gradient(103deg, rgba(2,0,36,1) 7%, rgba(86,9,121,1) 25%, rgba(201,125,242,1) 95%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#c97df2",GradientType=1); */
+    background-color: #52528c;
+    color: white;
+}
+
+.blog-hero-container h1 {
+    font-size: 34px;
+    padding-left: 11px;
+    border-left: 4px solid white;
+}
+
+.blog-hero-container p {
+    font-size: 20px;
+    word-spacing: 1.1px;
+    margin-top: -10px;
+}

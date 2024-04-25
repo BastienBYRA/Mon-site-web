@@ -21,9 +21,19 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addCollection('projects', (collection) => {
         return collection.getFilteredByGlob('src/project/*.md');
     });
-	eleventyConfig.addCollection('blogs', (collection) => {
-        return collection.getFilteredByGlob('src/blog/*.md');
-    });
+	// eleventyConfig.addCollection('articles', (collection) => {
+    //     return collection.getFilteredByGlob('src/blog/*.md');
+    // });
+
+	// limit filter
+	eleventyConfig.addFilter("limit", function(array, limit) {
+		return array.slice(0, limit);
+  	});
+
+	// limit filter
+	eleventyConfig.addFilter("firstItem", function(array) {
+		return array.slice(0, 1);
+		});
 
 	return {
         dir: {
