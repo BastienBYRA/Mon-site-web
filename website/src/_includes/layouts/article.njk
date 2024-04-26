@@ -1,0 +1,34 @@
+---
+css_file: article/index
+---
+
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+    <div class="article-container">
+        <div class="article-color-block"></div>
+        <div class="article-intro">
+            <p class="article-date">{{ dateText }} | {{ subject.join(', ') }}</p>
+            <h1 class="article-title">{{ title }}</h1>
+            <p class="article-description">{{ description }}</p>
+            <img class="article-image" src="../../assets/blog/{{ filename }}/{{ image }}" alt="{{ imageAlt }}" />
+        </div>
+        <div class="article-content">
+            {{ content | safe }}
+        </div>
+        <div class="article-end">
+            <p>Merci d'avoir lu cette article, n'hésitez pas a jeter un coup d'oeil au autre article 😆</p>
+            <div class="article-social-network">
+                <p>par Bastien BYRA</p>
+                <div class="article-network-image">
+                    <a href="https://twitter.com/olawanle_joel">
+                        <img src="/assets/social_network/Github.svg" alt="Logo de Github" />
+                    </a>
+                    <a href="https://twitter.com/olawanle_joel">
+                        <img src="/assets/social_network/Linkedin.svg" alt="Logo de Github" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

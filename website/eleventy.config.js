@@ -25,15 +25,20 @@ module.exports = function (eleventyConfig) {
     //     return collection.getFilteredByGlob('src/blog/*.md');
     // });
 
-	// limit filter
-	eleventyConfig.addFilter("limit", function(array, limit) {
-		return array.slice(0, limit);
-  	});
+	// // limit filter
+	// eleventyConfig.addFilter("limit", function(array, limit) {
+	// 	return array.slice(0, limit);
+  	// });
 
-	// limit filter
-	eleventyConfig.addFilter("firstItem", function(array) {
-		return array.slice(0, 1);
-		});
+	// // limit filter
+	// eleventyConfig.addFilter("firstItem", function(array) {
+	// 	return array.slice(0, 1);
+	// 	});
+
+	// eleventyConfig.addGlobalData("permalink", () => {
+	// 	return (data) =>
+	// 		`${data.page.filePathStem}.${data.page.outputFileExtension}`;
+	// 	});
 
 	return {
         dir: {
