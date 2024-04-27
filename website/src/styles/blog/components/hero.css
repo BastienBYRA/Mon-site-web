@@ -1,7 +1,12 @@
 .blog-hero-container {
     padding-top: 95px;
-    background-color: #252525;;
-    color: white;
+    /* background-color: #252525;
+    color: white; */
+    background: rgb(254,243,226);
+    background: -moz-linear-gradient(131deg, rgba(254,243,226,1) 7%, rgba(248,235,255,1) 93%);
+    background: -webkit-linear-gradient(131deg, rgba(254,243,226,1) 7%, rgba(248,235,255,1) 93%);
+    background: linear-gradient(131deg, rgba(254,243,226,1) 7%, rgba(248,235,255,1) 93%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fef3e2",endColorstr="#f8ebff",GradientType=1);
 }
 
 .blog-hero-content {
@@ -14,9 +19,10 @@
 }
 
 .blog-hero-container h1 {
-    font-size: 34px;
     padding-left: 11px;
-    border-left: 4px solid white;
+    /* border-left: 4px solid white; */
+    /* border-left: 4px solid rgb(0, 0, 0); */
+    border-left: 8px solid blueviolet;
 }
 
 .blog-hero-container p {
