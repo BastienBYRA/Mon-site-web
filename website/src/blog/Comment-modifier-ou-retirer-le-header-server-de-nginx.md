@@ -110,6 +110,8 @@ Explication de la commande :
 
 Exécuter la commande, et à la fin vous aurez une belle image NGINX dans la version voulue avec vos modules.
 
+**Note : Si vous utilisez une image nginx-unpriviliged, vous aurez besoin de modifier le Dockerfile pour passer en utilisateur root (USER root) le temps de l'installation des packages**
+
 Vous avez désormais un NGINX presque fonctionnelle, avec le module “headers-more” permettant de pouvoir modifier / supprimer l’en-tête “Server”
 
 Il vous suffit d’ajouter deux lignes dans le fichier /etc/nginx/nginx.conf de votre container pour qu’il supprime l’en-tête.
@@ -245,10 +247,10 @@ Maintenant que l’on est tous au même niveau, il suffit de rajouter deux ligne
 (Je prend le fichier nginx.conf par défaut comme exemple) 
 
 ```
-user nginx;
-worker_processes 1;
-error_log /var/log/nginx/error.log warn;
-pid /var/run/nginx.pid;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /tmp/nginx.pid;
 # -----------------------------------------------------------------------------------
 # --------------------------- ON IMPORTE NOS MODULES --------------------------------
 # -----------------------------------------------------------------------------------
@@ -257,26 +259,43 @@ load_module modules/ngx_http_security_headers_module.so;
 # --------------------------- ON IMPORTE NOS MODULES --------------------------------
 # -----------------------------------------------------------------------------------
 events {
-    . . .
+    worker_connections  1024;
 }
 
 http {
 # -----------------------------------------------------------------------------------
-# -------------- ON DESACTIVE L'AFFICHAGE DE LA VERSION DE NGINX --------------------
-# -----------------------------------------------------------------------------------
-    server_tokens: off;
-
-# -----------------------------------------------------------------------------------
 # ------------------- MODIFIE OU SUPPRIME L'ENETE "Server" --------------------------
 # -----------------------------------------------------------------------------------
     # Supprimer l’en-tête “Server”
+    server_tokens off;
     more_clear_headers Server;
 
     # OU
 
     # Modifier l'en-tête “Server”
+    server_tokens: off;
     more_set_headers    "Server: my_server";
-    . . .
+# -----------------------------------------------------------------------------------
+# ------------------- MODIFIE OU SUPPRIME L'ENETE "Server" --------------------------
+# -----------------------------------------------------------------------------------
+
+    # La suite de votre configuration NGINX :
+    proxy_temp_path /tmp/proxy_temp;
+    client_body_temp_path /tmp/client_temp;
+    fastcgi_temp_path /tmp/fastcgi_temp;
+    uwsgi_temp_path /tmp/uwsgi_temp;
+    scgi_temp_path /tmp/scgi_temp;
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+    access_log  /var/log/nginx/access.log  main;
+    sendfile        on;
+    #tcp_nopush     on;
+    keepalive_timeout  65;
+    #gzip  on;
+    include /etc/nginx/conf.d/*.conf;
 }
 ```
 
