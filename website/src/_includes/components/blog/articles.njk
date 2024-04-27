@@ -1,0 +1,99 @@
+{# <div class="blog-content-container">
+    {% set counter = 1 %} 
+    {% for article in articlesList -%}
+        {% if counter == 1 %}
+            <div class="blog-main-article"> UTILISE FLEX
+                <img src="" /> 
+                <div>
+                    <h2>Title</h2>
+                    <p>Description</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="blog-sub-article">
+                
+            </div>
+        {% endif %}
+
+        <p>Est-ce que je fais un call to action ?</p>
+    {% set counter = counter + 1 %}
+    {% endfor -%}
+</div> #}
+
+{# <div class="blog-content-container">
+    {% set firstArticle = collections.article[0] %}
+    <div class="blog-main-article"> UTILISE FLEX
+        <img src="" /> 
+        <div>
+            <h2>Title</h2>
+            <p>Description</p>
+        </div>
+    </div>
+</div> #}
+
+ {# First element #}
+<div class="blog-content-container">
+    {% if collections.article.length > 0 %}
+        {% set counter = 1 %} 
+        {% for article in collections.article | reverse -%}
+            {% if counter == 1 %}
+            <a class="link-no-visual-effect" href="/blog/{{article.data.filename}}">
+                <div class="blog-main-article">
+                    <div class="blog-main-image">
+                        <img src="assets/blog/{{article.data.filename}}/{{article.data.image}}" alt="{{article.data.title}}" /> 
+                    </div>
+                    <div class="blog-main-content">
+                        <p class="main-article-date">{{article.data.dateText}} | {{ article.data.subject.join(', ') }}</p>
+                        <h2>{{article.data.title}}</h2>
+                        <p class="main-article-description">{{article.data.description}}</p>
+                    </div>
+                </div>
+            </a>
+            
+            {% set counter = counter + 1 %} 
+            {% endif %}
+        {% endfor -%}
+    {% endif %}
+
+    {# Second and third element #}
+    {% if collections.article.length > 1 %}
+    <div class="blog-sub-article">
+        {% for article in collections.article.slice(0, collections.article.length-1) | reverse -%}
+        <a class="link-no-visual-effect" href="/blog/{{article.data.filename}}">
+            <div class="blog-sub-content">
+                <div class="blog-sub-flex">
+                    {# <div></div> #}
+                    <img src="assets/blog/{{article.data.filename}}/{{article.data.image}}" alt="{{article.data.title}}" />
+                    <div>
+                        <p class="sub-article-date">{{article.data.dateText}} | {{ article.data.subject.join(', ') }}</p>
+                        <h2>{{article.data.title}}</h2>
+                        <p class="sub-article-description">{{article.data.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor -%}
+    </div>
+    {% endif %}
+
+
+    {# Four to whatever the number of articles i have #}
+    {# {% if collections.article.length > 1 %}
+    <div class="blog-sub-article">
+        {% for article in collections.article.slice(0, collections.article.length-3) | reverse -%}
+        <div class="blog-sub-content">
+            <div class="blog-sub-flex">
+                <img src="assets/blog/{{article.data.filename}}/{{article.data.image}}" alt="{{article.data.title}}" />
+                <div>
+                    <p class="article-date">{{article.data.dateText}}</p>
+                    <h2>{{article.data.title}}</h2>
+                    <p class="article-description">{{article.data.description}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor -%}
+    </div>
+    {% endif %} #}
+    
+    <h2>{{firstArticle.data.title}}</h2>
+</div>

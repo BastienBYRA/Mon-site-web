@@ -17,7 +17,6 @@ body {
 
 a:hover {
     text-decoration: underline;
-    color: white
 }
 
 .scrollbar-color {
@@ -29,20 +28,7 @@ a:hover {
 }
 
 h1 {
-    transition: 0.2s;
-    text-decoration: underline;
-    text-decoration-color: blueviolet;
-}
-
-/* h1:hover {
-    color: blueviolet;
-    text-decoration: underline;
-    text-decoration-color: rgb(27, 27, 27);;
-} */
-
-h2 {
-    text-decoration: underline;
-    text-decoration-color: blueviolet;
+    font-size: 34px;
 }
 
 .underline {
@@ -92,3 +78,40 @@ a:has(.purple-white-btn) {
 .mt-32 {
     margin-top: 32px;
 }
+
+.link-no-visual-effect {
+    text-decoration: inherit;
+    color: inherit;  
+}
+
+.link-no-visual-effect:hover {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.image-related-text {
+    margin-top: -3px;
+    text-align: center;
+    font-style: italic;
+    font-size: 19px !important;
+    margin-bottom: 35px;
+}
+
+pre {
+    background-color: rgb(56, 56, 56);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    /* background-color: rgb(240, 240, 240);
+    color: black;
+    padding: 20px;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin-top: 20px;
+    margin-bottom: 20px; */
+}
+
