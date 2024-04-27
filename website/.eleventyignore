@@ -1,3 +1,9 @@
 projet-format-texte.md
 data-to-add.md
+
+
+# Folder / pages to ignore
 portfolio-index.njk
+src/project/*
+src/_data/*
+portfolio
