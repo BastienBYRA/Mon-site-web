@@ -35,8 +35,7 @@ Maintenant soyons honnête, vous pourriez vous en foutre, et continuer votre vie
 
 Si c'est votre cas, alors vous êtes au bon endroit, ici je vous montre comment modifier ou retirer, cet en-tête.
 
-<!-- ## Ce qui ne fonctionne pas -->
-<h2 id="ce-qui-ne-fonctionne-pas">Ce qui ne fonctionne pas</h2>
+## Ce qui ne fonctionne pas {#ce-qui-ne-fonctionne-pas}
 
 J'ai passé plusieurs jours dessus, je vais donc prendre le temps de passer sur certaines méthodes que j'ai vu être proposées qui ne fonctionnent pas, voir qui sont complètement catastrophiques.
 
@@ -67,15 +66,13 @@ L'idée est bonne, on passe un en-tête HTTP "server", pour remplacer celui auto
 
 Le problème, c'est que dans la pratique ça va rajouter un deuxième en-tête "server"...
 
-<!-- ## Comment fait-on alors ? -->
-<h2 id="comment-on-fait-alors">Comment fait-on alors ?</h2>
+## Comment fait-on alors ? {#comment-on-fait-alors}
 
 Je vais ici expliquer la méthode permettant de pouvoir résoudre notre problème sur une vraiment pré-build / compilé de NGINX (Obtenu via installation du paquet nginx, via une image Docker...)
 
 Cette méthode est tout aussi fonctionnelle pour une version non compilée, mais il me semble qu'il existe une seconde méthode demandant de modifier des fichiers avant la compilation du code, à vos risques et péril si vous l'essayez.
 
-<!-- ## La solution -->
-<h2 id="la-solution">La solution</h2>
+## La solution {#la-solution}
 
 Le [repository Github de NGINX](https://github.com/nginxinc/docker-nginx), dans son [dossier "modules"](https://github.com/nginxinc/docker-nginx/tree/master/modules), fourni deux Dockerfile, une utilisant le gestionnaire de paquet apt (Dockerfile) et une autre utilisant apk (Dockerfile.alpine). Elles permettent de pouvoir installer les modules que l'on veut dans une image NGINX de notre choix.
 
@@ -122,8 +119,7 @@ Car certaines personnes voudraient peut-être pouvoir installer leurs modules su
 
 Quelque soit vos raisons, je vais vous apprendre comment sortir vos modules NGINX de votre container.
 
-<!-- ## Comment installer les modules NGINX hors du container NGINX -->
-<h2 id="comment-installer-les-modules-NGINX-hors-du-container-NGINX">Comment installer les modules NGINX hors du container NGINX</h2>
+## Comment installer les modules NGINX hors du container NGINX {#comment-installer-les-modules-NGINX-hors-du-container-NGINX}
 
 Une question simple, qui je pensais au départ allez être simple, l’histoire de 5 minutes.
 
@@ -239,8 +235,7 @@ apt-get install --no-install-suggests --no-install-recommends -y /path/to/tmp/pa
 
 Modifier “/path/to/tmp/packages” par le chemin vers lequel vous avez installé le /tmp/packages du container, et hop, ça installe vos modules.
 
-<!-- ## Fichier à modifier pour appliquer les modules dans votre NGINX -->
-<h2 id="fichier-a-modifier-pour-appliquer-les-modules-dans-votre-NGINX">Fichier à modifier pour appliquer les modules dans votre NGINX</h2>
+## Fichier à modifier pour appliquer les modules dans votre NGINX {#fichier-a-modifier-pour-appliquer-les-modules-dans-votre-NGINX}
 
 Maintenant que l’on est tous au même niveau, il suffit de rajouter deux lignes dans le fichier nginx.conf
 

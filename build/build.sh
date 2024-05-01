@@ -14,5 +14,5 @@ docker build \
     --no-cache \
     ../
 
-# # Push l'image (docker hub)
+# Push l'image (docker hub)
 docker push $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_TAG
