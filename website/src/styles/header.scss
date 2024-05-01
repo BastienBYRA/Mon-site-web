@@ -11,7 +11,7 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    border-bottom: 1px rgba(0, 0, 0, 0.080) solid;
+    border-bottom: 1px rgba(0, 0, 0, 0.08) solid;
     z-index: 1000;
 }
 
@@ -23,21 +23,21 @@ header {
 
 header a {
     text-decoration: none;
-    color: black
-}
+    color: black;
 
-header a:hover {
-    text-underline-offset: 7px;
-    text-decoration-thickness: 2px;
+    &:hover {
+        text-underline-offset: 7px;
+        text-decoration-thickness: 2px;
+    }
 }
 
 .header-main-link {
     transition: color 0.2s;
     font-size: 25px;
     font-weight: bold;
-}
 
-.header-main-link:hover {
-    color: blueviolet;
-    text-decoration: none;
+    &:hover {
+        color: blueviolet;
+        text-decoration: none;
+    }
 }

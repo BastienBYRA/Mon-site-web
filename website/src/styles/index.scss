@@ -1,14 +1,13 @@
 /* Import font */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Manrope:wght@200..800&display=swap');
 
 /* Import other CSS files */
 @import url("header.css");
 
 /* Global CSS */
+
 html {
     font-family: 'Manrope';
-    /* font-size: large; */
 }
 
 body {
@@ -17,10 +16,6 @@ body {
 
 a:hover {
     text-decoration: underline;
-}
-
-.scrollbar-color {
-    scrollbar-color: blueviolet;
 }
 
 .text-bold {
@@ -56,13 +51,13 @@ h1 {
     background-color: blueviolet;
     color: white;
     transition: 0.2s;
-}
 
-.purple-white-btn:hover {
-    background-color: white;
-    border-color: rgb(113, 36, 186);
-    color: blueviolet;
-    cursor: pointer;
+    &:hover {
+        background-color: white;
+        border-color: rgb(113, 36, 186);
+        color: blueviolet;
+        cursor: pointer;
+    }
 }
 
 a:has(.purple-white-btn) {
@@ -81,12 +76,12 @@ a:has(.purple-white-btn) {
 
 .link-no-visual-effect {
     text-decoration: inherit;
-    color: inherit;  
-}
-
-.link-no-visual-effect:hover {
-    text-decoration: inherit;
     color: inherit;
+
+    &:hover {
+        text-decoration: inherit;
+        color: inherit;
+    }
 }
 
 .image-related-text {
@@ -98,13 +93,16 @@ a:has(.purple-white-btn) {
 }
 
 pre {
-    background-color: rgb(56, 56, 56);
-    color: white;
+    /* background-color: rgb(56, 56, 56);
+    color: white; */
     padding: 20px 25px;
     border-radius: 5px;
     overflow-x: auto;
     margin-top: 20px;
     margin-bottom: 20px;
+    background-color: #ebebeb;
+    border: 1px solid #d5d5d5;
+    font-size: 16px;
 
     /* background-color: rgb(240, 240, 240);
     color: black;
@@ -114,4 +112,3 @@ pre {
     margin-top: 20px;
     margin-bottom: 20px; */
 }
-
