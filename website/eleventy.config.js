@@ -24,6 +24,7 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addWatchTarget('src/styles');
 	eleventyConfig.addPassthroughCopy('src/assets/blog');
 	eleventyConfig.addPassthroughCopy('src/assets/social_network');
+	eleventyConfig.addPassthroughCopy('src/assets/icons');
 
 	// File/Folder that should be ignored by eleventy
 	eleventyConfig.ignores.delete("src/portfolio");
