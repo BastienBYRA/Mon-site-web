@@ -12,6 +12,14 @@
     padding: 0px 100px;
     margin: 0 auto;
     margin-top: -150px;
+
+    @media (max-width: 800px) {
+        padding: 0px 40px;
+    }
+
+    @media (max-width: 600px) {
+        padding: 0px 25px;
+    }
 }
 
 .article-date {
@@ -19,6 +27,14 @@
     letter-spacing: 3px;
     font-size: 18px;
     margin-top: -350px;
+    
+    @media (max-width: 800px) {
+        font-size: 16px;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 14px;
+    }
 }
 
 .article-image {
@@ -28,6 +44,26 @@
     margin-right: auto;
     max-height: 400px;
     object-fit: cover;
+
+    @media (max-width: 800px) {
+        max-height: 300px;
+    }
+}
+
+.image-related-text {
+    margin-top: -3px;
+    text-align: center;
+    font-style: italic;
+    font-size: 19px;
+    margin-bottom: 35px;
+
+    @media (max-width: 800px) {
+        font-size: 16px;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 14px;
+    }
 }
 
 .article-title {
@@ -36,6 +72,16 @@
     max-width: 80%;
     padding-left: 16px;
     border-left: 8px solid blueviolet;
+
+    @media (max-width: 800px) {
+        font-size: 26px;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 22px;
+        border-left: 4px solid blueviolet;
+        max-width: 90%;
+    }
 }
 
 .article-description {
@@ -43,31 +89,65 @@
     font-size: 20px;
     word-spacing: 1px;
     line-height: 30px;
+
+    @media (max-width: 800px) {
+        margin-top: 24px;
+        font-size: 18px;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 16px;
+        margin-top: 18px;
+    }
 }
 
 .article-intro img {
     border-radius: 25px;
 }
-  
-.article-content {
-    img {
-        border-radius: 25px;
-    }
 
+.article-content {
     max-width: 1000px;
     padding: 0px 100px;
     margin: 0 auto;
     padding-bottom: 20px;
 
+    @media (max-width: 800px) {
+        padding: 0px 40px;
+    }
+
+    @media (max-width: 600px) {
+        padding: 0px 25px;
+    }
+
+    img {
+        border-radius: 25px;
+    }
+
     p {
         font-size: 20px;
         line-height: 30px;
+
+        @media (max-width: 800px) {
+            font-size: 18px;
+        }
+    
+        @media (max-width: 600px) {
+            font-size: 16px;
+        }
     }
 }
 
 li {
     font-size: 20px;
     line-height: 30px;
+
+    @media (max-width: 800px) {
+        font-size: 18px;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 16px;
+    }
 }
 
 .article-content img {
@@ -85,15 +165,31 @@ h2 {
     text-underline-offset: 3px;
     text-decoration-thickness: 2px;
     margin-top: 50px;
+
+    @media (max-width: 800px) {
+        font-size: 26px;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 22px;
+    }
 }
 
 h3 {
     font-size: 22px;
     margin-top: 40px;
+
+    @media (max-width: 800px) {
+        font-size: 20px;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 18px;
+    }
 }
 
 .article-end {
-    padding: 1px 20px;
+    padding: 1px 40px;
     padding-bottom: 10px !important;
     background-color: #F2F2F2;
     border-bottom-right-radius: 40px;
@@ -105,18 +201,37 @@ h3 {
     background: -webkit-linear-gradient(131deg, rgba(254, 243, 226, 1) 7%, rgba(248, 235, 255, 1) 93%);
     background: linear-gradient(131deg, rgba(254, 243, 226, 1) 7%, rgba(248, 235, 255, 1) 93%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fef3e2",endColorstr="#f8ebff",GradientType=1);
+    width: 75%;
+
+    @media (max-width: 800px) {
+        margin-top: 60px;
+        padding: 1px 25px;
+    }
+
+    @media (max-width: 800px) {
+        font-size: 20px;
+        padding: 1px 15px;
+    }
 
     p {
         &:first-of-type {
             font-size: 24px;
             font-weight: bold;
+
+            @media (max-width: 800px) {
+                font-size: 22px;
+            }
+    
+            @media (max-width: 800px) {
+                font-size: 20px;
+            }
         }
 
         font-size: 20px;
         margin-left: 10px;
     }
 }
-  
+
 .article-social-network {
     padding-top: 10px;
     display: flex;

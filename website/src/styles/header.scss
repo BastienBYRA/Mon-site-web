@@ -1,13 +1,6 @@
 header {
     box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
     background-color: white;
-    padding: 13px;
-    align-items: center;
-    gap: 50px;
-    padding-left: 150px;
-    padding-right: 150px;
     position: fixed;
     width: 100%;
     top: 0;
@@ -15,10 +8,33 @@ header {
     z-index: 1000;
 }
 
+.header-main {
+    padding: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+
+    padding-left: 60px;
+    padding-right: 60px;
+
+    @media (max-width: 800px) {
+		padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
 .header-right {
     display: flex;
     gap: 25px;
     font-size: 18px;
+
+    a {
+        @media (max-width: 800px) {
+            display: none;
+        }
+    }
+
 }
 
 header a {
@@ -40,4 +56,48 @@ header a {
         color: blueviolet;
         text-decoration: none;
     }
+
+    @media (max-width: 500px) {
+        font-size: 18px;
+    }
+}
+
+.mobile-header-right {
+    width: 30px;
+    display: none;
+
+    @media (max-width: 800px) {
+        display: block
+    }
+}
+
+.header-mobile-row-invisible {
+    display: none;
+}
+
+.header-mobile-row {
+    // margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+
+    a {
+        display: inline-block;
+        padding: 14px 30px;
+        font-size: 28px;
+
+        &:hover {
+            border-left: 10px solid blueviolet;
+        }
+    }
+}
+
+
+.toggle-receiver-header {
+    position: absolute;
+    width: 100%;
+    bottom: 30px;
+}
+
+.header-full-page {
+    height: 100% !important;
 }

@@ -12,6 +12,7 @@ html {
 
 body {
     margin: 0px;
+    word-wrap: break-word;
 }
 
 a:hover {
@@ -24,6 +25,10 @@ a:hover {
 
 h1 {
     font-size: 34px;
+
+    @media (max-width: 950px) {
+		font-size: 30px;
+    }
 }
 
 .underline {
@@ -84,14 +89,6 @@ a:has(.purple-white-btn) {
     }
 }
 
-.image-related-text {
-    margin-top: -3px;
-    text-align: center;
-    font-style: italic;
-    font-size: 19px !important;
-    margin-bottom: 35px;
-}
-
 pre {
     /* background-color: rgb(56, 56, 56);
     color: white; */
@@ -103,6 +100,14 @@ pre {
     background-color: #ebebeb;
     border: 1px solid #d5d5d5;
     font-size: 16px;
+
+    @media (max-width: 800px) {
+        padding: 15px 18px;
+    }
+
+    @media (max-width: 600px) {
+        padding: 14px 16px;
+    }
 
     /* background-color: rgb(240, 240, 240);
     color: black;

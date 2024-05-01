@@ -1,9 +1,39 @@
 <header>
-    <a href="/" class="header-main-link">
-        Bastien Byra
-    </a>
-    <div class="header-right">
-        <a href="/">Blog</a>
-        <a href="/a-propos">A propos</a>
+    <div class="header-main">
+        <a href="/" class="header-main-link">
+            Bastien Byra
+        </a>
+        <div class="header-right">
+            <a href="/">Blog</a>
+            <a href="/a-propos">A propos</a>
+        </div>
+        <svg id="toggle-menu-header" class="mobile-header-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-menu-2" height="44" width="44">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="18" x2="20" y2="18" />
+        </svg>
     </div>
+    <div class="toggle-receiver-header header-mobile-row-invisible">
+        <a href="/">Blog</a>
+        <a href="/a-propos" class="last-link">A propos</a>
+    </div>
+    
 </header>
+
+<script>
+    document.getElementById('toggle-menu-header').addEventListener('click', function() {
+        var rowHeader = document.querySelector('.toggle-receiver-header');
+        var header = document.querySelector('header');
+
+        if (rowHeader.classList.contains('header-mobile-row-invisible')) {
+            rowHeader.classList.remove('header-mobile-row-invisible');
+            rowHeader.classList.add('header-mobile-row');
+            header.classList.add('header-full-page');
+        } else if (rowHeader.classList.contains('header-mobile-row')) {
+            rowHeader.classList.remove('header-mobile-row');
+            rowHeader.classList.add('header-mobile-row-invisible');
+            header.classList.remove('header-full-page');
+        }
+    });
+</script>
