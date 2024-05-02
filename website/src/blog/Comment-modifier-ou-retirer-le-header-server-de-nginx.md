@@ -5,14 +5,14 @@ description: "NGINX comme d'autre serveur web envoie une entête 'Server' permet
 image: "NGINX.webp"
 layout: layouts/article.njk
 tags: article
-date: 2017-12-01
+date: 2024-04-25
 dateText : 25 AVRIL 2024
 subject:
     - TECH
     - NGINX
     - WEB SERVER
 metaDescription: "Cet article explique comment modifier ou supprimer l'en-tête 'Server' de NGINX."
-metaKeywords: "NGINX, Server Header, Web Server"
+metaKeywords: "NGINX, Server Web, Header, Web Server, Header server"
 metaImage: "../../assets/blog/Comment-modifier-ou-retirer-le-header-server-de-nginx/NGINX.webp"
 ---
 
