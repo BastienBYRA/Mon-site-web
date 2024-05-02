@@ -24,6 +24,7 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addPassthroughCopy('src/assets/blog');
 	eleventyConfig.addPassthroughCopy('src/assets/social_network');
 	eleventyConfig.addPassthroughCopy('src/assets/icons');
+	eleventyConfig.addPassthroughCopy('src/javascript');
 
 	// File/Folder that should be ignored by eleventy
 	eleventyConfig.ignores.delete("src/portfolio");
@@ -38,7 +39,7 @@ module.exports = function (eleventyConfig) {
     });
 
 	//Copy file in specific place
-	eleventyConfig.addPassthroughCopy({ "src/assets/favicon.ico": "/" });
+	eleventyConfig.addPassthroughCopy({ "src/assets/favicon.ico": "favicon.ico" });
 
 	return {
         dir: {

@@ -34,4 +34,4 @@ docker build -f Dockerfile.clean \
 rm Dockerfile.clean
 
 # Push l'image (docker hub)
-# docker push $DOCKER_USERNAME/$DOCKER_NGINX_IMAGE_NAME:$DOCKER_NGINX_TAG
+docker push $DOCKER_USERNAME/$DOCKER_NGINX_IMAGE_NAME:$DOCKER_NGINX_TAG
