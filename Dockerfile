@@ -19,6 +19,9 @@ COPY website .
 # Construit l'application
 RUN npm run build
 
+# Converti les fichiers scss en css
+RUN npm run sass
+
 ###
 ### STAGE 2: Insert the build into the webserver
 ###
