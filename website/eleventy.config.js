@@ -18,7 +18,6 @@ module.exports = function (eleventyConfig) {
 		files: './_site/styles/**/*.css'
 	});
 
-
 	// File/Folder that should be copied to the build folder _site
 	eleventyConfig.addPassthroughCopy('src/styles');
 	eleventyConfig.addWatchTarget('src/styles');
@@ -37,6 +36,9 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addCollection('projects', (collection) => {
         return collection.getFilteredByGlob('src/project/*.md');
     });
+
+	//Copy file in specific place
+	eleventyConfig.addPassthroughCopy({ "src/assets/favicon.ico": "/" });
 
 	return {
         dir: {

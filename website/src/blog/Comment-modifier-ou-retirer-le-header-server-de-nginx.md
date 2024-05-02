@@ -2,7 +2,6 @@
 title: Comment modifier ou retirer le header "Server" de NGINX
 filename: Comment-modifier-ou-retirer-le-header-server-de-nginx
 description: "NGINX comme d'autre serveur web envoie une entête 'Server' permettant d'identifier la technologie du serveur, ce qui représente une vulnérabilité, nous allons voir comment modifier ou supprime cette entete."
-gitHubURL: "https://github.com/olawanlejoel/random-quote-generator"
 image: "NGINX.webp"
 layout: layouts/article.njk
 tags: article
@@ -12,6 +11,9 @@ subject:
     - TECH
     - NGINX
     - WEB SERVER
+metaDescription: "Cet article explique comment modifier ou supprimer l'en-tête 'Server' de NGINX."
+metaKeywords: "NGINX, Server Header, Web Server"
+metaImage: "../../assets/blog/Comment-modifier-ou-retirer-le-header-server-de-nginx/NGINX.webp"
 ---
 
 ## Sommaire
