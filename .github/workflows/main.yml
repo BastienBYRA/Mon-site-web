@@ -31,11 +31,15 @@ jobs:
       - name: Build and push image with version tag
         uses: docker/build-push-action@v5
         with:
+          build-args: |
+            - NGX_IMG_NAME=${{ vars.NGX_IMG_NAME }}
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:${{ vars.APP_VERSION }}
       - name: Build and push with latest tag
         uses: docker/build-push-action@v5
         with:
+          build-args: |
+            - NGX_IMG_NAME=${{ vars.NGX_IMG_NAME }}
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:latest
 
