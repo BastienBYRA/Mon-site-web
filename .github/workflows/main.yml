@@ -52,7 +52,6 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           source: "deploy/deploy.sh"
           target: "/test/"
-          rm: true
       - name: Copy .env to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
