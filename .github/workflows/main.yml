@@ -71,4 +71,5 @@ jobs:
             cd /apps/deploy || true
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:${{ vars.APP_VERSION }} || true
             sudo docker rm -f website || true
+            sudo chmod +x deploy.sh || true
             sudo ./deploy.sh || true
