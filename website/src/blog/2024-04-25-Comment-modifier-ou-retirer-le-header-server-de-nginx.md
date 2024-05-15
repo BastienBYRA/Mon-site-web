@@ -1,7 +1,7 @@
 ---
 title: Comment modifier ou retirer le header "Server" de NGINX
-filename: Comment-modifier-ou-retirer-le-header-server-de-nginx
-description: "NGINX comme d'autre serveur web envoie une entête 'Server' permettant d'identifier la technologie du serveur, ce qui représente une vulnérabilité, nous allons voir comment modifier ou supprime cette entete."
+filename: 2024-04-25-Comment-modifier-ou-retirer-le-header-server-de-nginx
+description: "NGINX comme d'autre serveur web envoie une entête 'Server' permettant d'identifier la technologie du serveur, ce qui représente une vulnérabilité, nous allons voir comment modifier ou supprime cette en-tête."
 image: "NGINX.webp"
 layout: layouts/article.njk
 tags: article
@@ -14,6 +14,7 @@ subject:
 metaDescription: "Cet article explique comment modifier ou supprimer l'en-tête 'Server' de NGINX."
 metaKeywords: "NGINX, Server Web, Header, Web Server, Header server"
 metaImage: "../../assets/blog/Comment-modifier-ou-retirer-le-header-server-de-nginx/NGINX.webp"
+permalink: "/blog/comment-modifier-ou-retirer-le-header-server-de-nginx"
 ---
 
 ## Sommaire
@@ -78,7 +79,7 @@ Cette méthode est tout aussi fonctionnelle pour une version non compilée, mais
 
 Le [repository Github de NGINX](https://github.com/nginxinc/docker-nginx), dans son [dossier "modules"](https://github.com/nginxinc/docker-nginx/tree/master/modules), fourni deux Dockerfile, une utilisant le gestionnaire de paquet apt (Dockerfile) et une autre utilisant apk (Dockerfile.alpine). Elles permettent de pouvoir installer les modules que l'on veut dans une image NGINX de notre choix.
 
-Laissez moi vous expliquer un peu plus en détails :
+aaa Laissez moi vous expliquer un peu plus en détails :
 
 Les Dockerfiles vont prendre deux arguments en paramètre  :
 - **NGINX_FROM_IMAGE** qui prend le nom d'une image NGINX en paramètre, par exemple : "nginx:1.25" ou “nginxinc/nginx-unprivileged:1.25-alpine”.
@@ -96,7 +97,7 @@ En fonction de l'installation de NGINX que l'on veut (Debian / Ubuntu ou Alpine)
 **Pour l'exemple, je vais vous présenter comment ajouter les modules dans un NGINX Alpine, la seule et unique chose qui change entre la version Debian et Alpine et le package manager, dont vous n'avez pas à vous souciez car vous n'aurez pas à modifier les images.**
 
 Une fois que l'on à installer le Dockerfile qui correspond à nos besoins, on va lancer cette commande (réaliser les modifications nécessaire à vos besoins) :
-```docker
+```bash
 docker build -f Dockerfile --build-arg ENABLED_MODULES="headers-more" --build-arg NGINX_FROM_IMAGE="nginx:1.25-alpine" -t my-nginx-with-headers-more /path/to/Dockerfile
 ```
 Explication de la commande :
@@ -133,7 +134,7 @@ Ca ne va pas fonctionner, dans les faits, vous risquez d’avoir une erreur vous
 
 Pour pouvoir installer les modules hors de l’image, vous allez devoir modifier le Dockerfile fournit par NGINX, vous allez supprimer la dernière partie de celle-ci, celle qui créer le deuxième NGINX (Vous pouvez pas la louper) : 
 
-```
+```dockerfile
 ARG NGINX_FROM_IMAGE=nginx:mainline
 FROM ${NGINX_FROM_IMAGE} as builder
 
@@ -243,38 +244,32 @@ Maintenant que l’on est tous au même niveau, il suffit de rajouter deux ligne
 
 (Je prend le fichier nginx.conf par défaut comme exemple) 
 
-```
+```nginx
 worker_processes  auto;
 
 error_log  /var/log/nginx/error.log notice;
 pid        /tmp/nginx.pid;
-# -----------------------------------------------------------------------------------
-# --------------------------- ON IMPORTE NOS MODULES --------------------------------
-# -----------------------------------------------------------------------------------
+
+# On importe nos modules
 load_module modules/ngx_http_security_headers_module.so;
-# -----------------------------------------------------------------------------------
-# --------------------------- ON IMPORTE NOS MODULES --------------------------------
-# -----------------------------------------------------------------------------------
+
 events {
     worker_connections  1024;
 }
 
 http {
-# -----------------------------------------------------------------------------------
-# ------------------- MODIFIE OU SUPPRIME L'ENETE "Server" --------------------------
-# -----------------------------------------------------------------------------------
-    # Supprimer l’en-tête “Server”
+    
+    # On modifie ou supprime l'entete "Server"
+    # 1. Supprimer l’en-tête “Server”
     server_tokens off;
     more_clear_headers Server;
 
-    # OU
+    # Ou
 
-    # Modifier l'en-tête “Server”
+    # 2. Modifier l'en-tête “Server”
     server_tokens: off;
     more_set_headers    "Server: my_server";
-# -----------------------------------------------------------------------------------
-# ------------------- MODIFIE OU SUPPRIME L'ENETE "Server" --------------------------
-# -----------------------------------------------------------------------------------
+
 
     # La suite de votre configuration NGINX :
     proxy_temp_path /tmp/proxy_temp;

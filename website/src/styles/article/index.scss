@@ -160,18 +160,24 @@ li {
 
 h2 {
     font-size: 30px;
-    text-decoration: underline;
-    text-decoration-color: blueviolet;
-    text-underline-offset: 3px;
-    text-decoration-thickness: 2px;
+    // text-decoration: underline;
+    // text-decoration-color: blueviolet;
+    // text-underline-offset: 3px;
+    // text-decoration-thickness: 2px;
+    border-left: 6px solid blueviolet;
+    padding-left: 14px;
+
     margin-top: 50px;
 
     @media (max-width: 800px) {
         font-size: 26px;
+        padding-left: 12px;
     }
 
     @media (max-width: 600px) {
         font-size: 22px;
+        padding-left: 10px;
+        border-left: 4px solid blueviolet;
     }
 }
 

@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "old_start": "npx @11ty/eleventy --serve --watch --port=8081",
-
     "build": "npx @11ty/eleventy",
     "serve": "npx @11ty/eleventy --serve --port=8081",
     "sass": "npx sass src/styles/:_site/styles/",
@@ -17,7 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
-    "tailwindcss": "^3.4.3"
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0"
   },
   "dependencies": {
     "@sindresorhus/slugify": "^2.2.1",

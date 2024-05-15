@@ -1,8 +1,8 @@
 ---
-title: Make(file) et DevOps
-filename: make-et-devops
-description: "TODO"
-image: "TODO.webp"
+title: Make(file) dans le processus de développement logiciel
+filename: GNU-Make-et-le-developpement-logiciel
+description: "TESTaa"
+image: "Makefile-main.png"
 layout: layouts/article.njk
 tags: article
 date: 2099-04-25
@@ -14,9 +14,8 @@ subject:
 metaDescription: "TODO"
 metaKeywords: "TODO"
 metaImage: "../../assets/blog/TODO"
+# permalink: /test/gnu-make-et-le-developpement-logiciel
 ---
-
-# Make(file) dans le processus de développement logiciel
 
 ## Présentation
 
@@ -26,35 +25,41 @@ Un Makefile est composé de cibles, ces cibles sont composé de une à plusieurs
 
 La structure d'un fichier Makefile est simple :
 
+```makefile
 Cible: prérequis
     commande 1
     commande 2
     …
-
+```
 
 ## Exemple 1 : Créer un fichier, le remplir et le supprimer
 
 Prenons un exemple simple, créons un fichier Makefile vide, auquel on va ajouter deux cibles; 
-“create” qui aura pour rôle de créer le fichier “file”, auquel on va ajouter le texte “Quel beau fichier” dedans.
-“delete” qui va supprimer le fichier “file”
 
+**create** qui aura pour rôle de créer le fichier “file”, auquel on va ajouter le texte “Quel beau fichier” dedans.
+
+**delete** qui va supprimer le fichier “file”
+
+```makefile
 create:
     touch file
     echo "Quel beau fichier" > file
 
 delete:
     rm -f file
-
+```
 
 Pour exécuter “create”, on utilise la commande “make create”, et pour exécuter “delete” on exécute “make delete”
 
-Note : Par défaut, le Makefile écrit les instructions de la cible.
+On exécute la cible create permettant de créer un fichier “file”, et de lui ajouter du contenu
 
-# On exécute la cible create permettant de créer un fichier “file”, et de lui ajouter du contenu
+```bash
+# On éxécute la cible create qui permet de créer le fichier "file" et qui lui ajoute du contenu
 bast@DESKTOP-97VIG3H:~$ make create
 touch file
 echo "Quel beau fichier" > file
 
+# On vérifie que le fichier est bien crée, ainsi que son contenu
 bast@DESKTOP-97VIG3H:~$ ls
 Makefile  file
 
@@ -67,12 +72,15 @@ rm -f file
 
 bast@DESKTOP-97VIG3H:~$ ls
 Makefile
+```
 
+Note : Par défaut, le Makefile écrit les instructions de la cible.
 
 ## Variables
 
 Et si on complexifie un peu cette exemple, en ajoutant une variable, qui représentera le nom du fichier
 
+```makefile
 FILENAME=file
 
 create:
@@ -80,33 +88,39 @@ create:
 
 delete:
     rm -f $(FILENAME)
-
+```
 
 Le résultat reste le même, mais on peut maintenant facilement changer le fichier que l’on créer ou supprime
 
 Il y a plusieurs façon de modifier le contenu de la variable
 
-### Passer une nouvelles valeurs
+### Passer une nouvelle valeur
 
-On peut passer une valeur quand on exécute la cible : make create FILENAME=”second file”
+On peut passer une valeur quand on exécute la cible : 
+
+```bash
+make create FILENAME=”second file”
+```
 
 ### Variable d’environnement
 
 On peut utiliser une variable d’environnement, il faudra cependant ne pas définir la variable dans le Makefile
 
+```makefile
 create:
     touch $(FILENAME)
 
 delete:
     rm -f $(FILENAME)
 
-
 FILENAME=”second file” make create
+```
 
 ### Variable référencé
 
 Une variable peut en référencé une autre, et ainsi de suite, prenons l’exemple suivant
 
+```makefile
 FULLNAME="$(FULL) :D"
 FULL="$(FIRSTNAME) $(LASTNAME)"
 FIRSTNAME="Bastien"
@@ -114,26 +128,30 @@ LASTNAME="BYRA"
 
 echo:
         echo $(FULLNAME)
+```
 
-
-Nous avons deux variables, FIRSTNAME et LASTNAME qui sont défini
+Nous avons deux variables, FIRSTNAME et LASTNAME qui sont défini, prenant un nom et prénom.
 
 FULL est une variable qui concatène les deux, donnant le résultat “Bastien BYRA”
 
 FULLNAME est une variable qui ajoute un smiley à la fin, donnant le résultat “Bastien BYRA :D”
 
+```bash
 bast@DESKTOP-97VIG3H:~$ make echo
 echo """Bastien" "BYRA"" :D"
 Bastien BYRA :D
-
+```
 
 ### Fichier de variable d’environnement
 
-Pour finir, on peut aussi utiliser les variables d’un fichier d’environnement (.env) en l’incluant dans le Makefile
+Pour finir, on peut aussi utiliser les variables d’un fichier d’environnement (.env) en l’incluant dans le Makefile avec la directive "include"
 
+```makefile
+# Contenu du fichier .env
 bast@DESKTOP-97VIG3H:~$ cat .env
 FULLNAME=SOMEONE
 
+# Contenu du fichier Makefile
 bast@DESKTOP-97VIG3H:~$ cat Makefile
 FULLNAME="$(FULL) :D"
 FULL="$(FIRSTNAME) $(LASTNAME)"
@@ -145,10 +163,11 @@ include .env
 echo:
         echo $(FULLNAME)
 
+# Exécution de la cible "echo"
 bast@DESKTOP-97VIG3H:~$ make echo
 echo SOMEONE
 SOMEONE
-
+```
 
 Note : La valeur FULLNAME de mon fichier d’environnement à override la valeur FULLNAME défini dans mon Makefile, mais c’est uniquement le cas car j’ai mis la directive “include” après la définition de ma variable FULLNAME, si j’ajoute la directive “include” au début de mon fichier, la valeur de FULLNAME sera “Bastien BYRA :D”
 
@@ -158,15 +177,17 @@ Par défaut, un Makefile va écrire les instruction exécutée au fur et à mesu
 
 Pour éviter ça, on peut ajouter le caractère “@” devant la ligne dont on ne veut pas afficher l’instruction
 
+```makefile
 echo:
         @echo $(FULLNAME)
-
+```
 
 Quand on exécute “make echo”
 
+```bash
 bast@DESKTOP-97VIG3H:~$ make echo
 Bastien BYRA :D
-
+```
 
 ## Les variables et cibles spéciales
 
@@ -184,20 +205,26 @@ Si un fichier du même nom que la cible existe, alors la commande ne s’exécut
 
 Si nous n’avons pas de fichier nommé ‘create” à la racine du projet, il n’y aura aucun problème d’exécution de la cible
 
+```bash
+# Le contenu de mon Makefile
 bast@DESKTOP-97VIG3H:~$ cat Makefile
 create:
         @touch $(FILENAME)
 
+# On créer un fichier "create"
 bast@DESKTOP-97VIG3H:~$ make create FILENAME="create"
+
+# On constate qu'un fichier "create" existe maintenant
 bast@DESKTOP-97VIG3H:~$ ls
 Makefile  create
-
+```
 
 Nous avons créer un fichier “create”, maintenant refaisons exactement la même commande
 
+```bash
 bast@DESKTOP-97VIG3H:~$ make create FILENAME="create"
 make: 'create' is up to date.
-
+```
 
 C’est problématique ça, car ça nous empêche de pouvoir exécuter notre cible “create”, comment résoudre ce problème ?
 
@@ -205,11 +232,13 @@ Pour ce faire, on utilise la cible spéciale “.PHONY” qui permet d’indique
 
 Je vais ajouter les cibles “create” et “delete” dans ma cible .PHONY, il y a deux moyens de le faire.
 
+```makefile
 .PHONY: create delete
-
+```
 
 ou
 
+```makefile
 .PHONY: create
 create:
     touch $(FILENAME)
@@ -217,27 +246,28 @@ create:
 .PHONY: delete
 delete:
     rm -f $(FILENAME)
+```
 
-
-## Autre cible spéciales (et variable spéciales)
+### Autre cible spéciales (et variable spéciales)
 
 Il y a quelques autres cibles spéciales (ainsi que des variables spéciales) qui peuvent valoir le détour.
 
-.DEFAULT_GOAL : Par défaut, si on exécute “make” sans spécifier de cible, la première cible est exécuté, .DEFAULT_GOAL permet de dire quelle est la cible à lancer si aucune cible est indiqué.
-.SILENT : Par défaut, les cibles renvoie des résultats, un “docker pull” ou “docker build” renvoie beaucoup de ligne, .SILENT permet de dire à une ou plusieurs cible de rien envoyé à l’utilisateur
+- **.DEFAULT_GOAL** : Par défaut, si on exécute “make” sans spécifier de cible, la première cible est exécuté, .DEFAULT_GOAL permet de dire quelle est la cible à lancer si aucune cible est indiqué.
+- **.SILENT** : Par défaut, les cibles renvoie des résultats, un “docker pull” ou “docker build” renvoie beaucoup de ligne, .SILENT permet de dire à une ou plusieurs cible de rien envoyé à l’utilisateur
 
 ## Exemple 2 : Build, Scan et Push une image Docker
 
 Pour donner un exemple un peu plus concret qui utilise ce que l’on à vu jusque la;
 
 Voici un fichier Makefile, permettant de réaliser les actions suivantes ; 
-Build une image Docker 
-Run un scan sur l'image Docker, en appelant la fonction de Build au préalable
-Push l'image Docker
-Run une image Docker, en appelant la fonction de Build au préalable
+- **Build** une image Docker 
+- **Scan** sur l'image Docker, en appelant la fonction de Build au préalable
+- **Push** l'image Docker
+- **Run** une image Docker, en appelant la fonction de Build au préalable
 
 Le tout en utilisant des variables afin de rendre le fichier plus flexible et portable, ainsi que la cible spéciale .DEFAULT_GOAL.
 
+```makefile
 .DEFAULT_GOAL: run
 
 DOCKERHUB_NAME = mon_nom
@@ -255,18 +285,16 @@ push:
 
 run: build
     docker run -d $(IMAGE_NAME)
-
+```
 
 Nous avons un fichier Makefile, qui déclare 4 cibles (build, scan, push, run), deux variables (DOCKERHUB_NAME et IMAGE_NAME) et une “cible spécial” .DEFAULT_GOAL
 
-Note : J’utilise ici .SILENT pour l’exemple, mais ne pas recevoir de retour d’une des cibles ci-dessus peut-être problématique, car alors on saura pas quel problème il y a eu s’il y en à.
-
 Nous avons notre fichier, avec nos tâches, pour les exécuter, il suffit d’appeler la commande make avec le nom de la cible : 
 
-make build va générer une image Docker de notre application selon un Dockerfile spécifié.
-make scan va appelé make build, puis exécuter un scan de l’image Docker.
-make push va pousser l’image dans la registry Docker.
-make run va appelé make build, puis lancer l’image sur la machine local.
+**make build** va générer une image Docker de notre application selon un Dockerfile spécifié.
+`make scan` va appelé make build, puis exécuter un scan de l’image Docker.
+`make push` va pousser l’image dans la registry Docker.
+`make run` va appelé make build, puis lancer l’image sur la machine local.
 
 ## Condition
 
@@ -275,25 +303,27 @@ Les Makefiles permettent de mettre en place des conditions ;
 ### Egal ou pas égal
 ifreq : Vérifie si les deux arguments sont égal
 
+```makefile
 cond:
 ifeq ($(BOOL), "True")
         echo "True !"
 else
         echo "False D:"
 endif
-
+```
 
 Dans cet exemple, si BOOL est égal à “True”, alors il renvoie “True !”, autrement il renvoie “False D:”
 
 ifneq : Vérifie si deux argument ne sont pas égal
 
+```makefile
 cond:
 ifneq ($(BOOL), "True")
         echo "True !"
 else
         echo "False D:"
 endif
-
+```
 
 Dans cet exemple, si BOOL est égal à “True”, alors il renvoie “False D:”, autrement il renvoie “True !”
 
@@ -301,6 +331,7 @@ Dans cet exemple, si BOOL est égal à “True”, alors il renvoie “False D:�
 
 ifdef : Vérifie si la variable passé en paramètre possède une valeur
 
+```bash
 bast@DESKTOP-97VIG3H:~$ cat Makefile
 cond:
 ifdef VALUE
@@ -318,10 +349,11 @@ bast@DESKTOP-97VIG3H:~$ make cond VALUE=""
 La variable est vide !
 bast@DESKTOP-97VIG3H:~$ make cond VALUE=" "
 La variable est vide !
-
+```
 
 ifndef : Vérifie si la variable passé en paramètre ne possède pas de valeur
 
+```bash
 bast@DESKTOP-97VIG3H:~$ cat Makefile
 cond:
 ifndef VALUE
@@ -335,20 +367,20 @@ La variable est vide !
 
 bast@DESKTOP-97VIG3H:~$ make cond VALUE="  am    i        empty  ?"
 La variable n'est pas vide : am    i        empty  ?
-
+```
 
 
 ## C’est quoi l’avantage d’un Makefile par rapport à un script
 
 C’est une question légitime, et la réponse que je vais vous donner est plutôt simple ; 
 
-Abstraction et uniformisation
+### Abstraction et uniformisation
 
 Le Makefile permet de faire office d’abstraction, en permettant à nos utilisateurs / équipés de pouvoir exécuter ce qui aurait été normalement plusieurs scripts en utilisant la commande make, on réunit tout notre processus dans un unique fichier.
 
 De plus, ce fichier va permettre d’uniformiser les différents processus pour ceux qui les utilise, prenons le cas de l'exécution du projet ; Que ce soit un projet en Javascript, Java, Python ou Go, le développeur n’aura qu’à faire “make run” pour lancer son projet, indépendamment de la technologie utilisée.
 
-Portabilité
+### Portabilité
 
 Au lieu de d’avoir une myriade de scripts par projet, vous n’avez qu’un Makefile par projet à entretenir (ou plusieurs Makefile par projet, mais vous aurez toujours moins que de Makefile qu’il n’y aurait eu de script).
 
@@ -365,15 +397,15 @@ Là ou je veux en venir, c’est que différentes solutions ont été créées a
 
 Je n’entre pas en détail dans Task et Just, mais si vous voulez une solution similaire à Make mais qui est pensée pour être plus simple et facile à configurer / utiliser, incluant des fonctionnalités pratique (lecture des .env, pas de .PHONY, pouvoir lister les cibles défini et leurs description…), ils peuvent être une solution alternative, bien que contrairement à make qui est disponible presque partout, il vous faudra les installer au préalable.
 
-Justfile : https://just.systems/man/en/chapter_1.html
-Taskfile : https://taskfile.dev/
+- Justfile : https://just.systems/man/en/chapter_1.html
+- Taskfile : https://taskfile.dev/
 
 Note : Just utilise la même syntaxe que Make, là où Task est configuré en utilisant du YAML.
 
 ## Pour plus d’informations : 
 
-Site officiel de “make” : https://www.gnu.org/software/make/manual/make.html
-GNU make for DevOps engineers : https://alexharv074.github.io/2019/12/26/gnu-make-for-devops-engineers.html
-Exemple de Makefile dans le monde réel (GraphQL Python) : https://github.com/graphql-python/graphene/blob/master/docs/Makefile
-Exemple de Makefile dans le monde réel (NGINX) : https://hg.nginx.org/pkg-oss/file/tip/Makefile
+- Site officiel de “make” : https://www.gnu.org/software/make/manual/make.html
+- GNU make for DevOps engineers : https://alexharv074.github.io/2019/12/26/gnu-make-for-devops-engineers.html
+- Exemple de Makefile dans le monde réel (GraphQL Python) : https://github.com/graphql-python/graphene/blob/master/docs/Makefile
+- Exemple de Makefile dans le monde réel (NGINX) : https://hg.nginx.org/pkg-oss/file/tip/Makefile
 
