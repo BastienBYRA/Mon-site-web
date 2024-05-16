@@ -158,6 +158,17 @@ li {
     margin-right: auto;
 }
 
+h2 > a  {
+    text-decoration: white;
+    color: inherit;
+    text-underline-offset: 5px;
+    transition: all 0.5s;
+
+    &:hover {
+        text-decoration-color: rgba(137, 43, 226, 0.452);
+    }
+}
+
 h2 {
     font-size: 30px;
     // text-decoration: underline;
@@ -178,6 +189,11 @@ h2 {
         font-size: 22px;
         padding-left: 10px;
         border-left: 4px solid blueviolet;
+    }
+
+    &::marker {
+        font-size: 150%;
+        color: lightgreen;
     }
 }
 
