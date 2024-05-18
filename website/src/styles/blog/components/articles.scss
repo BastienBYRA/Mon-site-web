@@ -116,6 +116,14 @@ $background-color_1: #ffffff;
 	grid-template-columns: repeat(3, 1fr);
 	column-gap: 30px;
 	row-gap: 30px;
+
+	@media (max-width: 1000px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media (max-width: 700px) {
+		grid-template-columns: repeat(1, 1fr);
+	}
 }
 
 .blog-sub-flex {
@@ -139,6 +147,10 @@ $background-color_1: #ffffff;
 		object-fit: cover;
 		max-height: 180px;
 		border: 1px solid rgba(109, 109, 109, 0.308);
+
+		@media (max-width: 700px) {
+			max-height: 250px;
+		}
 	}
 	h2 {
 		margin-top: -6px;

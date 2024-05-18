@@ -14,15 +14,15 @@ subject:
 metaDescription: "Cet article explique comment modifier ou supprimer l'en-tête 'Server' de NGINX."
 metaKeywords: "NGINX, Server Web, Header, Web Server, Header server"
 metaImage: "../../assets/blog/Comment-modifier-ou-retirer-le-header-server-de-nginx/NGINX.webp"
-permalink: "/blog/comment-modifier-ou-retirer-le-header-server-de-nginx"
+permalink: "/blog/comment-modifier-ou-retirer-le-header-server-de-nginx/index.html"
 ---
 
 ## Sommaire
-    - [Ce qui ne fonctionne pas](#ce-qui-ne-fonctionne-pas)
-    - [Comment on fait alors ?](#comment-on-fait-alors)
-    - [La solution](#la-solution)
-    - [Comment installer les modules NGINX hors du container NGINX](#comment-installer-les-modules-NGINX-hors-du-container-NGINX)
-    - [Fichier à modifier pour appliquer les modules dans votre NGINX](#fichier-a-modifier-pour-appliquer-les-modules-dans-votre-NGINX)
+- [Ce qui ne fonctionne pas](#ce-qui-ne-fonctionne-pas)
+- [Comment on fait alors ?](#comment-on-fait-alors)
+- [La solution](#la-solution)
+- [Comment installer les modules NGINX hors du container NGINX](#comment-installer-les-modules-NGINX-hors-du-container-NGINX)
+- [Fichier à modifier pour appliquer les modules dans votre NGINX](#fichier-a-modifier-pour-appliquer-les-modules-dans-votre-NGINX)
 <br>
 
 **NGINX**, comme tout serveur web, envoie dans ses requêtes et réponse HTTP des en-têtes, des "headers".
