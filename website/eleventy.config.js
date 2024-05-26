@@ -2,8 +2,10 @@ const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItAttrs = require('markdown-it-attrs');
 const { EleventyRenderPlugin } = require("@11ty/eleventy");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 module.exports = function (eleventyConfig) {
+
 	let markdownItOptions = {
 		html: true,
 		breaks: true,
@@ -34,12 +36,16 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addPlugin(EleventyRenderPlugin);
 
 	// Collection
-	eleventyConfig.addCollection('projects', (collection) => {
-        return collection.getFilteredByGlob('src/project/*.md');
-    });
+	// eleventyConfig.addCollection('articles', (collection) => {
+    //     return collection.getFilteredByGlob('src/blog/*.md');
+    // });
 
 	//Copy file in specific place
 	eleventyConfig.addPassthroughCopy({ "src/assets/favicon.ico": "favicon.ico" });
+	eleventyConfig.addPassthroughCopy({ "robots.txt": "robots.txt" });
+
+	// Syntax Highlight
+	eleventyConfig.addPlugin(syntaxHighlight);
 
 	return {
         dir: {

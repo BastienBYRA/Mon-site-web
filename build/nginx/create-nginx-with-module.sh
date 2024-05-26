@@ -9,7 +9,6 @@ dir="$(dirname "$0")"
 # Copie le Docker.alpine sur la machine hote
 curl -o Dockerfile.clean https://raw.githubusercontent.com/nginxinc/docker-nginx/master/modules/Dockerfile.alpine
 
-
 # Importe nos variables d'environnement
 source "$dir/.env"
 source "$dir/../../.env"

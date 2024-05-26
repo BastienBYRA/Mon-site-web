@@ -6,9 +6,9 @@ include .env
 
 # Targets
 run:
-	cd website && npm run start
+	cd website && npm run serve
 serve:
-	cd website && npm run start
+	cd website && npm run serve
 
 build:
 	cd website && npx @11ty/eleventy
