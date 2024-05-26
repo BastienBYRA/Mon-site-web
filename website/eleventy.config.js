@@ -42,6 +42,7 @@ module.exports = function (eleventyConfig) {
 
 	//Copy file in specific place
 	eleventyConfig.addPassthroughCopy({ "src/assets/favicon.ico": "favicon.ico" });
+	eleventyConfig.addPassthroughCopy({ "robots.txt": "robots.txt" });
 
 	// Syntax Highlight
 	eleventyConfig.addPlugin(syntaxHighlight);

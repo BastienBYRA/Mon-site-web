@@ -14,7 +14,7 @@ subject:
 metaDescription: "Cet article explique comment modifier ou supprimer l'en-tête 'Server' de NGINX."
 metaKeywords: "NGINX, Server Web, Header, Web Server, Header server"
 metaImage: "../../assets/blog/Comment-modifier-ou-retirer-le-header-server-de-nginx/NGINX.webp"
-permalink: "/blog/comment-modifier-ou-retirer-le-header-server-de-nginx/index.html"
+permalink: "/blog/comment-modifier-ou-retirer-le-header-server-de-nginx/"
 ---
 
 ## Sommaire

@@ -5,15 +5,15 @@ description: "Nous allons voir ce qu'est un GNU make et les Makefile, comment en
 image: "Makefile-main.png"
 layout: layouts/article.njk
 tags: article
-date: 2024-05-30
-dateText : 30 MAI 2024
+date: 2024-05-26
+dateText : 26 MAI 2024
 subject:
     - TECH
     - MAKEFILE
     - DEVOPS
 metaKeywords: "Tech, Make, GNU Make, Makefile, Devops, DevSecOps"
 metaImage: "../../assets/blog/GNU-Make-dans-le-developpement-logiciel/Makefile-main.png"
-permalink: /blog/make-dans-le-processus-de-developpement-logiciel/index.html
+permalink: /blog/make-dans-le-processus-de-developpement-logiciel/
 
 scripts: >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
