@@ -44,7 +44,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:latest
 
       # DEPLOY
-      - name: Copy deploy.sh to VPS
+      - name: Copy deploy.sh to VPS (Script to run the blog)
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -52,7 +52,7 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           source: "deploy/deploy.sh"
           target: "/apps/"
-      - name: Copy .env to VPS
+      - name: Copy .env to VPS (Required for the blog)
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
