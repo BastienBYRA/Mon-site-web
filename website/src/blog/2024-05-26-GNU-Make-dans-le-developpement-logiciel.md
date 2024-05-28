@@ -1,7 +1,7 @@
 ---
 title: Make(file) dans le processus de développement logiciel
 filename: GNU-Make-et-le-developpement-logiciel
-description: "Nous allons voir ce qu'est un GNU make et les Makefile, comment en créer un et l'utiliser pour faciliter le processus de developpement de solution web."
+description: "Un guide qui parle de GNU Make, le Makefile, comment l'utiliser, ce qu'il apporte et ses alternatives."
 image: "Makefile-main.png"
 layout: layouts/article.njk
 tags: article
@@ -101,7 +101,7 @@ Makefile
 
 > **Note :**
 >
-> Par défaut, make, et par extension le Makefile, affiche les commandes / instructions de la cible pendant qu'il l'est exécute.
+> Par défaut, make, et par extension le Makefile, affiche les commandes / instructions de la cible pendant son exécution.
 
 ## Variables {#variables}
 

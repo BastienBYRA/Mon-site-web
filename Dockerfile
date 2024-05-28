@@ -32,6 +32,7 @@ FROM ${NGX_IMG_NAME} as webserver
 
 # Ajoute les fichiers de configurations NGINX
 COPY build/nginx/default.conf.template /etc/nginx/templates/default.conf.template
+COPY build/nginx/registry.conf.template /etc/nginx/templates/registry.conf.template
 COPY build/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY build/nginx/nginx-headers.module /etc/nginx/nginx-headers.module
 
