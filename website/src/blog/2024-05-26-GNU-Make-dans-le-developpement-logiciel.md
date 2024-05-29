@@ -1,7 +1,7 @@
 ---
 title: Make(file) dans le processus de développement logiciel
 filename: GNU-Make-et-le-developpement-logiciel
-description: "Un guide qui parle de GNU Make, et le Makefile, comment l'utiliser, ce qu'il apporte et ses alternatives."
+description: "Un guide qui parle de GNU Make, comment l'utiliser, ce qu'il apporte et ses alternatives."
 image: "Makefile-main.png"
 layout: layouts/article.njk
 tags: article

@@ -79,7 +79,7 @@ Cette méthode est tout aussi fonctionnelle pour une version non compilée, mais
 
 Le [repository Github de NGINX](https://github.com/nginxinc/docker-nginx), dans son [dossier "modules"](https://github.com/nginxinc/docker-nginx/tree/master/modules), fourni deux Dockerfile, une utilisant le gestionnaire de paquet apt (Dockerfile) et une autre utilisant apk (Dockerfile.alpine). Elles permettent de pouvoir installer les modules que l'on veut dans une image NGINX de notre choix.
 
-aaa Laissez moi vous expliquer un peu plus en détails :
+Laissez moi vous expliquer un peu plus en détails :
 
 Les Dockerfiles vont prendre deux arguments en paramètre  :
 - **NGINX_FROM_IMAGE** qui prend le nom d'une image NGINX en paramètre, par exemple : "nginx:1.25" ou “nginxinc/nginx-unprivileged:1.25-alpine”.
@@ -94,7 +94,7 @@ En fonction de l'installation de NGINX que l'on veut (Debian / Ubuntu ou Alpine)
 - [Dockerfile](https://github.com/nginxinc/docker-nginx/blob/master/modules/Dockerfile) pour Ubuntu / Debian / Distro utilisant l’utilitaire de paquet “apt”
 - [Dockerfile.alpine](https://github.com/nginxinc/docker-nginx/blob/master/modules/Dockerfile.alpine) pour Alpine / Distro utilisant l’utilitaire de paquet “apk”
 
-**Pour l'exemple, je vais vous présenter comment ajouter les modules dans un NGINX Alpine, la seule et unique chose qui change entre la version Debian et Alpine et le package manager, dont vous n'avez pas à vous souciez car vous n'aurez pas à modifier les images.**
+**Pour l'exemple, je vais vous présenter comment ajouter les modules dans un NGINX Alpine, la seule et unique chose qui change entre la version Debian et Alpine et le package manager, dont vous n'avez pas à vous souciez car vous n'aurez pas à modifier les Dockerfiles.**
 
 Une fois que l'on à installer le Dockerfile qui correspond à nos besoins, on va lancer cette commande (réaliser les modifications nécessaire à vos besoins) :
 ```bash
