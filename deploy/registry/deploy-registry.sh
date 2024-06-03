@@ -13,6 +13,6 @@ docker run -d \
     -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
     -e REGISTRY_AUTH_HTPASSWD_PATH=/apps/registry/htpasswd \
     -v ../deploy/certbot/conf/:/certs \
-    -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/live/bastienbyra.fr/fullchain.pem \
-    -e REGISTRY_HTTP_TLS_KEY=/certs/live/bastienbyra.fr/privkey.pem \
+    -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/live/registry.bastienbyra.fr/fullchain.pem \
+    -e REGISTRY_HTTP_TLS_KEY=/certs/live/registry.bastienbyra.fr/privkey.pem \
     registry:2
