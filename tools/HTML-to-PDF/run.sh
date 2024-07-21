@@ -13,7 +13,7 @@ fi
 # wkhtmltopdf fonctionne pour une vielle version de JavaScript, il faut donc utiliser des méthodes plus vielle pour le faire fonctionner
 # Par exemple, element.remove() ne fonctionne pas, il faut utiliser element.parentNode.removeChild(element)
 # Les fonctions fléchés ne fonctionnent pas non plus, il faut utiliser function() {}
-docker run surnet/alpine-wkhtmltopdf:$VERSION-$TYPE \
+docker run --network host surnet/alpine-wkhtmltopdf:$VERSION-$TYPE \
     --debug-javascript \
     --run-script "
         var element = document.getElementById('toggle-menu-header');
@@ -34,3 +34,7 @@ docker run surnet/alpine-wkhtmltopdf:$VERSION-$TYPE \
         }
     " \
     $FULL_URL - > $FILE
+
+    # --footer-right "Bastien BYRA - [page] / [topage]" \
+    # --footer-line  \
+    # --footer-spacing 10 \
