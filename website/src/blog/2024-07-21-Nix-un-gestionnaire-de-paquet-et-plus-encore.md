@@ -173,9 +173,11 @@ Vous pouvez trouver la documentation des différents outils sur le site officiel
 
 Pour expliquer ce que fait cette configuration NGINX :
 
+```json
+services.nginx.enable = true
 ```
-services.nginx.enable = true # Indique que l’on veut lancer le serveur NGINX
-```
+
+On indique que l’on veut lancer le serveur NGINX
 
 ```json
 virtualHosts."bastienbyra.fr".addSSL

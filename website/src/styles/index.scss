@@ -117,3 +117,24 @@ a:has(.purple-white-btn) {
 //     margin-top: 20px;
 //     margin-bottom: 20px; */
 // }
+
+.layout-border {
+    padding-left: 190px;
+    padding-right: 190px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (max-width: 1280px) {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
+    @media (max-width: 800px) {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+.blueviolet {
+    color: blueviolet;
+}

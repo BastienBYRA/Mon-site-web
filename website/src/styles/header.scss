@@ -6,22 +6,44 @@ header {
     top: 0;
     border-bottom: 1px rgba(0, 0, 0, 0.08) solid;
     z-index: 1000;
+    background-color: rgba(39, 39, 39, 0.980);
+
+    a {
+        text-decoration: none;
+        color: rgb(244, 244, 244);
+    
+        &:hover {
+            text-underline-offset: 7px;
+            text-decoration-thickness: 2px;
+        }
+    }
+
+    // Same as styles/index.scss .layout-border
+    padding-left: 190px;
+    padding-right: 190px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (max-width: 1280px) {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
+    @media (max-width: 800px) {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+
 }
 
 .header-main {
-    padding: 13px;
+    padding-top: 18px;
+    padding-bottom: 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 50px;
-
-    padding-left: 60px;
-    padding-right: 60px;
-
-    @media (max-width: 800px) {
-		padding-left: 30px;
-        padding-right: 30px;
-    }
 }
 
 .header-right {
@@ -33,17 +55,6 @@ header {
         @media (max-width: 800px) {
             display: none;
         }
-    }
-
-}
-
-header a {
-    text-decoration: none;
-    color: black;
-
-    &:hover {
-        text-underline-offset: 7px;
-        text-decoration-thickness: 2px;
     }
 }
 
@@ -58,16 +69,24 @@ header a {
     }
 
     @media (max-width: 500px) {
+        font-size: 20px;
+    }
+    @media (max-width: 360px) {
         font-size: 18px;
+    }
+    @media (max-width: 330px) {
+        font-size: 14px;
     }
 }
 
 .mobile-header-right {
     width: 30px;
+    height: auto;
     display: none;
 
     @media (max-width: 800px) {
-        display: block
+        display: block;
+        margin: 0;
     }
 }
 
