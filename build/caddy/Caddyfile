@@ -1,0 +1,10 @@
+{$DNS_NAME} {
+    tls /etc/caddy/ssl/live/{$DNS_NAME}/fullchain.pem /etc/caddy/ssl/live/{$DNS_NAME}/privkey.pem
+    root * /usr/share/caddy
+    file_server
+
+    handle /blog/* {
+        root * /usr/share/caddy/blog
+        try_files {path} {path}/ /blog/{path}/index.html
+    }
+}
