@@ -1,5 +1,5 @@
 {$DNS_NAME} {
-    tls /etc/caddy/ssl/live/{$DNS_NAME}/fullchain.pem /etc/caddy/ssl/live/{$DNS_NAME}/privkey.pem
+    # tls /etc/caddy/ssl/live/{$DNS_NAME}/fullchain.pem /etc/caddy/ssl/live/{$DNS_NAME}/privkey.pem
     root * /usr/share/caddy
     file_server
 
