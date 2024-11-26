@@ -207,12 +207,20 @@ $background-color_1: #ffffff;
 	}
 
 	.blog-content {
-		display: grid;
+		// display: grid;
+		display: block;
 	}
 	
 	.blog-content a {
 		margin-top: auto;
 		margin-left: auto;
+	}
+
+	.blog-flex {
+		// Honnetement, je sais pas pourquoi mais sa fix le problème lié a "Lire article" qui overlap les images/texte
+		// Dans sa version mobile.
+		// God work over there
+		display: inline-table;
 	}
 }
 
