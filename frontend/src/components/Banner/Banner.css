@@ -1,11 +1,16 @@
 .banner {
-    /* text-align: center; */
     padding: 40px 200px;
-
-    
 }
 
 .banner h1 {
-    /* font-size: xx-large; */
     font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.banner p {
+    font-size: 20px;
+}
+
+.minor-text {
+    font-size: 11px;
 }
