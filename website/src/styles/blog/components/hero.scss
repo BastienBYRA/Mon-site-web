@@ -1,8 +1,8 @@
-.new-blog-hero-container {
+.blog-hero-container {
 	padding-top: 75px;
 	padding-bottom: 20px;
 	// background-color: blueviolet;
-	text-align: center;
+	// text-align: center;
 
 	@media (max-width: 700px) {
 		padding-top: 80px;
@@ -38,7 +38,7 @@
 
 	p {
 		font-size: 1.20rem;
-		margin-top: -14px;
+		margin-top: -18px;
 
 		@media (max-width: 800px) {
 			font-size: 1.10rem;
@@ -48,4 +48,12 @@
 			font-size: 1.00rem;
 		}
 	}
+}
+
+.small {
+	font-size: 12px;
+}
+
+.ultra-small {
+	font-size: 10px;
 }

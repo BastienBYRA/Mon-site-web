@@ -4,13 +4,17 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    border-bottom: 1px rgba(0, 0, 0, 0.08) solid;
     z-index: 1000;
-    background-color: rgba(39, 39, 39, 0.980);
+    background-color: #f8f9fa;
+
+    
+    border-bottom: 1px rgba(0, 0, 0, 0.036) solid;
+
+    
 
     a {
         text-decoration: none;
-        color: rgb(244, 244, 244);
+        color: #0c0a09;
     
         &:hover {
             text-underline-offset: 7px;
