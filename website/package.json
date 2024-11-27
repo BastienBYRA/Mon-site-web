@@ -6,6 +6,7 @@
   "scripts": {
     "build": "npx @11ty/eleventy",
     "serve": "npx @11ty/eleventy --serve --port=8081",
+    "sass": "npx sass src/styles/:_site/styles/",
     "watch:sass": "npx sass src/styles/:_site/styles/ --watch",
     "start": "npm run serve & npm run watch:sass"
   },
