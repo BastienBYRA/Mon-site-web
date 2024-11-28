@@ -7,13 +7,14 @@ pahtToIcon: ../../
 
 {% block content %}
     <div class="article-container">
-        <div class="article-color-block"></div>
+        <img class="article-image" src="../../assets/blog/{{ filename }}/{{ image }}" alt="{{ imageAlt }}" />
+
         <div class="article-intro">
             <p class="article-date">{{ dateText }} | {{ subject.join(', ') }}</p>
             <h1 class="article-title">{{ title }}</h1>
             <p class="article-description">{{ description }}</p>
-            <img class="article-image" src="../../assets/blog/{{ filename }}/{{ image }}" alt="{{ imageAlt }}" />
         </div>
+        
         <div class="article-content">
             {{ content | safe }}
         </div>

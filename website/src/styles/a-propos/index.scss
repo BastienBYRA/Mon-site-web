@@ -1,17 +1,5 @@
 .about-container {
-    padding-top: 100px;
-    margin: 0 auto;
-    padding-bottom: 40px;
-
-    @media (max-width: 800px) {
-        padding: 0px 40px;
-        padding-top: 90px;
-    }
-
-    @media (max-width: 600px) {
-        padding: 0px 25px;
-        padding-top: 90px;
-    }
+    padding-top: 10px;
 }
 
 h1 {

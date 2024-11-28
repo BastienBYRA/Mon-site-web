@@ -1,16 +1,11 @@
 header {
     box-sizing: border-box;
-    background-color: white;
-    position: fixed;
+    position: sticky;
     width: 100%;
     top: 0;
     z-index: 1000;
     background-color: #f8f9fa;
-
-    
     border-bottom: 1px rgba(0, 0, 0, 0.036) solid;
-
-    
 
     a {
         text-decoration: none;
@@ -21,24 +16,6 @@ header {
             text-decoration-thickness: 2px;
         }
     }
-
-    // Same as styles/index.scss .layout-border
-    padding-left: 270px;
-    padding-right: 270px;
-    margin-left: auto;
-    margin-right: auto;
-
-    @media (max-width: 1280px) {
-        padding-left: 80px;
-        padding-right: 80px;
-    }
-
-    @media (max-width: 800px) {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-
-
 }
 
 .header-main {

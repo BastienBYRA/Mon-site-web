@@ -29,11 +29,13 @@
     
   </head>
   <body>
+    <div class="container">
       {% include "components/header.njk" %}
       <div class="layout-border">
-        {% block content %} 
-            {{ content | safe }}
-        {% endblock %}
+      {% block content %} 
+          {{ content | safe }}
+      {% endblock %}
       </div>
+    </div>
   </body>
 </html>
