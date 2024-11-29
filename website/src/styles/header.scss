@@ -76,16 +76,18 @@ header {
 }
 
 .header-mobile-row {
-    // margin-top: 5px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 40px;
 
     a {
         display: inline-block;
-        padding: 14px 30px;
+        padding: 14px 0px;
         font-size: 28px;
 
         &:hover {
+            padding: 14px 20px;
             border-left: 10px solid blueviolet;
         }
     }
@@ -93,9 +95,12 @@ header {
 
 
 .toggle-receiver-header {
-    position: absolute;
+    position: fixed;
     width: 100%;
-    bottom: 30px;
+    height: -webkit-fill-available;
+    background-color: #f8f9fa;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .header-full-page {
