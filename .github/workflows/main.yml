@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - debug-cicd
 
 jobs:
   build:
@@ -34,7 +35,7 @@ jobs:
           build-args: |
             IMG_TAG=${{ github.sha }}
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:$IMG_TAG
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:${{ github.sha }}
       - name: Build and push with latest tag
         uses: docker/build-push-action@v5
         with:
