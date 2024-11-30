@@ -1,0 +1,236 @@
+$color_1: rgb(97, 97, 97);
+$background-color_1: #ffffff;
+
+/* ##################### */
+
+// .blog-main-article {
+// 	// margin-top: -65px;
+// 	display: flex;
+// 	overflow: hidden;
+// 	transition: 0.5s;
+
+// 	&:hover {
+// 		// img {
+// 		// 	scale: 1.2;
+// 		// }
+// 		border-bottom-right-radius: 50px;
+// 	}
+
+// 	img {
+// 		transition: scale 0.5s;
+// 		width: 100%;
+// 		height: 100%;
+// 		object-fit: cover;
+
+// 		@media (max-width: 800px) {
+// 			max-height: 300px;
+// 		}
+// 	}
+
+// 	>div {
+// 		width: 100%;
+// 		max-height: 100%;
+
+// 		@media (max-width: 950px) {
+// 			width: auto;
+// 		}
+// 	}
+
+// 	@media (max-width: 950px) {
+// 		flex-direction: column;
+//     }
+// }
+
+// .blog-main-image {
+// 	overflow: hidden;
+// }
+
+// .blog-main-content {
+// 	padding-top: 20px;
+// 	padding-bottom: 15px;
+// 	padding-left: 25px;
+// 	padding-right: 40px;
+// 	background-color: $background-color_1;
+// 	height: auto;
+    
+// 	h2 {
+// 		margin-top: -10px;
+// 		@media (max-width: 800px) {
+// 			font-size: 22px;
+// 			margin-top: -5px;
+// 		}
+
+// 		@media (max-width: 600px) {
+// 			font-size: 19px;
+// 		}
+// 	}
+
+// 	@media (max-width: 950px) {
+// 		padding-right: 20px;
+// 		padding-left: 20px;
+// 		padding-top: 8px;
+//     }
+
+// 	@media (max-width: 700px) {
+// 		padding-left: 12px;
+// 		padding-right: 12px;
+//     }
+// }
+
+// .main-article-date {
+// 	word-spacing: 1.3px;
+// 	letter-spacing: 1.1px;
+// 	color: $color_1;
+
+// 	@media (max-width: 800px) {
+// 		font-size: 14px;
+// 	}
+
+// 	@media (max-width: 600px) {
+// 		font-size: 12px;
+// 	}
+// }
+// .main-article-description {
+// 	max-width: 85%;
+// 	line-height: 1.8;
+// 	letter-spacing: 1.9;
+
+// 	@media (max-width: 800px) {
+// 		font-size: 16px;
+// 	}
+// }
+
+// .blog-sub-article {
+// 	margin-top: 50px;
+// 	display: grid;
+// 	grid-template-columns: repeat(3, 1fr);
+// 	column-gap: 30px;
+// 	row-gap: 30px;
+
+// 	@media (max-width: 1000px) {
+// 		grid-template-columns: repeat(2, 1fr);
+// 	}
+
+// 	@media (max-width: 700px) {
+// 		grid-template-columns: repeat(1, 1fr);
+// 		margin-top: 15px;
+// 	}
+// }
+
+// .blog-sub-flex {
+// 	display: flex;
+// 	flex-direction: column;
+// 	&:hover {
+// 		div {
+// 			border-bottom-right-radius: 50px;
+// 		}
+// 	}
+// 	div {
+// 		transition: ease-in-out 0.4s;
+// 		padding-top: 3px;
+// 		padding-bottom: 15px;
+// 		padding-left: 12px;
+// 		padding-right: 12px;
+// 	}
+// 	img {
+// 		width: 100%;
+// 		height: 100%;
+// 		object-fit: cover;
+// 		max-height: 180px;
+// 		border: 1px solid rgba(109, 109, 109, 0.308);
+
+		// @media (max-width: 700px) {
+		// 	max-height: 250px;
+		// }
+// 	}
+// 	h2 {
+// 		margin-top: -6px;
+// 		font-size: 20px;
+// 	}
+// }
+// .sub-article-date {
+// 	word-spacing: 1.3px;
+// 	letter-spacing: 1.1px;
+// 	color: $color_1;
+// 	font-size: 13px;
+// }
+// .sub-article-description {
+// 	line-height: 1.7;
+// 	font-size: 15px;
+// }
+
+
+.new-blog-article {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 40px;
+	row-gap: 30px;
+
+	@media (max-width: 850px) {
+		grid-template-columns: repeat(1, 1fr);
+		margin-top: 15px;
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		max-height: 250px;
+		// border: 1px solid rgba(109, 109, 109, 0.308);
+		border: 1px solid rgba(0, 0, 0, 0.002);
+		border-radius: 20px;
+
+		@media (max-width: 850px) {
+			max-height: 350px;
+		}
+	}
+
+	h2 {
+		margin-top: 7px;
+		font-size: 20px;
+	}
+
+	.article-date {
+		word-spacing: 1.3px;
+		letter-spacing: 1.1px;
+		font-size: 12px;
+		margin-top: -6px;
+	}
+
+	.article-description {
+		line-height: 1.7;
+		font-size: 15px;
+	}
+
+	.blog-content {
+		display: grid;
+
+		@media (max-width: 850px) {
+			padding-bottom: 4px;
+		}
+	}
+	
+	.blog-content a {
+		margin-top: auto;
+		margin-left: auto;
+	}
+
+	.blog-flex {
+		// Honnetement, je sais pas pourquoi mais sa fix le problème lié a "Lire article" qui overlap les images/texte
+		// Dans sa version mobile.
+		// God work over there
+		display: inline-table;
+	}
+}
+
+.main-article {
+	padding-bottom: 40px;
+	max-height: 250px;
+}
+
+.blog-content:hover {
+    h2 {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+}

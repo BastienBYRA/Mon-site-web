@@ -1,16 +1,7 @@
+# JS
 */*/node_modules
 node_modules
 
-# Angular / Java code, useless for now
-backend
-frontend
-
-# Build related folders/files for Jekyll
+# Build related folders/files for 11ty
 website/_site
-website/.jekyll-cache
-
-data-to-add.md
-
-portfolio
-
-LOGIN.txt
+_data

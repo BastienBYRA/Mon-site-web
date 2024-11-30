@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/article/index.css">
+    <title>Comment modifier ou retirer le header &quot;Server&quot; de NGINX</title>
+    
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="author" content="Bastien Byra" />
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="NGINX comme d&#39;autre serveur web envoie une entête &#39;Server&#39; permettant d&#39;identifier la technologie du serveur, ce qui représente une vulnérabilité, nous allons voir comment modifier ou supprime cette en-tête.">
+    <meta name="keywords" content="NGINX, Server Web, Header, Web Server, Header server">
+    
+    <meta property="og:image" content="../../assets/blog/Comment-modifier-ou-retirer-le-header-server-de-nginx/NGINX.webp" />
+    <meta property="og:description" content="NGINX comme d&#39;autre serveur web envoie une entête &#39;Server&#39; permettant d&#39;identifier la technologie du serveur, ce qui représente une vulnérabilité, nous allons voir comment modifier ou supprime cette en-tête."/>
+    <meta property="og:title" content="Comment modifier ou retirer le header &quot;Server&quot; de NGINX" />
+    <script src="/javascript/script.js" refferer></script>
+    
+    <link
+			href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css"
+			rel="stylesheet"
+		/>
+
+    <script data-goatcounter="https://bastienbyra.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js">
+    </script>
+    
+  </head>
+  <body>
+    <div class="container">
+      <header>
+    <div class="header-main">
+        <a href="/" class="header-main-link">
+            Bastien Byra
+        </a>
+        <div class="header-right">
+            <a href="/">Blog</a>
+            <a href="/a-propos">A propos</a>
+        </div>
+        <svg id="toggle-menu-header" class="mobile-header-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-menu-2" height="44" width="44">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="18" x2="20" y2="18" />
+        </svg>
+    </div>
+    <div class="toggle-receiver-header header-mobile-row-invisible">
+        <a href="/">Blog</a>
+        <a href="/a-propos" class="last-link">A propos</a>
+    </div>
+    
+</header>
+      <div class="layout-border">
+      
+    <div class="article-container">
+        <img class="article-image" src="../../assets/blog/2024-04-25-Comment-modifier-ou-retirer-le-header-server-de-nginx/NGINX.webp" alt="" />
+
+        <div class="article-intro">
+            <p class="article-date">25 AVRIL 2024 | TECH, NGINX, WEB SERVER</p>
+            <h1 class="article-title">Comment modifier ou retirer le header &quot;Server&quot; de NGINX</h1>
+            <p class="article-description">NGINX comme d&#39;autre serveur web envoie une entête &#39;Server&#39; permettant d&#39;identifier la technologie du serveur, ce qui représente une vulnérabilité, nous allons voir comment modifier ou supprime cette en-tête.</p>
+        </div>
+        
+        <div class="article-content">
+            <h2 id="sommaire" tabindex="-1">Sommaire</h2>
+<ul>
+<li><a href="#ce-qui-ne-fonctionne-pas">Ce qui ne fonctionne pas</a></li>
+<li><a href="#comment-on-fait-alors">Comment on fait alors ?</a></li>
+<li><a href="#la-solution">La solution</a></li>
+<li><a href="#comment-installer-les-modules-NGINX-hors-du-container-NGINX">Comment installer les modules NGINX hors du container NGINX</a></li>
+<li><a href="#fichier-a-modifier-pour-appliquer-les-modules-dans-votre-NGINX">Fichier à modifier pour appliquer les modules dans votre NGINX</a><br>
+<br></li>
+</ul>
+<p><strong>NGINX</strong>, comme tout serveur web, envoie dans ses requêtes et réponse HTTP des en-têtes, des &quot;headers&quot;.</p>
+<p>Ces en-têtes sont utiles, car ils permettent de pouvoir faire passer des données nécessaires au serveur ainsi qu'au navigateur (Authorization, Content-Security-Policy, Cache-Control…).</p>
+<p>Parmi les différents en-têtes envoyés par le serveur en réponse existe <strong>l’en-tête “server”</strong> qui permet d'identifier le serveur que l'on utilise, dans le cas de NGINX, on reçoit une données sous la forme de <strong>nginx/&lt;version&gt;</strong></p>
+<p><img src="../../assets/blog/2024-04-25-Comment-modifier-ou-retirer-le-header-server-de-nginx/NGINX-header-show.png" alt="Image mettant en évidence l'entete &quot;Server&quot; envoyé par le serveur NGINX"></p>
+<p class="image-related-text">L'entête “server” par défaut de Nginx</p>
+<p>Maintenant soyons honnête, vous pourriez vous en foutre, et continuer votre vie, grand bien vous fasse, mais vous pourriez aussi vous dire &quot;Merde, j'ai pas envie que de potentiel attaquant sache quel technologie de serveur web j'utilise !&quot;</p>
+<p>Si c'est votre cas, alors vous êtes au bon endroit, ici je vous montre comment modifier ou retirer, cet en-tête.</p>
+<h2 id="ce-qui-ne-fonctionne-pas" tabindex="-1">Ce qui ne fonctionne pas</h2>
+<p>J'ai passé plusieurs jours dessus, je vais donc prendre le temps de passer sur certaines méthodes que j'ai vu être proposées qui ne fonctionnent pas, voir qui sont complètement catastrophiques.</p>
+<h3>Méthode 1 : installer le package &quot;nginx-extras&quot;</h3>
+<p>Cette méthode est plutôt simple ; Installer le package nginx-extras, et hop, vous avez un NGINX prêt avec tout plein de packages.</p>
+<p>Ça marche, oui, vous aurez un NGINX qui tourne avec des modules, dont &quot;header-more&quot; qui permet de modifier ou supprimer des headers que l'on ne pourrait normalement pas, comme l'en-tête “server”.</p>
+<p>Vous aurez cependant une <s>bonne</s> mauvaise surprise quand vous verrez que ce package vous fait une réinstallation complète de NGINX, en vous faisant une réinstallation complète utilisant une version daté... (V1.18, on est à la V1.25)</p>
+<h3>Méthode 2 : Utiliser la directive &quot;server_tokens off;&quot;</h3>
+<p>C'est un bon début, cette directive permet de supprimer la version de Nginx dans l’en-tête “Server&quot;, cependant il laisse le NGINX dans l'en-tête, next.</p>
+<h3>Méthode 3 : Utiliser la directive &quot;proxy_pass_header Server;&quot;</h3>
+<p>Non.</p>
+<p>Le nom de la directive implique que l'on passe un l’en-tête dans nos réponses HTTP, pour rappel, on essaie d’éviter de passer l’en-tête “Server”.</p>
+<p>D'après la documentation officielle de NGINX :<br>
+&quot;Permits passing otherwise disabled header fields from a proxied server to a client.&quot;, next !</p>
+<h3>Méthode 4 : Passer la directive &quot;proxy_pass_header: Server&quot;</h3>
+<p>L'idée est bonne, on passe un en-tête HTTP &quot;server&quot;, pour remplacer celui automatiquement généré par notre serveur web.</p>
+<p>Le problème, c'est que dans la pratique ça va rajouter un deuxième en-tête &quot;server&quot;...</p>
+<h2 id="comment-on-fait-alors" tabindex="-1">Comment fait-on alors ?</h2>
+<p>Je vais ici expliquer la méthode permettant de pouvoir résoudre notre problème sur une vraiment pré-build / compilé de NGINX (Obtenu via installation du paquet nginx, via une image Docker...)</p>
+<p>Cette méthode est tout aussi fonctionnelle pour une version non compilée, mais il me semble qu'il existe une seconde méthode demandant de modifier des fichiers avant la compilation du code, à vos risques et péril si vous l'essayez.</p>
+<h2 id="la-solution" tabindex="-1">La solution</h2>
+<p>Le <a href="https://github.com/nginxinc/docker-nginx">repository Github de NGINX</a>, dans son <a href="https://github.com/nginxinc/docker-nginx/tree/master/modules">dossier &quot;modules&quot;</a>, fourni deux Dockerfile, une utilisant le gestionnaire de paquet apt (Dockerfile) et une autre utilisant apk (Dockerfile.alpine). Elles permettent de pouvoir installer les modules que l'on veut dans une image NGINX de notre choix.</p>
+<p>Laissez moi vous expliquer un peu plus en détails :</p>
+<p>Les Dockerfiles vont prendre deux arguments en paramètre  :</p>
+<ul>
+<li><strong>NGINX_FROM_IMAGE</strong> qui prend le nom d'une image NGINX en paramètre, par exemple : &quot;nginx:1.25&quot; ou “nginxinc/nginx-unprivileged:1.25-alpine”.</li>
+<li><strong>ENABLED_MODULES</strong> qui prend en paramètre la liste des modules que l'on veut, par exemple : &quot;headers-more lua passenger perl&quot; si on veut ajouter les modules headers-more, lua, passgenger et perl.</li>
+</ul>
+<p>À noter que pas tous les modules sont disponibles, vous trouverez la liste des modules dans <a href="https://hg.nginx.org/pkg-oss/file/tip">les dossiers &quot;debian&quot; ou &quot;alpine&quot; en fonction du Dockerfile utilisé</a>.</p>
+<p><img src="../../assets/blog/2024-04-25-Comment-modifier-ou-retirer-le-header-server-de-nginx/NGINX-repo-mercurial.png" alt="Image montrant les modules disponible pour NGINX Alpine"></p>
+<p class="image-related-text">La liste des modules disponible pour NGINX Alpine en version 1.25</p>
+<p>En fonction de l'installation de NGINX que l'on veut (Debian / Ubuntu ou Alpine), on va installer le fichier Dockerfile correspondant sur notre machine local.</p>
+<ul>
+<li><a href="https://github.com/nginxinc/docker-nginx/blob/master/modules/Dockerfile">Dockerfile</a> pour Ubuntu / Debian / Distro utilisant l’utilitaire de paquet “apt”</li>
+<li><a href="https://github.com/nginxinc/docker-nginx/blob/master/modules/Dockerfile.alpine">Dockerfile.alpine</a> pour Alpine / Distro utilisant l’utilitaire de paquet “apk”</li>
+</ul>
+<p><strong>Pour l'exemple, je vais vous présenter comment ajouter les modules dans un NGINX Alpine, la seule et unique chose qui change entre la version Debian et Alpine et le package manager, dont vous n'avez pas à vous souciez car vous n'aurez pas à modifier les Dockerfiles.</strong></p>
+<p>Une fois que l'on à installer le Dockerfile qui correspond à nos besoins, on va lancer cette commande (réaliser les modifications nécessaire à vos besoins) :</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> build <span class="token parameter variable">-f</span> Dockerfile --build-arg <span class="token assign-left variable">ENABLED_MODULES</span><span class="token operator">=</span><span class="token string">"headers-more"</span> --build-arg <span class="token assign-left variable">NGINX_FROM_IMAGE</span><span class="token operator">=</span><span class="token string">"nginx:1.25-alpine"</span> <span class="token parameter variable">-t</span> my-nginx-with-headers-more /path/to/Dockerfile</code></pre>
+<p>Explication de la commande :</p>
+<ul>
+<li><strong>docker build</strong></li>
+<li><strong>-f Dockerfile</strong> : On précise le nom du fichier Dockerfile qu'il doit utiliser, Dockerfile, Dockerfile.alpine ou un autre nom si vous l'avez modifiez.</li>
+<li><strong>--build-arg ENABLED_MODULES=&quot;headers-more&quot;</strong> : On lui dit les modules que l'on veut, ici on installe uniquement headers-more</li>
+<li><strong>--build-arg NGINX_FROM_IMAGE=&quot;nginx:1.25-alpine&quot;</strong> : <strong>Argument optionnel</strong>, On lui dit l’image NGINX à utilisé, si on ne saisie pas cette argument, alors il utilisera nginx:mainline ou nginx:mainline-alpine en fonction du Dockerfile utilisé</li>
+<li><strong>-t my-nginx-with-headers-more</strong> : Nom donné à l’image que l’on va créer (le NGINX avec les modules)</li>
+<li><strong>/path/to/Dockerfile</strong> : Chemin vers le Dockerfile</li>
+</ul>
+<p>Exécuter la commande, et à la fin vous aurez une belle image NGINX dans la version voulue avec vos modules.</p>
+<p><strong>Note : Si vous utilisez une image nginx-unpriviliged, vous aurez besoin de modifier le Dockerfile pour passer en utilisateur root (USER root) le temps de l'installation des packages</strong></p>
+<p>Vous avez désormais un NGINX presque fonctionnelle, avec le module “headers-more” permettant de pouvoir modifier / supprimer l’en-tête “Server”</p>
+<p>Il vous suffit d’ajouter deux lignes dans le fichier /etc/nginx/nginx.conf de votre container pour qu’il supprime l’en-tête.</p>
+<p>Mais attendez, j’y reviendrai juste après ! Et pourquoi pas maintenant, certains d’entre vous pourraient se demander ?</p>
+<p>Car certaines personnes voudraient peut-être pouvoir installer leurs modules sur un NGINX installé directement sur leur machine, un NGINX installé nativement sur leur host, ou peut-être que certains doivent gérer plusieurs projets utilisant NGINX, et n’ont pas les mêmes besoins de modules.</p>
+<p>Quelque soit vos raisons, je vais vous apprendre comment sortir vos modules NGINX de votre container.</p>
+<h2 id="comment-installer-les-modules-NGINX-hors-du-container-NGINX" tabindex="-1">Comment installer les modules NGINX hors du container NGINX</h2>
+<p>Une question simple, qui je pensais au départ allez être simple, l’histoire de 5 minutes.</p>
+<p>NGINX installe ses modules dans le dossier “modules” situé dans /etc/nginx/modules, vous pourriez être tenté de simplement copier ce dossier hors de votre container pour ensuite le copier dans vos autre installation de NGINX</p>
+<p>Ca ne va pas fonctionner, dans les faits, vous risquez d’avoir une erreur vous disant que vous avez un problème de version, headers-more vous dira qu’il a besoin d’un NGINX v1.18, et ce alors même que quand il était encore dans le container, il fonctionnait très bien sur un NGINX v1.25</p>
+<p><em>Note personnel ici, mais dieu sait que si un ingénieur de NGINX était passé à côté de moi à ce moment précis, je l’aurai emmené dans un ring de MMA dans un combat à mort, no items fox only destination finale.</em></p>
+<p>Pour pouvoir installer les modules hors de l’image, vous allez devoir modifier le Dockerfile fournit par NGINX, vous allez supprimer la dernière partie de celle-ci, celle qui créer le deuxième NGINX (Vous pouvez pas la louper) :</p>
+<pre class="language-dockerfile"><code class="language-dockerfile"><span class="token instruction"><span class="token keyword">ARG</span> NGINX_FROM_IMAGE=nginx:mainline</span>
+<span class="token instruction"><span class="token keyword">FROM</span> <span class="token variable">${NGINX_FROM_IMAGE}</span> <span class="token keyword">as</span> builder</span>
+
+<span class="token instruction"><span class="token keyword">ARG</span> ENABLED_MODULES</span>
+
+<span class="token instruction"><span class="token keyword">SHELL</span> [<span class="token string">"/bin/bash"</span>, <span class="token string">"-exo"</span>, <span class="token string">"pipefail"</span>, <span class="token string">"-c"</span>]</span>
+
+<span class="token instruction"><span class="token keyword">RUN</span> if [ <span class="token string">"$ENABLED_MODULES"</span> = <span class="token string">""</span> ]; then <span class="token operator">\</span>
+        echo <span class="token string">"No additional modules enabled, exiting"</span>; <span class="token operator">\</span>
+        exit 1; <span class="token operator">\</span>
+    fi</span>
+
+<span class="token instruction"><span class="token keyword">COPY</span> ./ /modules/</span>
+
+<span class="token instruction"><span class="token keyword">RUN</span> apt-get update <span class="token operator">\</span>
+    &amp;&amp; apt-get install -y --no-install-suggests --no-install-recommends <span class="token operator">\</span>
+                patch make wget mercurial devscripts debhelper dpkg-dev <span class="token operator">\</span>
+                quilt lsb-release build-essential libxml2-utils xsltproc <span class="token operator">\</span>
+                equivs git g++ libparse-recdescent-perl <span class="token operator">\</span>
+    &amp;&amp; XSLSCRIPT_SHA512=<span class="token string">"f7194c5198daeab9b3b0c3aebf006922c7df1d345d454bd8474489ff2eb6b4bf8e2ffe442489a45d1aab80da6ecebe0097759a1e12cc26b5f0613d05b7c09ffa *stdin"</span> <span class="token operator">\</span>
+    &amp;&amp; wget -O /tmp/xslscript.pl https://hg.nginx.org/xslscript/raw-file/01dc9ba12e1b/xslscript.pl <span class="token operator">\</span>
+    &amp;&amp; if [ <span class="token string">"$(cat /tmp/xslscript.pl | openssl sha512 -r)"</span> = <span class="token string">"$XSLSCRIPT_SHA512"</span> ]; then <span class="token operator">\</span>
+        echo <span class="token string">"XSLScript checksum verification succeeded!"</span>; <span class="token operator">\</span>
+        chmod +x /tmp/xslscript.pl; <span class="token operator">\</span>
+        mv /tmp/xslscript.pl /usr/local/bin/; <span class="token operator">\</span>
+    else <span class="token operator">\</span>
+        echo <span class="token string">"XSLScript checksum verification failed!"</span>; <span class="token operator">\</span>
+        exit 1; <span class="token operator">\</span>
+    fi <span class="token operator">\</span>
+    &amp;&amp; hg clone -r <span class="token variable">${NGINX_VERSION}</span>-<span class="token variable">${PKG_RELEASE%%~*}</span> https://hg.nginx.org/pkg-oss/ <span class="token operator">\</span>
+    &amp;&amp; cd pkg-oss <span class="token operator">\</span>
+    &amp;&amp; mkdir /tmp/packages <span class="token operator">\</span>
+    &amp;&amp; for module in <span class="token variable">$ENABLED_MODULES</span>; do <span class="token operator">\</span>
+        echo <span class="token string">"Building $module for nginx-$NGINX_VERSION"</span>; <span class="token operator">\</span>
+        if [ -d /modules/<span class="token variable">$module</span> ]; then <span class="token operator">\</span>
+            echo <span class="token string">"Building $module from user-supplied sources"</span>; <span class="token operator">\</span>
+            <span class="token comment"># check if module sources file is there and not empty</span>
+            if [ ! -s /modules/<span class="token variable">$module</span>/source ]; then <span class="token operator">\</span>
+                echo <span class="token string">"No source file for $module in modules/$module/source, exiting"</span>; <span class="token operator">\</span>
+                exit 1; <span class="token operator">\</span>
+            fi; <span class="token operator">\</span>
+            <span class="token comment"># some modules require build dependencies</span>
+            if [ -f /modules/<span class="token variable">$module</span>/build-deps ]; then <span class="token operator">\</span>
+                echo <span class="token string">"Installing $module build dependencies"</span>; <span class="token operator">\</span>
+                apt-get update &amp;&amp; apt-get install -y --no-install-suggests --no-install-recommends $(cat /modules/<span class="token variable">$module</span>/build-deps | xargs); <span class="token operator">\</span>
+            fi; <span class="token operator">\</span>
+            <span class="token comment"># if a module has a build dependency that is not in a distro, provide a</span>
+            <span class="token comment"># shell script to fetch/build/install those</span>
+            <span class="token comment"># note that shared libraries produced as a result of this script will</span>
+            <span class="token comment"># not be copied from the builder image to the main one so build static</span>
+            if [ -x /modules/<span class="token variable">$module</span>/prebuild ]; then <span class="token operator">\</span>
+                echo <span class="token string">"Running prebuild script for $module"</span>; <span class="token operator">\</span>
+                /modules/<span class="token variable">$module</span>/prebuild; <span class="token operator">\</span>
+            fi; <span class="token operator">\</span>
+            /pkg-oss/build_module.sh -v <span class="token variable">$NGINX_VERSION</span> -f -y -o /tmp/packages -n <span class="token variable">$module</span> $(cat /modules/<span class="token variable">$module</span>/source); <span class="token operator">\</span>
+            BUILT_MODULES=<span class="token string">"$BUILT_MODULES $(echo $module | tr '[A-Z]' '[a-z]' | tr -d '[/_\-\.\t ]')"</span>; <span class="token operator">\</span>
+        elif make -C /pkg-oss/debian list | grep -P <span class="token string">"^$module\s+\d"</span> > /dev/null; then <span class="token operator">\</span>
+            echo <span class="token string">"Building $module from pkg-oss sources"</span>; <span class="token operator">\</span>
+            cd /pkg-oss/debian; <span class="token operator">\</span>
+            make rules-module-<span class="token variable">$module</span> BASE_VERSION=<span class="token variable">$NGINX_VERSION</span> NGINX_VERSION=<span class="token variable">$NGINX_VERSION</span>; <span class="token operator">\</span>
+            mk-build-deps --install --tool=<span class="token string">"apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"</span> debuild-module-<span class="token variable">$module</span>/nginx-<span class="token variable">$NGINX_VERSION</span>/debian/control; <span class="token operator">\</span>
+            make module-<span class="token variable">$module</span> BASE_VERSION=<span class="token variable">$NGINX_VERSION</span> NGINX_VERSION=<span class="token variable">$NGINX_VERSION</span>; <span class="token operator">\</span>
+            find ../../ -maxdepth 1 -mindepth 1 -type f -name <span class="token string">"*.deb"</span> -exec mv -v {} /tmp/packages/ \;; <span class="token operator">\</span>
+            BUILT_MODULES=<span class="token string">"$BUILT_MODULES $module"</span>; <span class="token operator">\</span>
+        else <span class="token operator">\</span>
+            echo <span class="token string">"Don't know how to build $module module, exiting"</span>; <span class="token operator">\</span>
+            exit 1; <span class="token operator">\</span>
+        fi; <span class="token operator">\</span>
+    done <span class="token operator">\</span>
+    &amp;&amp; echo <span class="token string">"BUILT_MODULES=\"$BUILT_MODULES\""</span> > /tmp/packages/modules.env</span>
+
+<span class="token comment"># ------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="token comment"># -------------------------------------------------------------VOUS SUPPRIMER CETTE PARTIE--------------------------------------------------------------------</span>
+<span class="token comment"># ------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="token comment"># ------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="token instruction"><span class="token keyword">FROM</span> <span class="token variable">${NGINX_FROM_IMAGE}</span></span>
+<span class="token instruction"><span class="token keyword">RUN</span> <span class="token options"><span class="token property">--mount</span><span class="token punctuation">=</span><span class="token string">type=bind,target=/tmp/packages/,source=/tmp/packages/,from=builder</span></span> <span class="token operator">\</span>
+    apt-get update <span class="token operator">\</span>
+    &amp;&amp; . /tmp/packages/modules.env <span class="token operator">\</span>
+    &amp;&amp; for module in <span class="token variable">$BUILT_MODULES</span>; do <span class="token operator">\</span>
+           apt-get install --no-install-suggests --no-install-recommends -y /tmp/packages/nginx-module-<span class="token variable">${module}</span>_<span class="token variable">${NGINX_VERSION}</span>*.deb; <span class="token operator">\</span>
+       done <span class="token operator">\</span>
+    &amp;&amp; rm -rf /var/lib/apt/lists/</span>
+<span class="token comment"># ------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="token comment"># ------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="token comment"># -------------------------------------------------------------VOUS SUPPRIMER CETTE PARTIE--------------------------------------------------------------------</span>
+<span class="token comment"># ------------------------------------------------------------------------------------------------------------------------------------------------------------</span></code></pre>
+<p>En faisant ça, en lançant la commande évoqué plus haut, l’image créer ne sera plus l’image NGINX clean, mais celle avec tous ses utilitaire, et surtout, celle ayant les fichiers d’installation des modules, dans son /tmp/packages</p>
+<p>Supprimer les lignes évoqué plus haut du Dockerfile, créer l’image Docker, et copier le dossier /tmp/packages sur votre host.</p>
+<p>Félicitation, vous avez vos fichiers d’installation de modules.</p>
+<p>Comment les installer ? Rien de plus simple.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">apt-get</span> <span class="token function">install</span> --no-install-suggests --no-install-recommends <span class="token parameter variable">-y</span> /path/to/tmp/packages/nginx-module-*<span class="token variable">${NGINX_VERSION}</span>*.deb<span class="token punctuation">;</span></code></pre>
+<p>Modifier “/path/to/tmp/packages” par le chemin vers lequel vous avez installé le /tmp/packages du container, et hop, ça installe vos modules.</p>
+<h2 id="fichier-a-modifier-pour-appliquer-les-modules-dans-votre-NGINX" tabindex="-1">Fichier à modifier pour appliquer les modules dans votre NGINX</h2>
+<p>Maintenant que l’on est tous au même niveau, il suffit de rajouter deux lignes dans le fichier nginx.conf</p>
+<p>(Je prend le fichier nginx.conf par défaut comme exemple)</p>
+<pre class="language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">worker_processes</span>  auto</span><span class="token punctuation">;</span>
+
+<span class="token directive"><span class="token keyword">error_log</span>  /var/log/nginx/error.log notice</span><span class="token punctuation">;</span>
+<span class="token directive"><span class="token keyword">pid</span>        /tmp/nginx.pid</span><span class="token punctuation">;</span>
+
+<span class="token comment"># On importe nos modules</span>
+<span class="token directive"><span class="token keyword">load_module</span> modules/ngx_http_security_headers_module.so</span><span class="token punctuation">;</span>
+
+<span class="token directive"><span class="token keyword">events</span></span> <span class="token punctuation">{</span>
+    <span class="token directive"><span class="token keyword">worker_connections</span>  <span class="token number">1024</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token directive"><span class="token keyword">http</span></span> <span class="token punctuation">{</span>
+    
+    <span class="token comment"># On modifie ou supprime l'entete "Server"</span>
+    <span class="token comment"># 1. Supprimer l’en-tête “Server”</span>
+    <span class="token directive"><span class="token keyword">server_tokens</span> <span class="token boolean">off</span></span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">more_clear_headers</span> Server</span><span class="token punctuation">;</span>
+
+    <span class="token comment"># Ou</span>
+
+    <span class="token comment"># 2. Modifier l'en-tête “Server”</span>
+    <span class="token directive"><span class="token keyword">server_tokens:</span> <span class="token boolean">off</span></span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">more_set_headers</span>    <span class="token string">"Server: my_server"</span></span><span class="token punctuation">;</span>
+
+
+    <span class="token comment"># La suite de votre configuration NGINX :</span>
+    <span class="token directive"><span class="token keyword">proxy_temp_path</span> /tmp/proxy_temp</span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">client_body_temp_path</span> /tmp/client_temp</span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">fastcgi_temp_path</span> /tmp/fastcgi_temp</span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">uwsgi_temp_path</span> /tmp/uwsgi_temp</span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">scgi_temp_path</span> /tmp/scgi_temp</span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">include</span>       /etc/nginx/mime.types</span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">default_type</span>  application/octet-stream</span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">log_format</span>  main  <span class="token string">'<span class="token variable">$remote_addr</span> - <span class="token variable">$remote_user</span> [<span class="token variable">$time_local]</span> "<span class="token variable">$request</span>" '</span>
+                      <span class="token string">'<span class="token variable">$status</span> <span class="token variable">$body_bytes_sent</span> "<span class="token variable">$http_referer</span>" '</span>
+                      <span class="token string">'"<span class="token variable">$http_user_agent</span>" "<span class="token variable">$http_x_forwarded_for</span>"'</span></span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">access_log</span>  /var/log/nginx/access.log  main</span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">sendfile</span>        <span class="token boolean">on</span></span><span class="token punctuation">;</span>
+    <span class="token comment">#tcp_nopush     on;</span>
+    <span class="token directive"><span class="token keyword">keepalive_timeout</span>  <span class="token number">65</span></span><span class="token punctuation">;</span>
+    <span class="token comment">#gzip  on;</span>
+    <span class="token directive"><span class="token keyword">include</span> /etc/nginx/conf.d/*.conf</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Ajouter la directive “load_modules” <strong>AVANT</strong> la directive “http” pour importer le module headers-more</p>
+<p>Ajouter la directive server_tokens: off pour désactiver les détails de NGINX, et finalement ajouter au choix :</p>
+<ul>
+<li><strong>more_clear_headers</strong> : Supprime complètement le header</li>
+<li><strong>more_set_headers</strong> : Modifie la valeur du header</li>
+</ul>
+<p>Et… C’est bon ! Plus de NGINX dans l’en-tête “server” dans vos réponse HTTP.</p>
+<p>Tout ça pour ça… Mon dieu… par pitié F5, faites un truc facile à modifier, et je ne parle pas d'une solution demandant d’avoir NGINX Plus !</p>
+
+        </div>
+
+        <hr>
+        
+        <div class="article-end">
+            <p>Merci d'avoir lu cet article, n'hésitez pas à jeter un coup d'oeil aux autres articles.</p>
+            <a class="link-to-articles" href="https://bastienbyra.fr/">Mes autres articles.</a>
+            <div class="article-social-network">
+                <p>par <span class="blueviolet">Bastien BYRA</span></p>
+                <div class="article-network-image">
+                    <a href="https://github.com/BastienBYRA">
+                        <img src="/assets/social_network/Github.png" alt="Logo de Github" />
+                    </a>
+                    <a href="https://www.linkedin.com/in/bastien-byra-848998209/">
+                        <img src="/assets/social_network/Linkedin.png" alt="Logo de Linkedin" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      </div>
+    </div>
+  </body>
+</html>

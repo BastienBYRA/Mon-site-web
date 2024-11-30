@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/article/index.css">
+    <title>Sécuriser vos conteneurs avec le Distroless</title>
+    
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="author" content="Bastien Byra" />
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Le distroless est une méthode de sécurisation des conteneurs que j&#39;explore dans cet article, nous allons voir les solutions disponibles pour le mettre en place et la manière de l&#39;utiliser.">
+    <meta name="keywords" content="Conteneurs docker, sécurite, distroless, image distroless, mise en place de containers docker distroless">
+    
+    <meta property="og:image" content="../../assets/blog/Securiser-vos-conteneurs-avec-le-distroless/securiser-vos-conteneurs-avec-le-distroless-thumbnail.png" />
+    <meta property="og:description" content="Le distroless est une méthode de sécurisation des conteneurs que j&#39;explore dans cet article, nous allons voir les solutions disponibles pour le mettre en place et la manière de l&#39;utiliser."/>
+    <meta property="og:title" content="Sécuriser vos conteneurs avec le Distroless" />
+    <script src="/javascript/script.js" refferer></script>
+    
+    <link
+			href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css"
+			rel="stylesheet"
+		/>
+
+    <script data-goatcounter="https://bastienbyra.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js">
+    </script>
+    
+  </head>
+  <body>
+    <div class="container">
+      <header>
+    <div class="header-main">
+        <a href="/" class="header-main-link">
+            Bastien Byra
+        </a>
+        <div class="header-right">
+            <a href="/">Blog</a>
+            <a href="/a-propos">A propos</a>
+        </div>
+        <svg id="toggle-menu-header" class="mobile-header-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-menu-2" height="44" width="44">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="18" x2="20" y2="18" />
+        </svg>
+    </div>
+    <div class="toggle-receiver-header header-mobile-row-invisible">
+        <a href="/">Blog</a>
+        <a href="/a-propos" class="last-link">A propos</a>
+    </div>
+    
+</header>
+      <div class="layout-border">
+      
+    <div class="article-container">
+        <img class="article-image" src="../../assets/blog/Securiser-vos-conteneurs-avec-le-distroless/securiser-vos-conteneurs-avec-le-distroless-thumbnail.png" alt="" />
+
+        <div class="article-intro">
+            <p class="article-date">29 OCTOBRE 2024 | CONTENEURS, DISTROLESS, SECURITE</p>
+            <h1 class="article-title">Sécuriser vos conteneurs avec le Distroless</h1>
+            <p class="article-description">Le distroless est une méthode de sécurisation des conteneurs que j&#39;explore dans cet article, nous allons voir les solutions disponibles pour le mettre en place et la manière de l&#39;utiliser.</p>
+        </div>
+        
+        <div class="article-content">
+            <h2 id="table-des-mati%C3%A8res" tabindex="-1">Table des matières</h2>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#from-scratch">From Scratch</a></li>
+<li><a href="#les-conteneurs-distroless-de-google">Les conteneurs Distroless de Google</a>
+<ul>
+<li><a href="#exemple-google-container">Exemple</a></li>
+</ul>
+</li>
+<li><a href="#wolfi-l-os-pour-les-conteneurs">Wolfi : l'OS pour les conteneurs</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#liens-utiles">Liens utiles</a></li>
+</ul>
+<h2 id="introduction" tabindex="-1">Introduction</h2>
+<p>Lorsqu'on crée une image Docker, on utilise une image qui servira de base.</p>
+<p>Celle-ci peut être :</p>
+<ul>
+<li>une distribution Linux comme Debian, Ubuntu ou Alpine,</li>
+<li>une image contenant le langage de programmation nécessaire à notre projet,</li>
+<li>une image contenant un outil requis pour le projet.</li>
+</ul>
+<p>Il existe de nombreuses options, mais l'essentiel à retenir est que toutes les images Docker sont basées sur une autre, et il est probable que cette base soit une distribution Linux ou une image qui en utilise une.</p>
+<p>Mais est-il possible de se passer complètement d'une distribution Linux ? Après tout, si le but est de déployer une application ou un service, n’y aurait-il pas des avantages à se détacher de cette base Linux ?</p>
+<p>Ne pas utiliser de distribution Linux offrirait plusieurs avantages :</p>
+<ul>
+<li>une surface d'attaque réduite,</li>
+<li>un temps de construction plus rapide,</li>
+<li>un déploiement plus rapide,</li>
+<li>une image plus légère.</li>
+</ul>
+<p>Des avantages intéressants, mais est-ce même possible ?</p>
+<h2 id="from-scratch" tabindex="-1">From Scratch</h2>
+<p>L'image Debian, par exemple, utilise &quot;Scratch&quot; comme base. C'est l'image la plus minimale possible, dépourvue de tout.</p>
+<p>Cette image &quot;vide&quot; n'a généralement qu'une seule fonction : lancer un binaire statique, comme l'exécutable de votre application.</p>
+<p>Cependant, cette méthode implique que votre programme ne doit dépendre d'aucune autre ressource : pas de runtime, de bibliothèque ou de dépendance externe. Le programme doit être entièrement autonome et capable d'être compilé en un fichier binaire unique.</p>
+<p>Ce n’est généralement pas réaliste, car la plupart des programmes ont besoin de bibliothèques, qu’on le veuille ou non.</p>
+<blockquote>
+<p>Utiliser scratch, c’est ne pas avoir de shell, pas de système de fichiers... rien.</p>
+<p>Vous savez exactement ce que contient votre image : rien. C’est à vous d’ajouter ce dont vous avez besoin.</p>
+</blockquote>
+<h2 id="les-conteneurs-distroless-de-google" tabindex="-1">Les conteneurs Distroless de Google</h2>
+<p>Maintenant que nous avons fait ce détour, parlons du sujet principal : les conteneurs <strong>distroless</strong> (sans distribution Linux), comme ceux proposés par Google.</p>
+<p>👉 <a href="https://github.com/GoogleContainerTools/distroless">https://github.com/GoogleContainerTools/distroless</a></p>
+<p>Les images “distroless” n’embarquent pas de distribution Linux ni les nombreux paquets qui l’accompagnent, adoptant ainsi de bonnes pratiques pour garantir des images sécurisées et légères.</p>
+<p>Elles sont dépourvues de la multitude de paquets qui accompagnent habituellement un OS, et permettent leur utilisation en tant qu’utilisateur non-root.</p>
+<p>On trouve des images pour plusieurs langages : Python 3, Java 17, Java 21, Node 20, ainsi que des images plus générales comme static pour les programmes compilés en fichiers binaires uniques (C, Golang, etc.).</p>
+<p>Prenons l'exemple de python. Google propose l'image <code>gcr.io/distroless/python3-debian12</code>.</p>
+<blockquote>
+<p><strong>Note :</strong></p>
+<p>Le distroless (de Google) est basé sur Debian, cependant, il est basé sur une version modifiée de celui-ci, ne conservant que l’essentiel pour exécuter les programmes dans de bonnes conditions.</p>
+</blockquote>
+<p>Le résultat : des images très légères, de l’ordre de 2 Mo, soit quatre fois moins que la taille d’une image Alpine de base, en plus d’avoir une surface d’attaque diminuée.</p>
+<p>Le distroless pour faire une analogie, c'est comme le serverless ; Le serverless utilise des serveurs, et le distroless utilise une distro Linux.</p>
+<p>L'image Python, par exemple, contient uniquement par défaut :</p>
+<ul>
+<li>la bibliothèque ca-certificates,</li>
+<li><code>/etc/passwd</code> pour l'utilisateur root,</li>
+<li>le répertoire <code>/tmp</code>,</li>
+<li>les bibliothèques tzdata, glibc, et libssl,</li>
+<li>Python 3 et ses dépendances.</li>
+</ul>
+<h3 id="exemple-google-container">Exemple</h3>
+<p>Prenons l'exemple d'une application Python Flask, le code de cette application est très simpliste, exposant une route.</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask
+
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">hello_world</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token string">"&lt;p>Hello, World!&lt;/p>"</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>host<span class="token operator">=</span><span class="token string">"0.0.0.0"</span><span class="token punctuation">,</span> port<span class="token operator">=</span><span class="token number">80</span><span class="token punctuation">)</span></code></pre>
+<p>Pour créer une image Distroless, je vais me baser sur <a href="https://github.com/GoogleContainerTools/distroless/blob/main/examples/python3/Dockerfile">l'exemple fourni par Google.</a></p>
+<p>Ce qui nous donne ceci :</p>
+<pre class="language-dockerfile"><code class="language-dockerfile"><span class="token comment"># Étape 1 : Construction des dépendances et de l'application</span>
+<span class="token instruction"><span class="token keyword">FROM</span> python:3.12-slim <span class="token keyword">AS</span> build-env</span>
+
+<span class="token comment"># Copier les fichiers du projet dans le conteneur</span>
+<span class="token instruction"><span class="token keyword">COPY</span> . /app</span>
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /app</span>
+
+<span class="token comment"># Installer les dépendances du projet</span>
+<span class="token instruction"><span class="token keyword">RUN</span> pip install .</span>
+
+<span class="token comment"># Étape 2 : Image Distroless</span>
+<span class="token instruction"><span class="token keyword">FROM</span> gcr.io/distroless/python3-debian12</span>
+
+<span class="token comment"># Copier l'application et les dépendances depuis l'étape de construction</span>
+<span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">build-env</span></span> /app /app</span>
+<span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">build-env</span></span> /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages</span>
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /app</span>
+<span class="token instruction"><span class="token keyword">ENV</span> PYTHONPATH=/usr/local/lib/python3.12/site-packages</span>
+
+<span class="token instruction"><span class="token keyword">CMD</span> [<span class="token string">"main.py"</span>]</span></code></pre>
+<p>La structure de fichier de l'application :</p>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">.</span>
+├── Dockerfile
+├── README.md
+├── main.py
+├── pyproject.toml
+└── uv.lock</code></pre>
+<p>Je build mon image, et je lance mon conteneur !</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">docker</span> buildx build <span class="token parameter variable">--quiet</span> <span class="token parameter variable">-t</span> mon-container-python-distroless <span class="token builtin class-name">.</span>
+sha256:98c5333dc36b1cf3698811b36acaf5dd1fe8d945c7c191b01abfca4228cf8fa4
+
+$ <span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">-p</span> <span class="token number">80</span>:80 <span class="token parameter variable">--name</span> py mon-container-python-distroless
+a44d954e93215d9cb52beda7a4c84a155d5d741579873e11ee86e5a8119ec3b7
+
+$ <span class="token function">docker</span> <span class="token function">ps</span>
+CONTAINER ID   IMAGE                          COMMAND                 CREATED          STATUS          PORTS                 NAMES
+a44d954e9321   mon-container-python-distroless   <span class="token string">"/usr/bin/python3.11…"</span>   <span class="token number">12</span> seconds ago   Up <span class="token number">11</span> seconds   <span class="token number">0.0</span>.0.0:80-<span class="token operator">></span><span class="token number">80</span>/tcp   py</code></pre>
+<p>Mon conteneur est accessible en ligne depuis mon navigateur, et je n'ai aucun moyen de pénétrer dedans.</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> py <span class="token function">sh</span>
+OCI runtime <span class="token builtin class-name">exec</span> failed: <span class="token builtin class-name">exec</span> failed: unable to start container process: exec: <span class="token string">"sh"</span><span class="token builtin class-name">:</span> executable <span class="token function">file</span> not found <span class="token keyword">in</span> <span class="token environment constant">$PATH</span><span class="token builtin class-name">:</span> unknown
+
+$ <span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> py <span class="token function">bash</span>
+OCI runtime <span class="token builtin class-name">exec</span> failed: <span class="token builtin class-name">exec</span> failed: unable to start container process: exec: <span class="token string">"bash"</span><span class="token builtin class-name">:</span> executable <span class="token function">file</span> not found <span class="token keyword">in</span> <span class="token environment constant">$PATH</span><span class="token builtin class-name">:</span> unknown</code></pre>
+<p>Et si on vérifiait le nombre de failles que trouve <code>docker scout quickview</code> dans notre image comparée à l’image python3.12-slim ?</p>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># Python 3.12 slim	</span>
+$ <span class="token function">docker</span> scout quickview python:3.12-slim
+  Target             │ python:3.12-slim │ 0C 0H 1M 28L
+  digest             │   311c6c7090a5   │
+  Base image         │     debian       │ 0C 0H 1M 23L
+  Updated base image │     debian       │ 0C 0H 1M 23L
+
+<span class="token comment"># Mon application Flask</span>
+$ <span class="token function">docker</span> scout quickview mon-container-python-distroless
+  Target     │ mon-container-python-distroless:latest │ 0C 0H 0M 0L
+  digest     │              9b7fb764deb2              │
+  Base image │    distroless/static-debian12:latest   │ 0C 0H 0M 0L</code></pre>
+<p>Juste comme ça, j'ai une image Distroless fonctionnelle, sécurisée et prête à l'emploi.</p>
+<blockquote>
+<p><strong>Note</strong> :</p>
+<p>Il est important de noter que ces images ne contiennent ni shell, ni gestionnaire de paquets, ce qui peut compliquer le débogage si nécessaire (et cela arrivera inévitablement, loi de Murphy oblige).</p>
+</blockquote>
+<h2 id="wolfi-l-os-pour-les-conteneurs" tabindex="-1">Wolfi : l'OS pour les conteneurs</h2>
+<p>Wolfi est un OS conçu pour les conteneurs et le cloud de manière générale. Il vise à produire des images sans vulnérabilité.</p>
+<p>👉 <a href="https://github.com/wolfi-dev">https://github.com/wolfi-dev</a></p>
+<p>Wolfi s’inscrit également dans la dynamique distroless. Alors que les conteneurs distroless de Google fournissent des images prêtes à l’emploi pour des cas spécifiques, Wolfi se veut plus général et peut être utilisé quel que soit votre projet.</p>
+<p>Il est possible de créer des images avec Wolfi de deux façons :</p>
+<p>La méthode standard via l’utilisation d’un Dockerfile, ou avec les outils in-house apko et melange. Wolfi peut aussi créer des images plus classiques, incluant un shell, un gestionnaire de fichiers, etc., c’est notamment le cas quand on crée une image via l’utilisation d’un Dockerfile.</p>
+<blockquote>
+<p><strong>Note</strong> :</p>
+<p>Générer une image avec le Dockerfile : <a href="https://edu.chainguard.dev/open-source/wolfi/wolfi-with-dockerfiles/">https://edu.chainguard.dev/open-source/wolfi/wolfi-with-dockerfiles/</a> Générer une image avec apko et melange : <a href="https://edu.chainguard.dev/open-source/build-tools/apko/getting-started-with-apko/">https://edu.chainguard.dev/open-source/build-tools/apko/getting-started-with-apko/</a></p>
+</blockquote>
+<h2 id="conclusion" tabindex="-1">Conclusion</h2>
+<p>Avez-vous besoin de conteneurs distroless ? C'est une question légitime à se poser.</p>
+<p>Les distroless offrent un énorme avantage : la sécurité. L'image étant presque vierge, les risques liés aux dépendances inutiles ou aux failles de sécurité sont réduits au minimum, en plus de bloquer l'accès au shell, permettant d'encore plus réduire la surface d'attaque d'un attaquant.</p>
+<p>Cependant, l'absence de shell peut être contraignante. Il peut être nécessaire, en fonction de vos besoins, pour exécuter des scripts ou déboguer des conteneurs.</p>
+<blockquote>
+<p><strong>Note</strong> :</p>
+<p>Ce n'est pas un problème si vous utilisez Kubernetes version v1.25+, qui permet de créer des conteneurs éphémères permettant de fournir un shell et différents outils à un autre conteneurs.</p>
+</blockquote>
+<p>En fin de compte, c'est à vous de peser le pour et le contre. Alpine et Debian, bien qu'ils embarquent tout ce que l'OS a besoin et plus encore, permettent même une fois le conteneur lancé de pouvoir agir dessus, via l'installation de paquets, le lancement de scripts, la modification de configuration…</p>
+<p>Je pense, à titre purement personnel, que le Distroless peut être pratique pour le déploiement en préproduction et production, car normalement quand votre application finit en production, elle est déjà passée par toutes les phases de tests.</p>
+<p>Pour les phases de recette, intégration, test… un conteneur plus basique semble être le plus adapté, car ce sont les phases où le débogage est le plus important.</p>
+<h2 id="liens-utiles" tabindex="-1">Liens utiles</h2>
+<ul>
+<li>Github Google Distroless : <a href="https://github.com/GoogleContainerTools/distroless">https://github.com/GoogleContainerTools/distroless</a></li>
+<li>Github Wolfi : <a href="https://github.com/wolfi-dev">https://github.com/wolfi-dev</a></li>
+<li>Article de Chainguard sur le distroless : <a href="https://www.chainguard.dev/unchained/minimal-container-images-towards-a-more-secure-future">https://www.chainguard.dev/unchained/minimal-container-images-towards-a-more-secure-future</a></li>
+<li>Conférence sur le distroless : <a href="https://youtu.be/lviLZFciDv4?si=st4pYmcT7wZ2yG-d">https://youtu.be/lviLZFciDv4?si=st4pYmcT7wZ2yG-d</a></li>
+<li>Plus sur FROM Scratch : <a href="https://docs.docker.com/build/building/base-images/">https://docs.docker.com/build/building/base-images/</a></li>
+</ul>
+
+        </div>
+
+        <hr>
+        
+        <div class="article-end">
+            <p>Merci d'avoir lu cet article, n'hésitez pas à jeter un coup d'oeil aux autres articles.</p>
+            <a class="link-to-articles" href="https://bastienbyra.fr/">Mes autres articles.</a>
+            <div class="article-social-network">
+                <p>par <span class="blueviolet">Bastien BYRA</span></p>
+                <div class="article-network-image">
+                    <a href="https://github.com/BastienBYRA">
+                        <img src="/assets/social_network/Github.png" alt="Logo de Github" />
+                    </a>
+                    <a href="https://www.linkedin.com/in/bastien-byra-848998209/">
+                        <img src="/assets/social_network/Linkedin.png" alt="Logo de Linkedin" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/article/index.css">
+    <title>Les underscores dans les en-têtes HTTP</title>
+    
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="author" content="Bastien Byra" />
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Un court article sur l&#39;utilisation des underscores dans les en-têtes HTTP">
+    <meta name="keywords" content="Tech, Web server, NGINX, Apache, HTTP Header, En-tete HTTP, underscore http header, Devops">
+    
+    <meta property="og:image" content="../../assets/blog/Les-underscores-dans-les-en-tetes-http/header-main.png" />
+    <meta property="og:description" content="Un court article sur l&#39;utilisation des underscores dans les en-têtes HTTP"/>
+    <meta property="og:title" content="Les underscores dans les en-têtes HTTP" />
+    <script src="/javascript/script.js" refferer></script>
+    
+    <link
+			href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css"
+			rel="stylesheet"
+		/>
+
+    <script data-goatcounter="https://bastienbyra.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js">
+    </script>
+    
+  </head>
+  <body>
+    <div class="container">
+      <header>
+    <div class="header-main">
+        <a href="/" class="header-main-link">
+            Bastien Byra
+        </a>
+        <div class="header-right">
+            <a href="/">Blog</a>
+            <a href="/a-propos">A propos</a>
+        </div>
+        <svg id="toggle-menu-header" class="mobile-header-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-menu-2" height="44" width="44">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="18" x2="20" y2="18" />
+        </svg>
+    </div>
+    <div class="toggle-receiver-header header-mobile-row-invisible">
+        <a href="/">Blog</a>
+        <a href="/a-propos" class="last-link">A propos</a>
+    </div>
+    
+</header>
+      <div class="layout-border">
+      
+    <div class="article-container">
+        <img class="article-image" src="../../assets/blog/Les-underscores-dans-les-en-tetes-http/header-main.png" alt="" />
+
+        <div class="article-intro">
+            <p class="article-date">7 SEPTEMBRE 2024 | TECH, WEB SERVER</p>
+            <h1 class="article-title">Les underscores dans les en-têtes HTTP</h1>
+            <p class="article-description">Un court article sur l&#39;utilisation des underscores dans les en-têtes HTTP</p>
+        </div>
+        
+        <div class="article-content">
+            <h2 id="les-underscores-dans-les-en-t%C3%AAtes-http" tabindex="-1">Les underscores dans les en-têtes HTTP</h2>
+<p>Les en-têtes HTTP sont des choses auxquelles je trouve qu’on ne prête pas particulièrement attention, et ce même malgré leur importance dans notre consommation du Web.</p>
+<p>Ce serait un sujet intéressant à aborder dans un article dédié, mais ce n'est pas le cas de cet article.</p>
+<p>Je veux parler de quelque chose de plus précis : <strong>les underscores dans les en-têtes HTTP.</strong></p>
+<p>Coupons le suspense court, vous n’en verrez quasiment jamais dans vos requêtes.</p>
+<p>C'est quelque chose auquel je n'avais jamais fait attention, mais si vous regardez les en-têtes HTTP que vous envoyez et recevez dans votre navigateur, il y a de fortes chances qu'aucune ne soit composée d'underscore.</p>
+<p>Le <a href="https://datatracker.ietf.org/doc/html/rfc822">RFC 822</a> a standardisé la façon dont sont écrits les en-têtes, leur forme étant désormais un ou plusieurs mots séparés par des tirets <em>(e.g : Ma-Super-En-Tete)</em>.</p>
+<p>Plus d'informations sur comment écrire une en-tête HTTP dans la section 3.2. HEADER FIELD DEFINITION du <a href="https://datatracker.ietf.org/doc/html/rfc822#section-3.2">RFC 822</a>.</p>
+<blockquote>
+<p><strong>Note :</strong></p>
+<p>Un RFC (Request for comments) est un document qui décrit les aspects, spécifications et / ou normes techniques d'un projet / protocole lié au web.</p>
+</blockquote>
+<p>Revenons à notre sujet : est-il interdit d'utiliser des underscores dans des en-têtes ? D'après le RFC, rien n'interdit leur utilisation dans les en-têtes. Il est donc parfaitement possible d'en utiliser.</p>
+<p>Cependant ! Car il y a mais, ce qu'il faut savoir, c'est que certains serveurs web (comme Nginx et Apache) n'acceptent pas les en-têtes avec des underscores par défaut pour des raisons qui leur sont propres. Dans le cas d'Apache et NGINX, ça ne va pas causer de crash du serveur ni remonter d'erreurs, mais elles ne seront pas transférées avec les autres en-têtes.</p>
+<p>Les deux serveurs web offrent différentes solutions pour résoudre ce problème : NGINX en <a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#underscores_in_headers">ajoutant un paramètre dans sa configuration</a> et Apache en <a href="https://httpd.apache.org/docs/trunk/env.html#fixheader">transformant les en-têtes pour remplacer ses underscores par des tirets</a>.</p>
+<p>D'autres serveurs web comme Caddy acceptent par défaut les en-têtes avec underscore.</p>
+<h3>TL;DR :</h3>
+<p>Faites attention aux en-têtes HTTP que vous envoyez et recevez sur votre serveur, ça vous évitera des heures de débogage pour un problème stupide d'underscore 😉</p>
+<blockquote>
+<p><strong>Bonus :</strong></p>
+<p>En lisant rapidement le RFC 822, j’ai voulu tester l'ajout de points d’exclamation (<code>!</code>) dans mes en-têtes, et ça fonctionne ! Mais pas les points d’interrogation (<code>?</code>)…</p>
+<p>Pourquoi ? Parce qu’il en a été décidé ainsi. Je ne sais pas quoi faire de cette information, donc il est absolument essentiel que je vous la partage pour que vous puissiez vous aussi méditer sur cette question 👍.</p>
+</blockquote>
+
+        </div>
+
+        <hr>
+        
+        <div class="article-end">
+            <p>Merci d'avoir lu cet article, n'hésitez pas à jeter un coup d'oeil aux autres articles.</p>
+            <a class="link-to-articles" href="https://bastienbyra.fr/">Mes autres articles.</a>
+            <div class="article-social-network">
+                <p>par <span class="blueviolet">Bastien BYRA</span></p>
+                <div class="article-network-image">
+                    <a href="https://github.com/BastienBYRA">
+                        <img src="/assets/social_network/Github.png" alt="Logo de Github" />
+                    </a>
+                    <a href="https://www.linkedin.com/in/bastien-byra-848998209/">
+                        <img src="/assets/social_network/Linkedin.png" alt="Logo de Linkedin" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      </div>
+    </div>
+  </body>
+</html>

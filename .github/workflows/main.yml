@@ -1,7 +1,6 @@
 name: Build & Deploy
 
 on:
-  # workflow_dispatch:
   push:
     branches:
       - master
@@ -28,48 +27,47 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build and push image with version tag
         uses: docker/build-push-action@v5
         with:
           build-args: |
-            NGX_IMG_NAME=${{ vars.NGX_IMG_NAME }}
+            IMG_TAG=${{ github.sha }}
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:${{ vars.APP_VERSION }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:$IMG_TAG
       - name: Build and push with latest tag
         uses: docker/build-push-action@v5
         with:
-          build-args: |
-            NGX_IMG_NAME=${{ vars.NGX_IMG_NAME }}
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:latest
 
-      # DEPLOY
-      - name: Copy deploy.sh to VPS
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          source: "deploy/deploy.sh"
-          target: "/apps/"
-      - name: Copy .env to VPS
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          source: "./.env"
-          target: "/apps/"
-      - name: Deploy to VPS
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          script: |
-            sudo su || true
-            cd /apps/deploy || true
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:${{ vars.APP_VERSION }} || true
-            sudo docker rm -f website || true
-            sudo chmod +x deploy.sh || true
-            sudo ./deploy.sh || true
+      # # DEPLOY
+      # - name: Copy deploy.sh to VPS
+      #   uses: appleboy/scp-action@v0.1.7
+      #   with:
+      #     host: ${{ secrets.VPS_HOST }}
+      #     username: ${{ secrets.VPS_USERNAME }}
+      #     key: ${{ secrets.VPS_PRIVATE_KEY }}
+      #     source: "deploy/deploy.sh"
+      #     target: "/apps/"
+      # - name: Copy .env to VPS
+      #   uses: appleboy/scp-action@v0.1.7
+      #   with:
+      #     host: ${{ secrets.VPS_HOST }}
+      #     username: ${{ secrets.VPS_USERNAME }}
+      #     key: ${{ secrets.VPS_PRIVATE_KEY }}
+      #     source: "./.env"
+      #     target: "/apps/"
+      # - name: Deploy to VPS
+      #   uses: appleboy/ssh-action@v1.0.3
+      #   with:
+      #     host: ${{ secrets.VPS_HOST }}
+      #     username: ${{ secrets.VPS_USERNAME }}
+      #     key: ${{ secrets.VPS_PRIVATE_KEY }}
+      #     script: |
+      #       sudo su || true
+      #       cd /apps/deploy || true
+      #       sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:${{ vars.APP_VERSION }} || true
+      #       sudo docker rm -f website || true
+      #       sudo chmod +x deploy.sh || true
+      #       sudo ./deploy.sh || true
