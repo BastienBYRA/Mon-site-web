@@ -3,5 +3,5 @@
 node_modules
 
 # Build related folders/files for 11ty
-website/_site
+_site
 _data
