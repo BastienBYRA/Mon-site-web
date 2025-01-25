@@ -5,3 +5,6 @@ node_modules
 # Build related folders/files for 11ty
 _site
 _data
+
+# Skaffold
+skaffold*
