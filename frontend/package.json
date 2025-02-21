@@ -8,14 +8,15 @@
     "serve": "npx @11ty/eleventy --serve --port=8081",
     "sass": "npx sass src/styles/:_site/styles/",
     "watch:sass": "npx sass src/styles/:_site/styles/ --watch",
-    "start": "npm run serve & npm run watch:sass"
+    "start": "concurrently \"npm run serve\" \"npm run watch:sass\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0"
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+    "concurrently": "^9.1.2"
   },
   "dependencies": {
     "@sindresorhus/slugify": "^2.2.1",
