@@ -22,6 +22,7 @@ scripts: >
 - [Introduction](#introduction)
 - [Kompose](#kompose)
 - [Labels, un moyen d’aller plus loin dans la configuration de vos sorties Kubernetes](#labels-un-moyen-daller-plus-loin-dans-la-configuration-de-vos-sorties-kubernetes)
+- [Conclusion](#conclusion)
 
 ## Introduction {#introduction}
 Je suis de ceux persuadés qu’un bon fichier Docker-compose est suffisant pour un bon nombre de situations, mais là n’est pas la question.
@@ -37,7 +38,10 @@ Saviez-vous qu’il existe un outil pour convertir un fichier docker-compose.yml
 Si vous ne le saviez pas, alors permettez-moi de vous présenter un outil qui s'appelle [Kompose](https://kompose.io/), qui permet de transformer un fichier Docker-compose en fichiers Kubernetes (Deployment, Service, PV, PVC...).
 
 ## Kompose {#kompose}
-Prenons un exemple, ici le fichier Docker-compose que l’on va utiliser dans le cadre de ce tutoriel :
+
+Kompose est un outil simple : il convertit un fichier `docker-compose.yml` en son équivalent Kubernetes
+
+Prenons un exemple, ici le fichier Docker Compose que l’on va utiliser dans le cadre de ce tutoriel :
 
 ```yaml
 version: '3.8'
@@ -175,9 +179,31 @@ services:
       kompose.hpa.memory: 1Gi
 ```
 
+## Conclusion {#conclusion}
+
 Ainsi, lors de notre prochaine exécution de `kompose`, nos fichiers Kubernetes appliqueront les différents données définis dans la section `label`.
 
 Plus d’info sur leur documentation ([https://kompose.io/user-guide/#cli-modifications](https://kompose.io/user-guide/#cli-modifications)), l’outil est vraiment flexible 👍
+
+Ci-dessous la procédure d'installation du binaire Kompose ;
+```bash
+# Linux
+curl -L https://github.com/kubernetes/kompose/releases/download/v1.35.0/kompose-linux-amd64 -o kompose
+
+# Linux ARM64
+curl -L https://github.com/kubernetes/kompose/releases/download/v1.35.0/kompose-linux-arm64 -o kompose
+
+# macOS
+curl -L https://github.com/kubernetes/kompose/releases/download/v1.35.0/kompose-darwin-amd64 -o kompose
+
+# macOS ARM64
+curl -L https://github.com/kubernetes/kompose/releases/download/v1.35.0/kompose-darwin-arm64 -o kompose
+
+chmod +x kompose
+sudo mv ./kompose /usr/local/bin/kompose
+```
+
+Le reste des procédures disponible sur [leur site](https://kompose.io/installation/) (Docker, CentOS, Windows, Go)
 
 Ça peut être un moyen rapide de transformer une infrastructure utilisée par des développeurs (Docker-compose) en infrastructure pour des tests/prod sur Kubernetes.
 
