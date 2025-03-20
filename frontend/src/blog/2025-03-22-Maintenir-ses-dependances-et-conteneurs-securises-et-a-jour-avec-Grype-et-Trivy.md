@@ -1,7 +1,7 @@
 ---
 title: Maintenir ses dépendances et conteneurs sécurisés et à jour avec Grype et Trivy
 filename: Maintenir-ses-dependances-et-conteneurs-securises-et-a-jour-avec-grype-et-trivy
-description: "Kompose est un outil facile à prendre en main permettant de transformer un fichier Docker-compose.yml en un ensemble de manifest Kubernetes."
+description: "Grype et Trivy sont deux outils permettant de scanner des images Docker afin de s'assurer qu'aucune faille au niveau des dépendances ne soit présente, je vous les présente avec une implémentation dans une CI/CD."
 image: "maintenir-ses-dependances-et-conteneurs-securises-et-a-jour-avec-grype-et-trivy.png"
 layout: layouts/article.njk
 tags: article

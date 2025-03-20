@@ -10,7 +10,7 @@ dateText : 25 JANVIER 2025
 subject:
     - SECRETS KUBERNETES
     - GESTION DE CONFIGURATION
-metaDescription: "Reflector est un outils permettant de dupliquer, synchroniser, et mettre à jour des ConfigMaps et Secrets dans un cluster Kubernetes, dans cet article, nous allons voir comment facilement le mettre en place et l'utiliser."
+metaDescription: "Reflector est un outil permettant de dupliquer, synchroniser, et mettre à jour des ConfigMaps et Secrets dans un cluster Kubernetes, dans cet article, nous allons voir comment facilement le mettre en place et l'utiliser."
 metaKeywords: "Gestion de configuration Kubernetes, secret kubernetes, configmap kubernetes, Centralisez vos Secrets et ConfigMap Kubernetes avec Reflector"
 metaImage: "../../assets/blog/Mutualiser-vos-secrets-et-configmap-kubernetes-avec-reflector/mutualiser-vos-secrets-et-configmap-kubernetes-avec-reflector.png"
 permalink: "/blog/centralisez-vos-secrets-et-configmap-kubernetes-avec-reflector/"
