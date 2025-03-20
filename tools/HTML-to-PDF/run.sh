@@ -3,7 +3,6 @@ dir="$(dirname "$0")"
 . "$dir/.env"
 
 # Code logic
-
 if [ "$1" = "full" ]; then
     TYPE="full"
 else
@@ -19,13 +18,6 @@ docker run --network host surnet/alpine-wkhtmltopdf:$VERSION-$TYPE \
         var element = document.getElementById('toggle-menu-header');
         if (element && element.parentNode) {
             element.parentNode.removeChild(element);
-        }
-
-        var elements = document.querySelectorAll('.article-image');
-        for (var i = 0; i < elements.length; i++) {
-            if (elements[i] && elements[i].parentNode) {
-                elements[i].parentNode.removeChild(elements[i]);
-            }
         }
 
         elements = document.querySelectorAll('.article-color-block');
