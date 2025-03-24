@@ -271,7 +271,7 @@ La réponse n'est pas si déconnante, les deux outils se basent sur des bases de
 
 Il est tout à fait possible que l'un trouve une faille que l'autre n'aurait pas. De la même manière qu'il est tout à fait possible que l'un lève un faux-positif et pas l'autre, avoir deux scanners est une mesure de sûreté pour minimiser les risques de laisser passer une faille.
 
-## Comment être sure de sure que mon applications est prête ? {#comment-etre-sur-que-mon-application-est-prete}
+## Comment être sure de sure que mon application est prête ? {#comment-etre-sur-que-mon-application-est-prete}
 
 Au fil des années, beaucoup d'outils ont émergé visant à s’assurer que son application est production-ready, ci-dessous quelques outils qui peuvent être intéressants à intégrer dans votre workflow.
 
