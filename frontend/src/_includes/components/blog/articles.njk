@@ -1,7 +1,7 @@
 <div class="blog-content-container">
     <div class="new-blog-article">
         {% for article in collections.article | reverse -%}
-        <div class="blog-content">
+        <div class="blog-content" itemscope itemtype="https://schema.org/Article">
             <div class="blog-flex">
                 <a class="link-no-visual-effect" href="{{article.data.permalink}}">
                     <img src="assets/blog/{{article.data.filename}}/{{article.data.image}}" alt="{{article.data.title}}" />
