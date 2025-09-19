@@ -1,19 +1,19 @@
 ---
-title: Le fichier SBOM (Software Bill Of Material) et pourquoi c'est important
-filename: Le-fichier-SBOM-Software-Bill-Of-Material-et-pourquoi-c-est-important
-description: "Présentation des SBOM (Software Bill Of Material) : découvrez ce qu'est un fichier SBOM et son importance dans l'analyse des vulnérabilités, l'identification des licences et la sécurité de vos logiciels"
-image: "le-fichier-SBOM-Software-Bill-Of-Material-et-pourquoi-c-est-important.png"
+title: Le fichier SBOM (Software Bill Of Materials) et pourquoi c'est important
+filename: Le-fichier-SBOM-Software-Bill-Of-Materials-et-pourquoi-c-est-important
+description: "Présentation des SBOM (Software Bill Of Materials) : découvrez ce qu'est un fichier SBOM et son importance dans l'analyse des vulnérabilités, l'identification des licences et la sécurité de vos logiciels"
+image: "le-fichier-SBOM-Software-Bill-Of-Materials-et-pourquoi-c-est-important.png"
 layout: layouts/article.njk
 tags: article
 date: 2025-09-20
 dateText : 20 SEPTEMBRE 2025
 subject:
-    - SOFTWARE BILL OF MATERIAL
+    - SOFTWARE BILL OF MATERIALS
     - VULNERABILITE
     - SECURITE
     - CVE
 metaKeywords: "SBOM, Dependency Check, Dependency Track, safe code, code sécurité, français"
-permalink: "/blog/le-fichier-SBOM-Software-Bill-Of-Material-et-pourquoi-c-est-important/"
+permalink: "/blog/le-fichier-SBOM-Software-Bill-Of-Materials-et-pourquoi-c-est-important/"
 
 scripts: >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-bash.min.js" integrity="sha512-35RBtvuCKWANuRid6RXP2gYm4D5RMieVL/xbp6KiMXlIqgNrI7XRUh9HurE8lKHW4aRpC0TZU3ZfqG8qmQ35zA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -30,7 +30,7 @@ scripts: >
 - [Conclusion](#conclusion)  
 
 ## Introduction {#introduction}
-Un fichier BOM (Bill Of Material) ou SBOM (**Software** Bill Of Material) est une représentation **structurée** d'un logiciel, son inventaire.
+Un fichier BOM (Bill Of Materials) ou SBOM (**Software** Bill Of Materials) est une représentation **structurée** d'un logiciel, son inventaire.
 
 Ce fichier est composé de plusieurs données utiles à représenter ce qu'est votre logiciel : Dépendance, version, licence, vulnérabilité...
 
