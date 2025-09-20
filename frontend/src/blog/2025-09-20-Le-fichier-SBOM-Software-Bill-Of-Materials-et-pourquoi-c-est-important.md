@@ -23,6 +23,7 @@ scripts: >
 - [Introduction](#introduction)  
 - [Se tenir au courant des vulnérabilités en temps réel](#se-tenir-au-courant-des-vulnérabilites-en-temps-reel)
 - [L'enjeu des licences](#l-enjeu-des-licences)
+- [Être informé des nouvelles mises à jour des dépendances](#etre-informe-des-nouvelles-mises-a-jour-des-dependances)
 - [Le Cyber Resilience Act](#le-cyber-resilience-act)
 - [Format, standard et génération](#format-standard-et-generation)
     - [Les formats de fichier SBOM](#les-formats-de-fichier-sbom)
@@ -30,18 +31,19 @@ scripts: >
 - [Conclusion](#conclusion)  
 
 ## Introduction {#introduction}
-Un fichier BOM (Bill Of Materials) ou SBOM (**Software** Bill Of Materials) est une représentation **structurée** d'un logiciel, son inventaire.
+Un fichier BOM (Bill of Materials) ou SBOM (**Software** Bill of Materials) est une représentation **structurée** d'un logiciel : son inventaire.
 
-Ce fichier est composé de plusieurs données utiles à représenter ce qu'est votre logiciel : Dépendance, version, licence, vulnérabilité...
+Ce fichier est composé de plusieurs données utiles pour décrire ce qu’est un logiciel : Dépendances, versions, licences, vulnérabilités...
 
-Son objectif est simple : Il est la représentation textuelle de ce qui forme un logiciel.
+Son objectif est simple : Représenter sous forme textuelle ce qui compose un logiciel.
 
 Aujourd'hui, il y a plusieurs intérêts à générer le SBOM de son logiciel :
-1. Ce fichier permet de faire l'état de ce qui compose votre logiciel, notamment les dépendances et les **licences** de chacune d'elles, qu'il est nécessaire de surveiller de peur d'inclure une dépendance **payante** ou d'être forcé de **partager son code**.
-2. Il permet aussi, en utilisant une base de données de vulnérabilité (e.g. [NVD](https://nvd.nist.gov/)), de vérifier si les dépendances ont des **vulnérabilités** à leur actif.
-3. Combiné avec des outils de scan de vulnérabilité, un fichier SBOM peut être analysé régulièrement contre une base de données de vulnérabilités pour être **informé en continu** si une nouvelle faille affecte le logiciel.
-4. Ce fichier **va devenir nécessaire** pour être conforme au niveau européen, comme l'impose le [Cyber Resilience Act (CRA)](https://en.wikipedia.org/wiki/Cyber_Resilience_Act), qui prendra effet à partir du **11 Décembre 2027** *(Les logiciels Open Source non commercial ne sont pas concernés par cette mesure.)*
-5. Ce fichier peut être partagé avec des tiers (clients, partenaires, utilisateurs, auditeurs) afin de garantir une **meilleure transparence** et de **renforcer la confiance dans le logiciel livré**.
+1. Faire l'état de ce qui compose un logiciel, notamment les dépendances et les **licences** de chacune d'elles, qu'il est nécessaire de surveiller pour éviter d’inclure une dépendance **"payante"** ou de se retrouver forcé de **partager son code**.
+2. Vérifier, en utilisant une base de données de vulnérabilités (e.g. [NVD](https://nvd.nist.gov/)), si les dépendances présentent des **failles connues**.
+3. Combiné avec des outils de scan, analyser régulièrement un SBOM contre un référentiel de vulnérabilités permet d’être **informé en continu** lorsqu’une nouvelle faille affecte le logiciel.
+4. En combinaison avec des outils capables de lire les SBOM, il est possible de traquer chaque composant et **sa version**, et se **tenir au courant des mises à jour en temps réel**.
+5. Répondre aux exigences de conformité européennes à venir : Le [Cyber Resilience Act (CRA)](https://en.wikipedia.org/wiki/Cyber_Resilience_Act) rendra les SBOM obligatoires à partir du **11 décembre 2027** *(les logiciels open source non commerciaux ne sont pas concernés par cette mesure)*.
+6. Partager le fichier avec des tiers (clients, partenaires, utilisateurs, auditeurs) permet de garantir une **meilleure transparence** et de **renforcer la confiance dans le logiciel livré**.
 
 ## Se tenir au courant des vulnérabilités en temps réel {#se-tenir-au-courant-des-vulnérabilites-en-temps-reel}
 Un fichier SBOM répertorie l'ensemble des composants d'un logiciel, notamment **son nom** et **sa version**. C'est une force car il devient possible d'utiliser ses informations pour voir si ce composant présente ou non des vulnérabilités **en temps réel**.
@@ -52,7 +54,7 @@ Ce sont des outils très utilisés dans des workflows, comme une CI/CD, ils perm
 
 Mais qu'en est-il d'après ? Si le logiciel en question entre dans son cycle de fin de vie, ou en pause, et qu'il n'est plus scanné ? Est-ce qu'on l'ignore ?
 
-Un fichier SBOM permet de résoudre ce problème, non pas par lui-même, mais **à l'aide d'outils d'analyse continue** comme [Dependency-Track](https://dependencytrack.org/) qui consomme des SBOMs.
+Un fichier SBOM permet de résoudre ce problème, non pas par lui-même, mais **à l'aide d'outils d'analyse continue** comme [Dependency-Track](https://dependencytrack.org/) qui consomme des SBOM.
 
 Si un fichier SBOM contient chaque dépendance et version d'un projet, alors **il devient possible de vérifier auprès d'une base de données de vulnérabilité si le composant présente des failles ou non**, c'est exactement ce que propose [Dependency-Track](https://dependencytrack.org/), en jouant ce rôle de veilleur. Assurant sur une base quotidienne de vérifier si les composants d'un logiciel présentent ou non de nouvelle faille.
 
@@ -71,6 +73,13 @@ Et chacun de ses outils possède une ou plusieurs licences à leur actif, pouvan
 - La licence SSPL va plus loin et demande la publication de TOUT ce qui permet l'exécution du logiciel (e.g. Scripts d'automatisation, manifeste Kubernetes...)
 
 Avoir conscience des licences des outils qu'on utilise est essentiel pour savoir comment l'aborder ; Que faire, et quoi ne pas faire.
+
+## Être informé des nouvelles mises à jour des dépendances {#etre-informe-des-nouvelles-mises-a-jour-des-dependances}
+Nos logiciels font appel à de plus en plus de dépendances, et chacune d’elles est une épée de Damoclès : elles apportent une valeur ajoutée aux logiciels, mais constituent aussi des points d’entrée potentiels si une faille venait à être découverte.
+
+Parce qu’un fichier SBOM liste chaque composant et sa version, en combinaison avec un outil d’analyse des dépendances, il devient possible de se **tenir informé des nouvelles versions** et de **rester à jour sans effort**.
+
+Être à jour, c’est assurer la qualité de son logiciel : Inclure les correctifs de bugs, bénéficier des nouvelles fonctionnalités et réduire l’inévitable dette technique qui s’accumule après deux ans de dépendances non mises à jour.
 
 ## Le Cyber Resilience Act {#le-cyber-resilience-act}
 Bien que ce ne soit pas le cas aujourd'hui, le [Cyber Resilience Act (CRA)](https://en.wikipedia.org/wiki/Cyber_Resilience_Act) va forcer les entreprises, petites (solo dev) comme grandes (1000+ employés) à devoir **mettre en place des systèmes pour assurer la sécurité de leurs logiciels** durant leur cycle de vie (Software et Hardware).
