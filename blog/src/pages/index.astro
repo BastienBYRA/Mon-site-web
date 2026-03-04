@@ -1,0 +1,26 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_TITLE_SHORTENED } from '../consts';
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Le blog de Bastien</h1>
+			<p>
+				Bienvenue sur le blog d'un type lambda mais pas AWS, (Un type lambda, AWS Lambda, vous l'avez... ? Je suis un poti clown).
+			</p>
+			<p>
+				Vous trouverez des articles sur divers sujets de la tech, notamment des choses qui peuvent intéresser des gens en DevOps ou Sysadmin.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>

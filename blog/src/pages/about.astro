@@ -1,0 +1,30 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_TITLE_SHORTENED } from '../consts';
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Moi c'est Bastien BYRA</h1>
+			<p>
+				Et- Je n'ai pas grand-chose à dire, dans les faits, à l'heure où j'écris ces lignes, j'ai un poil la flemme de rédiger cette page, donc vous avez l'honneur de voir cette page telle quelle, sans information pertinente quelconque.
+			</p>
+			<p>
+				Je la remplirai un jour, peut-être, si j'ai la motivation...
+			</p>
+			<p>
+				Un jour...
+			</p>
+			<img src="https://media.tenor.com/gSpo_xn3NiMAAAAM/hop-on-the-cycle-frontier.gif" >
+		</main>
+		<Footer />
+	</body>
+</html>
