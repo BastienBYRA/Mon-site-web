@@ -6,14 +6,21 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "toc": "node scripts/anchor-gen.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.7.0",
     "astro": "^5.17.1",
-    "remark-toc": "^9.0.0",
     "sharp": "^0.34.3"
+  },
+  "devDependencies": {
+    "remark-cli": "^12.0.1",
+    "remark-preset-lint-consistent": "^6.0.1",
+    "remark-preset-lint-recommended": "^7.0.1",
+    "remark-toc": "^9.0.0",
+    "to-vfile": "^8.0.0"
   }
 }

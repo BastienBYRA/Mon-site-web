@@ -4,8 +4,19 @@ description: "On regarde comment supprimer l'en-tete \"Server\" des réponses HT
 pubDate: 2024-04-25
 author: 'Bastien BYRA'
 heroImage: '../../assets/2024-04-25-Comment-modifier-ou-retirer-le-header-server-de-nginx/NGINX.webp'
-tags: ["astro", "blogging", "apprentissage en public"]
+tags: ["Sécurité", "NGINX"]
 ---
+
+## Table des matières
+* [Ce qui ne fonctionne pas](#ce-qui-ne-fonctionne-pas)
+  * [Méthode 1 : installer le package "nginx-extras"](#méthode-1--installer-le-package-nginx-extras)     
+  * [Méthode 2 : Utiliser la directive "server\_tokens off;"](#méthode-2--utiliser-la-directive-server_tokens-off)
+  * [Méthode 3 : Utiliser la directive "proxy\_pass\_header Server;"](#méthode-3--utiliser-la-directive-proxy_pass_header-server)
+  * [Méthode 4 : Passer la directive "proxy\_pass\_header: Server"](#méthode-4--passer-la-directive-proxy_pass_header-server)
+* [Comment fait-on alors ?](#comment-fait-on-alors-)
+* [La solution](#la-solution)
+* [Comment installer les modules NGINX hors du container NGINX](#comment-installer-les-modules-nginx-hors-du-container-nginx)
+* [Fichier à modifier pour appliquer les modules dans votre NGINX](#fichier-à-modifier-pour-appliquer-les-modules-dans-votre-nginx)
 
 **NGINX**, comme tout serveur web, envoie dans ses requêtes et réponse HTTP des en-têtes, des "headers".
 
