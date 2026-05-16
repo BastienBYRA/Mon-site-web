@@ -149,9 +149,8 @@ footer::before {
 
 .hero {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
+  align-items: flex-start;
+  gap: 3rem;
   padding-bottom: 3rem;
   border-bottom: 1px solid var(--border);
   animation: fadeSlideUp 0.5s ease both;
@@ -223,39 +222,27 @@ footer::before {
 /* ── Hero featured ───────────────────────────────────────── */
 
 .hero-featured {
+  flex: 1;
+  min-width: 0;
   display: flex;
-  gap: 1.25rem;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.75rem;
   text-decoration: none;
   color: inherit;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.25rem;
-  max-width: 520px;
-  flex-shrink: 1;
-  transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
-}
-
-.hero-featured:hover {
-  border-color: var(--accent);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(242, 50, 82, 0.15);
 }
 
 .hero-featured-img {
-  width: 130px;
-  aspect-ratio: 4 / 3;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 6px;
-  flex-shrink: 0;
+  border-radius: 8px;
+  display: block;
 }
 
 .hero-featured-body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  flex: 1;
-  min-width: 0;
 }
 
 .hero-featured-meta {
@@ -697,6 +684,12 @@ article > h1 {
   }
 }
 
+@media (max-width: 950px) {
+  .hero-featured {
+    display: none;
+  }
+}
+
 @media (max-width: 600px) {
   main {
     margin: 2.5rem auto;
@@ -718,11 +711,6 @@ article > h1 {
     flex-direction: row;
     align-items: baseline;
     gap: 0.6rem;
-  }
-
-  .hero-featured {
-    max-width: 100%;
-    width: 100%;
   }
 
   .article-list {
