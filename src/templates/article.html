@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ article__title_block }}</title>
+  <meta name="description" content="{{ article__description_block }}">
+  <meta name="keywords" content="{{ article__tags_block }}">
+  <meta property="og:title" content="{{ article__title_block }}">
+  <meta property="og:description" content="{{ article__description_block }}">
+  <link rel="stylesheet" href="{{ blog__assets }}/style.css" type="text/css">
+</head>
+<body>
+  {{ blog__header_block }}
+
+  <main>
+    <article>
+      <h1>{{ article__title_block }}</h1>
+      <div class="article-meta">
+        <time datetime="{{ article__date_block }}">{{ article__date_formatted_block }}</time>
+        <p>|</p>
+        <div class="tags">{{ article__tags_html_block }}</div>
+      </div>
+      <p class="article-description">{{ article__description_block }}</p>
+      {{ article__image_block }}
+      <div class="article-content">
+        {{ article__content_block }}
+      </div>
+    </article>
+  </main>
+
+  {{ blog__footer_block }}
+</body>
+</html>

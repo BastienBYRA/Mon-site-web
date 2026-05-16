@@ -1,8 +1,0 @@
-{$DNS_NAME} {
-    root * /usr/share/caddy
-    file_server
-
-    handle /blog/* {
-        try_files {path}/index.html {path} /blog/index.html
-    }
-}

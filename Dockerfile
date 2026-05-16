@@ -1,38 +1,11 @@
-###
-### STAGE 1: Build
-###
-FROM node:20.12.2 AS build
-
+FROM node:22-alpine AS builder
 WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY . .
+RUN PRODUCTION=true node build.js
 
-# Copie les fichiers package.json et package-lock.json
-COPY frontend/package*.json ./
-
-# Installe les dépendances
-RUN npm install
-
-# Copie le reste des fichiers de l'application
-COPY frontend .
-
-# Construit l'application
-RUN npm run build
-
-# Converti les fichiers scss en css
-RUN npm run sass
-
-###
-### STAGE 2: Insert the build into the webserver
-###
-FROM nginx:1.27.3 as webserver
-
-# Ajoute les fichiers de configurations NGINX
-COPY frontend/docker/default.conf.template /etc/nginx/templates/default.conf.template
-COPY frontend/docker/nginx-headers.module /etc/nginx/nginx-headers.module
-
-# Copie le code du site dans NGINX
-COPY --from=build /app/_site/ /usr/share/nginx/html
-
-# Expose le port 80
+FROM nginx:alpine AS final
+COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /app/src/assets /usr/share/nginx/html/assets
 EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
