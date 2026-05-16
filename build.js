@@ -97,17 +97,15 @@ const extractFrontMatter = (articleContent, variableName) => {
     var parts = articleContent.split(`${variableName}: `)
 
     // Split sur `\n` (newline) pour ne récupérer que la valeur du Frontmatter
-    var valueLines = parts[1].split("\n")[0]
+    var valueLines = parts[1].split("\n")[0].trim()
     return valueLines
 }
 
-// const mergeFilesIndex = (articlesHTML) => {
+// const generateIndex = (listArticle) => {
 //     // Créer le dossier `build`
 //     if (!fs.existsSync(BUILD_FOLDER)){
 //         fs.mkdirSync(BUILD_FOLDER);
 //     }
-
-//     const INDEX_PAGE = "./src/templates/index.html"
 
 
 // }
@@ -130,7 +128,9 @@ const mergeFilesArticle = (listArticle) => {
         const fullFilepath = BUILD_FOLDER + article.filename
 
         articleContent = articleContent.replaceAll("{{ article__date_block }}", article.date)
+        articleContent = articleContent.replaceAll("{{ article__date_formatted_block }}", formatDate(article.date))
         articleContent = articleContent.replaceAll("{{ article__tags_block }}", article.tags)
+        articleContent = articleContent.replaceAll("{{ article__tags_html_block }}", formatTagsHTML(article.tags))
         articleContent = articleContent.replaceAll("{{ article__title_block }}", article.title)
         articleContent = articleContent.replaceAll("{{ article__description_block }}", article.description)
         articleContent = articleContent.replaceAll("{{ article__content_block }}", article.content)
@@ -138,6 +138,21 @@ const mergeFilesArticle = (listArticle) => {
         fs.writeFileSync(fullFilepath, articleContent, { encoding: ENCODING })
     })
 } 
+
+/**
+ * Génère du code HTML pour l'affichage des tags
+ * 
+ * @param {string} tagsStr 
+ * @returns string
+ */
+const formatTagsHTML = (tagsStr) => {
+    return tagsStr.split(',').map(t => `<span class="tag">${t.trim()}</span>`).join('')
+}
+
+const formatDate = (dateStr) => {
+    const date = new Date(dateStr + 'T00:00:00')
+    return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
+}
 
 let listArticle = parseMarkdown()
 mergeFilesArticle(listArticle)
