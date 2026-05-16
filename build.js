@@ -160,7 +160,7 @@ const generateIndex = (listArticle) => {
             ? `<img src="${fullAssetsFolderPath}" alt="" loading="lazy" />`
             : ''
         return `<article class="article-preview">
-      <a href="./articles/${article.filename}" class="article-preview-link">
+      <a href="/${article.filename}" class="article-preview-link">
         <div class="article-cover">${coverHTML}</div>
         <div class="article-body">
           <div class="article-meta">
