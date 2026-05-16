@@ -1,5 +1,33 @@
 import { marked } from "marked"
 import fs from "fs"
+import { gfmHeadingId } from "marked-gfm-heading-id";
+import { markedHighlight } from "marked-highlight";
+import hljs from 'highlight.js';
+
+const renderer = {
+    heading({ text, depth }) {
+        const idMatch = text.match(/\{#([^}]+)\}/)
+        let id, cleanText
+        if (idMatch) {
+            id = idMatch[1]
+            cleanText = text.replace(/\s*\{#[^}]+\}/, '')
+        } else {
+            cleanText = text
+            id = text.toLowerCase().replace(/[^\wÀ-ɏ]+/g, '-').replace(/^-|-$/g, '')
+        }
+        return `<h${depth} id="${id}">${cleanText}</h${depth}>\n`
+    }
+}
+marked.use({ renderer })
+marked.use(markedHighlight({
+	emptyLangClass: 'hljs',
+    langPrefix: 'hljs language-',
+    highlight(code, lang, info) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    }
+}))
+// marked.use(gfmHeadingId())
 
 // Dossiers
 const ARTICLE_FOLDER = "./articles/"
@@ -66,6 +94,7 @@ const parseMarkdown = () => {
 
         // Converti les fichiers Markdown > HTML
         var articleHTML = marked.parse(articleContent)
+        // var articleHTML = marked(articleContent, { headerIds: true })
 
         // Ajout le contenu et le nom du fichier à l'objet Article
         article.content = articleHTML
