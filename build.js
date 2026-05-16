@@ -183,7 +183,7 @@ const generateIndex = (listArticle) => {
     const featuredImgHTML = featured.image
         ? `<img class="hero-featured-img" src="${featuredImgPath}" alt="" loading="lazy">`
         : ''
-    const featuredHTML = `<a href="./articles/${featured.filename}" class="hero-featured">
+    const featuredHTML = `<a href="./${featured.filename}" class="hero-featured">
       ${featuredImgHTML}
       <div class="hero-featured-body">
         <h2 class="hero-featured-title">${featured.title}</h2>
