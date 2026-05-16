@@ -93,22 +93,50 @@ const removeFrontMatter = (articleContent) => {
  * @param {string} articleContent 
  */
 const extractFrontMatter = (articleContent, variableName) => {
-    // Extracte le texte autour de la variable Frontmatter pour récupère sa valeur ainsi que tout le reste de l'article dans le second élément du tableau
     var parts = articleContent.split(`${variableName}: `)
-
-    // Split sur `\n` (newline) pour ne récupérer que la valeur du Frontmatter
-    var valueLines = parts[1].split("\n")[0].trim()
-    return valueLines
+    if (parts.length < 2) return ''
+    return parts[1].split("\n")[0].trim().replace(/^["']|["']$/g, '')
 }
 
-// const generateIndex = (listArticle) => {
-//     // Créer le dossier `build`
-//     if (!fs.existsSync(BUILD_FOLDER)){
-//         fs.mkdirSync(BUILD_FOLDER);
-//     }
+const generateIndex = (listArticle) => {
+    if (!fs.existsSync(BUILD_FOLDER)) {
+        fs.mkdirSync(BUILD_FOLDER)
+    }
 
+    const headerContent = fs.readFileSync(HEADER_FILE, { encoding: ENCODING })
+    const footerContent = fs.readFileSync(FOOTER_FILE, { encoding: ENCODING })
+    let indexContent = fs.readFileSync(INDEX_FILE, { encoding: ENCODING })
 
-// }
+    indexContent = indexContent.replace("{{ blog__header_block }}", headerContent)
+    indexContent = indexContent.replace("{{ blog__footer_block }}", footerContent)
+
+    const sorted = [...listArticle].sort((a, b) => new Date(b.date) - new Date(a.date))
+
+    const articlesHTML = sorted.map(article => {
+        const coverHTML = article.image
+            ? `<img src="${article.image}" alt="" loading="lazy" />`
+            : ''
+        return `<article class="article-preview">
+      <a href="./articles/${article.filename}" class="article-preview-link">
+        <div class="article-cover">${coverHTML}</div>
+        <div class="article-body">
+          <div class="article-meta">
+            <time datetime="${article.date}">${formatDateShort(article.date)}</time>
+            <span class="meta-sep">·</span>
+            <div class="tags">${formatTagsHTML(article.tags)}</div>
+          </div>
+          <h2>${article.title}</h2>
+          <p>${article.description}</p>
+        </div>
+      </a>
+    </article>`
+    }).join('\n    ')
+
+    indexContent = indexContent.replace("{{ blog__articles_block }}", articlesHTML)
+    indexContent = indexContent.replace("{{ blog__article_count_block }}", sorted.length.toString().padStart(2, '0'))
+
+    fs.writeFileSync(BUILD_FOLDER + "index.html", indexContent, { encoding: ENCODING })
+}
 
 const mergeFilesArticle = (listArticle) => {
     // Créer le dossier `build`
@@ -149,10 +177,16 @@ const formatTagsHTML = (tagsStr) => {
     return tagsStr.split(',').map(t => `<span class="tag">${t.trim()}</span>`).join('')
 }
 
+const formatDateShort = (dateStr) => {
+    const date = new Date(dateStr + 'T00:00:00')
+    return date.toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' })
+}
+
 const formatDate = (dateStr) => {
     const date = new Date(dateStr + 'T00:00:00')
     return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
 let listArticle = parseMarkdown()
+generateIndex(listArticle)
 mergeFilesArticle(listArticle)

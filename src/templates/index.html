@@ -6,16 +6,26 @@
     (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog</title>
+  <title>Blog de Bastien</title>
   <meta name="description" content="Articles techniques sur le DevOps, le web et la sécurité.">
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="/src/assets/style.css">
 </head>
-<body>
+<body class="page-index">
   {{ blog__header_block }}
 
   <main>
+    <div class="hero">
+      <div class="hero-text">
+        <h1 class="hero-title">Le blog<br>de <em>Bastien</em></h1>
+        <p class="hero-sub">Un type lambda, <span class="hero-sub-note"> mais pas AWS, </span></p>
+        <p class="hero-sub"><span class="hero-sub-sub-note"> vous l'avez.. ?</span></p>
+      </div>
+    </div>
+
     <section class="blog-index">
-      <h1>Articles</h1>
+      <div class="blog-index-header">
+        <span class="blog-index-label">Articles</span>
+      </div>
       <div class="article-list">
         {{ blog__articles_block }}
       </div>
