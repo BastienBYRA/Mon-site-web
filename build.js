@@ -149,6 +149,25 @@ const generateIndex = (listArticle) => {
     indexContent = indexContent.replace("{{ blog__articles_block }}", articlesHTML)
     indexContent = indexContent.replace("{{ blog__article_count_block }}", sorted.length.toString().padStart(2, '0'))
 
+    const featured = sorted[0]
+    const featuredImgPath = setAssetsFolder() + "/blog/card/" + featured.image
+    const featuredImgHTML = featured.image
+        ? `<img class="hero-featured-img" src="${featuredImgPath}" alt="" loading="lazy">`
+        : ''
+    const featuredHTML = `<a href="./articles/${featured.filename}" class="hero-featured">
+      ${featuredImgHTML}
+      <div class="hero-featured-body">
+        <h2 class="hero-featured-title">${featured.title}</h2>
+        <div class="hero-featured-meta">
+          <time datetime="${featured.date}">${formatDateShort(featured.date)}</time>
+          <span class="meta-sep">·</span>
+          <div class="tags">${formatTagsHTML(featured.tags)}</div>
+        </div>
+        <p class="hero-featured-desc">${featured.description}</p>
+      </div>
+    </a>`
+    indexContent = indexContent.replace("{{ blog__hero_featured_block }}", featuredHTML)
+
     fs.writeFileSync(BUILD_FOLDER + "index.html", indexContent, { encoding: ENCODING })
 }
 
