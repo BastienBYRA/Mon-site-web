@@ -62,7 +62,7 @@ const parseMarkdown = () => {
         articleContent = removeFrontMatter(articleContent)
 
         // Utilise le bon dossier d'assets
-        articleContent.replaceAll("{{ blog__assets }}", setAssetsFolder())
+        articleContent = articleContent.replaceAll("{{ blog__assets }}", setAssetsFolder())
 
         // Converti les fichiers Markdown > HTML
         var articleHTML = marked.parse(articleContent)
