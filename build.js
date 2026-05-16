@@ -69,7 +69,7 @@ const parseMarkdown = () => {
 
         // Ajout le contenu et le nom du fichier à l'objet Article
         article.content = articleHTML
-        article.filename = articleFilename.replace(".md", ".html")
+        article.filename = articleFilename.replace(".md", ".html").replace(/^\d+-\d+-\d+-/, '')
 
         listArticle.push(article)
     })
@@ -218,6 +218,17 @@ const setAssetsFolder = () => {
     return assetsFolder
 }
 
+const generateSearchIndex = (listArticle) => {
+    const index = listArticle.map(article => ({
+        title: article.title,
+        description: article.description,
+        tags: article.tags,
+        url: `./articles/${article.filename}`
+    }))
+    fs.writeFileSync(BUILD_FOLDER + "search.json", JSON.stringify(index), { encoding: ENCODING })
+}
+
 let listArticle = parseMarkdown()
 generateIndex(listArticle)
 mergeFilesArticle(listArticle)
+generateSearchIndex(listArticle)
