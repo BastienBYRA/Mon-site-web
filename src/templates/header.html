@@ -1,8 +1,14 @@
-<header>
+﻿<header>
   <nav>
     <a href="/" class="logo">Bastien BYRA</a>
-    <a href="/">Articles</a>
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Changer de thème"></button>
+    <div class="search-wrapper" id="search-wrapper">
+      <input type="search" id="search" class="search-input" placeholder="Rechercher&hellip;" autocomplete="off" spellcheck="false">
+      <div class="search-results hidden" id="search-results"></div>
+    </div>
+    <div class="nav-links">
+      <a href="/">Articles</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Changer de th&egrave;me"></button>
+    </div>
   </nav>
 </header>
 <script>
@@ -11,4 +17,58 @@
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
   }
+
+  (function () {
+    const input = document.getElementById('search');
+    const resultsEl = document.getElementById('search-results');
+    const prefix = window.location.pathname.startsWith('/articles/') ? '../' : './';
+    const normalize = function(s) {
+      return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    };
+    var index = null;
+
+    function loadIndex() {
+      if (index !== null) return Promise.resolve();
+      return fetch(prefix + 'search.json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) { index = data; })
+        .catch(function() { index = []; });
+    }
+
+    function render(items) {
+      if (items.length === 0) {
+        resultsEl.innerHTML = '<p class="search-no-results">Aucun résultat.</p>';
+      } else {
+        resultsEl.innerHTML = items.slice(0, 8).map(function(item) {
+          return '<a href="' + prefix + 'articles/' + item.url + '" class="search-result-item">'
+            + '<span class="search-result-title">' + item.title + '</span>'
+            + '<span class="search-result-desc">' + item.description + '</span>'
+            + '</a>';
+        }).join('');
+      }
+      resultsEl.classList.remove('hidden');
+    }
+
+    function hide() {
+      resultsEl.classList.add('hidden');
+    }
+
+    input.addEventListener('input', function() {
+      var q = normalize(input.value.trim());
+      if (q.length < 3) { hide(); return; }
+      loadIndex().then(function() {
+        render(index.filter(function(item) {
+          return normalize(item.title + ' ' + item.description + ' ' + item.tags).includes(q);
+        }));
+      });
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#search-wrapper')) hide();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { hide(); input.value = ''; input.blur(); }
+    });
+  })();
 </script>

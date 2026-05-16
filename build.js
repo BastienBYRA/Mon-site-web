@@ -223,7 +223,7 @@ const generateSearchIndex = (listArticle) => {
         title: article.title,
         description: article.description,
         tags: article.tags,
-        url: `./articles/${article.filename}`
+        url: article.filename
     }))
     fs.writeFileSync(BUILD_FOLDER + "search.json", JSON.stringify(index), { encoding: ENCODING })
 }

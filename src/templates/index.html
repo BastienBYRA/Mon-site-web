@@ -25,39 +25,13 @@
     <section class="blog-index">
       <div class="blog-index-header">
         <span class="blog-index-label">Articles</span>
-        <input type="search" id="search" class="search-input" placeholder="Rechercher&hellip;" autocomplete="off" spellcheck="false">
       </div>
       <div class="article-list">
         {{ blog__articles_block }}
       </div>
-      <p class="search-empty hidden" id="search-empty">Aucun article trouv&eacute;.</p>
     </section>
   </main>
 
   {{ blog__footer_block }}
-
-  <script>
-    (function () {
-      const input = document.getElementById('search')
-      const cards = Array.from(document.querySelectorAll('.article-preview'))
-      const empty = document.getElementById('search-empty')
-
-      const normalize = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
-
-      input.addEventListener('input', () => {
-        const q = normalize(input.value.trim())
-        let visible = 0
-        cards.forEach(card => {
-          const title = card.querySelector('h2').textContent
-          const desc  = card.querySelector('p').textContent
-          const tags  = card.querySelector('.tags').textContent
-          const match = !q || normalize(title + ' ' + desc + ' ' + tags).includes(q)
-          card.style.display = match ? '' : 'none'
-          if (match) visible++
-        })
-        empty.classList.toggle('hidden', visible > 0 || !q)
-      })
-    })()
-  </script>
 </body>
 </html>
