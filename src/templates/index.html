@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog</title>
+  <meta name="description" content="Articles techniques sur le DevOps, le web et la sécurité.">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  {{ blog__header_block }}
+
+  <main>
+    <section class="blog-index">
+      <h1>Articles</h1>
+      <div class="article-list">
+        {{ blog__articles_block }}
+      </div>
+    </section>
+  </main>
+
+  {{ blog__footer_block }}
+</body>
+</html>

@@ -3,19 +3,8 @@ title: Sécuriser vos conteneurs avec le Distroless
 filename: Securiser-vos-conteneurs-avec-le-distroless
 description: "Le distroless est une méthode de sécurisation des conteneurs que j'explore dans cet article, nous allons voir les solutions disponibles pour le mettre en place et la manière de l'utiliser."
 image: "securiser-vos-conteneurs-avec-le-distroless-thumbnail.png"
-layout: layouts/article.njk
-tags: article
 date: 2024-10-29
-dateText : 29 OCTOBRE 2024
-subject:
-    - CONTENEURS
-    - DISTROLESS
-    - SECURITE
-metaDescription: "Le distroless est une méthode de sécurisation des conteneurs que j'explore dans cet article, nous allons voir les solutions disponibles pour le mettre en place et la manière de l'utiliser."
-metaKeywords: "Conteneurs docker, sécurite, distroless, image distroless, mise en place de containers docker distroless"
-metaImage: "../../assets/blog/Securiser-vos-conteneurs-avec-le-distroless/securiser-vos-conteneurs-avec-le-distroless-thumbnail.png"
-permalink: "/blog/securiser-vos-conteneurs-avec-le-distroless/"
-
+tags: CONTENEURS, DISTROLESS, SECURITE
 scripts: >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-bash.min.js" integrity="sha512-35RBtvuCKWANuRid6RXP2gYm4D5RMieVL/xbp6KiMXlIqgNrI7XRUh9HurE8lKHW4aRpC0TZU3ZfqG8qmQ35zA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

@@ -3,18 +3,8 @@ title: Le fichier SBOM (Software Bill Of Materials) et pourquoi c'est important
 filename: Le-fichier-SBOM-Software-Bill-Of-Materials-et-pourquoi-c-est-important
 description: "Présentation des SBOM (Software Bill Of Materials) : découvrez ce qu'est un fichier SBOM et son importance dans l'analyse des vulnérabilités, l'identification des licences et la sécurité de vos logiciels"
 image: "le-fichier-SBOM-Software-Bill-Of-Materials-et-pourquoi-c-est-important.png"
-layout: layouts/article.njk
-tags: article
 date: 2025-09-20
-dateText : 20 SEPTEMBRE 2025
-subject:
-    - SOFTWARE BILL OF MATERIALS
-    - VULNERABILITE
-    - SECURITE
-    - CVE
-metaKeywords: "SBOM, Dependency Check, Dependency Track, safe code, code sécurité, français"
-permalink: "/blog/le-fichier-SBOM-Software-Bill-Of-Materials-et-pourquoi-c-est-important/"
-
+tags: SOFTWARE BILL OF MATERIALS, VULNERABILITE, SECURITE, CVE
 scripts: >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-bash.min.js" integrity="sha512-35RBtvuCKWANuRid6RXP2gYm4D5RMieVL/xbp6KiMXlIqgNrI7XRUh9HurE8lKHW4aRpC0TZU3ZfqG8qmQ35zA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 ---

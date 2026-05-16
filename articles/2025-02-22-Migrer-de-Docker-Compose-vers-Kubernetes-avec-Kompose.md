@@ -3,16 +3,8 @@ title: Migrer de Docker Compose vers Kubernetes avec Kompose
 filename: Migrer-de-docker-compose-vers-kubernetes-avec-kompose
 description: "Kompose est un outil facile à prendre en main permettant de transformer un fichier Docker-compose.yml en un ensemble de manifest Kubernetes."
 image: "migrer-de-docker-compose-vers-kubernetes-avec-kompose.png"
-layout: layouts/article.njk
-tags: article
 date: 2025-02-22
-dateText : 22 FEVRIER 2025
-subject:
-    - DOCKER
-    - TRANSITION TECHNOLOGIQUE
-metaKeywords: "Docker, Docker-compose, Docker-compose.yml, Kompose, transition docker à kubernetes, migration docker vers kubernetes"
-permalink: "/blog/migrer-de-docker-compose-vers-kubernetes-avec-kompose/"
-
+tags: DOCKER, TRANSITION TECHNOLOGIQUE
 scripts: >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-bash.min.js" integrity="sha512-35RBtvuCKWANuRid6RXP2gYm4D5RMieVL/xbp6KiMXlIqgNrI7XRUh9HurE8lKHW4aRpC0TZU3ZfqG8qmQ35zA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js" integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

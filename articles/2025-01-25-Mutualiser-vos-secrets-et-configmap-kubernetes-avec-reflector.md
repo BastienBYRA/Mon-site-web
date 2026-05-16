@@ -3,18 +3,8 @@ title: Centralisez vos Secrets et ConfigMap Kubernetes avec Reflector
 filename: Mutualiser-vos-secrets-et-configmap-kubernetes-avec-reflector
 description: "Reflector est un outil permettant de dupliquer, synchroniser, et mettre à jour des ConfigMaps et Secrets dans un cluster Kubernetes, dans cet article, nous allons voir comment facilement le mettre en place et l'utiliser."
 image: "mutualiser-vos-secrets-et-configmap-kubernetes-avec-reflector.png"
-layout: layouts/article.njk
-tags: article
 date: 2025-01-25
-dateText : 25 JANVIER 2025
-subject:
-    - SECRETS KUBERNETES
-    - GESTION DE CONFIGURATION
-metaDescription: "Reflector est un outil permettant de dupliquer, synchroniser, et mettre à jour des ConfigMaps et Secrets dans un cluster Kubernetes, dans cet article, nous allons voir comment facilement le mettre en place et l'utiliser."
-metaKeywords: "Gestion de configuration Kubernetes, secret kubernetes, configmap kubernetes, Centralisez vos Secrets et ConfigMap Kubernetes avec Reflector"
-metaImage: "../../assets/blog/Mutualiser-vos-secrets-et-configmap-kubernetes-avec-reflector/mutualiser-vos-secrets-et-configmap-kubernetes-avec-reflector.png"
-permalink: "/blog/centralisez-vos-secrets-et-configmap-kubernetes-avec-reflector/"
-
+tags: KUBERNETES, GESTION DE CONFIGURATION
 scripts: >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-bash.min.js" integrity="sha512-35RBtvuCKWANuRid6RXP2gYm4D5RMieVL/xbp6KiMXlIqgNrI7XRUh9HurE8lKHW4aRpC0TZU3ZfqG8qmQ35zA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js" integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

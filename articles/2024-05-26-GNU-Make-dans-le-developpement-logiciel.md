@@ -3,17 +3,8 @@ title: Make(file) dans le processus de développement logiciel
 filename: GNU-Make-et-le-developpement-logiciel
 description: "Make est un outil permettant de réaliser diverses tâches via l'appel d'une commande. Cet article est un guide sur GNU Make, expliquant comment l'utiliser, ce qu'il apporte et quelles sont ses alternatives."
 image: "Makefile-main.png"
-layout: layouts/article.njk
-tags: article
 date: 2024-05-26
-dateText : 26 MAI 2024
-subject:
-    - TECH
-    - MAKEFILE
-    - DEVOPS
-metaKeywords: "Tech, Make, GNU Make, Makefile, Devops, DevSecOps"
-metaImage: "../../assets/blog/GNU-Make-dans-le-developpement-logiciel/Makefile-main.png"
-permalink: /blog/make-dans-le-processus-de-developpement-logiciel/
+tags: MAKEFILE, DEVOPS
 
 scripts: >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

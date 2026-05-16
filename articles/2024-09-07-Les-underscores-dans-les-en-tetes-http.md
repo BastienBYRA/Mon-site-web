@@ -3,16 +3,8 @@ title: "Les underscores dans les en-têtes HTTP"
 filename: Les-underscores-dans-les-en-tetes-http
 description: "Un court article sur l'utilisation des underscores dans les en-têtes HTTP"
 image: "header-main.png"
-layout: layouts/article.njk
-tags: article
 date: 2024-09-07
-dateText : 7 SEPTEMBRE 2024
-subject:
-    - TECH
-    - WEB SERVER
-metaKeywords: "Tech, Web server, NGINX, Apache, HTTP Header, En-tete HTTP, underscore http header, Devops"
-metaImage: "../../assets/blog/Les-underscores-dans-les-en-tetes-http/header-main.png"
-permalink: /blog/Les-underscores-dans-les-en-tetes-http/
+tags: TECH, WEB SERVER
 ---
 
 ## Les underscores dans les en-têtes HTTP

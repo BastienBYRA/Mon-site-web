@@ -1,0 +1,14 @@
+<header>
+  <nav>
+    <a href="/" class="logo">Mon Blog</a>
+    <a href="/">Articles</a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Changer de thème"></button>
+  </nav>
+</header>
+<script>
+  function toggleTheme() {
+    var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  }
+</script>

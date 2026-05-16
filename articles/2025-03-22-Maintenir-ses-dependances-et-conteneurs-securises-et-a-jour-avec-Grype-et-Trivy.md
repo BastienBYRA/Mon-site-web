@@ -3,16 +3,8 @@ title: Maintenir ses dépendances et conteneurs sécurisés et à jour avec Gryp
 filename: Maintenir-ses-dependances-et-conteneurs-securises-et-a-jour-avec-grype-et-trivy
 description: "Grype et Trivy sont deux outils permettant de scanner des images Docker afin de s'assurer qu'aucune faille au niveau des dépendances ne soit présente, je vous les présente avec une implémentation dans une CI/CD."
 image: "maintenir-ses-dependances-et-conteneurs-securises-et-a-jour-avec-grype-et-trivy.png"
-layout: layouts/article.njk
-tags: article
 date: 2025-03-22
-dateText : 22 MARS 2025
-subject:
-    - CONTENEURS
-    - SECURITE
-metaKeywords: "Grype, Trivy, safe code, code sécurité, français, Maintenir ses dépendances et conteneurs sécurisés et à jour avec Grype et Trivy"
-permalink: "/blog/maintenir-ses-dependances-et-conteneurs-securises-et-a-jour-avec-grype-et-trivy/"
-
+tags: CONTENEURS, SECURITE
 scripts: >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-bash.min.js" integrity="sha512-35RBtvuCKWANuRid6RXP2gYm4D5RMieVL/xbp6KiMXlIqgNrI7XRUh9HurE8lKHW4aRpC0TZU3ZfqG8qmQ35zA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js" integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
