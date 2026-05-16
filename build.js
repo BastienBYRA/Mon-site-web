@@ -5,6 +5,8 @@ import fs from "fs"
 const ARTICLE_FOLDER = "./articles/"
 const BUILD_FOLDER = "./build/"
 const TEMPLATE_FOLDER = "./src/templates/"
+const DEV_ASSETS_FOLDER = "/src/assets/"
+const PROD_ASSETS_FOLDER = "/assets/"
 
 // Encodage
 const ENCODING = "utf-8"
@@ -17,6 +19,10 @@ const ARTICLE_FILE = TEMPLATE_FOLDER + "article.html"
 
 // Variables
 const FRONTMATTER_VARIABLE = ["title", "description", "date", "image", "tags"]
+
+// Environnement
+var PRODUCTION = process.env.PRODUCTION ? true : false
+
 class Article {
     constructor(title, description, date, image, tags, content, filename) {
         this.title = title
@@ -54,6 +60,9 @@ const parseMarkdown = () => {
 
         // Supprime le Front-matter
         articleContent = removeFrontMatter(articleContent)
+
+        // Utilise le bon dossier d'assets
+        articleContent.replaceAll("{{ blog__assets }}", setAssetsFolder())
 
         // Converti les fichiers Markdown > HTML
         var articleHTML = marked.parse(articleContent)
@@ -105,7 +114,7 @@ const generateIndex = (listArticle) => {
 
     const headerContent = fs.readFileSync(HEADER_FILE, { encoding: ENCODING })
     const footerContent = fs.readFileSync(FOOTER_FILE, { encoding: ENCODING })
-    let indexContent = fs.readFileSync(INDEX_FILE, { encoding: ENCODING })
+    let indexContent = fs.readFileSync(INDEX_FILE, { encoding: ENCODING }).replaceAll("{{ blog__assets }}", setAssetsFolder())
 
     indexContent = indexContent.replace("{{ blog__header_block }}", headerContent)
     indexContent = indexContent.replace("{{ blog__footer_block }}", footerContent)
@@ -113,8 +122,13 @@ const generateIndex = (listArticle) => {
     const sorted = [...listArticle].sort((a, b) => new Date(b.date) - new Date(a.date))
 
     const articlesHTML = sorted.map(article => {
+        // Utilise le bon dossier d'assets
+        var assetsFolder = setAssetsFolder()
+        var fullAssetsFolderPath = assetsFolder + "/blog/card/" + article.image
+
+        // Génère le code HTML de la liste des articles
         const coverHTML = article.image
-            ? `<img src="${article.image}" alt="" loading="lazy" />`
+            ? `<img src="${fullAssetsFolderPath}" alt="" loading="lazy" />`
             : ''
         return `<article class="article-preview">
       <a href="./articles/${article.filename}" class="article-preview-link">
@@ -146,22 +160,31 @@ const mergeFilesArticle = (listArticle) => {
 
     const headerContent = fs.readFileSync(HEADER_FILE, { encoding: ENCODING })
     const bottomContent = fs.readFileSync(FOOTER_FILE, { encoding: ENCODING })
-    var articleContent = fs.readFileSync(ARTICLE_FILE, { encoding: ENCODING })
-
-    articleContent = articleContent.replace("{{ blog__header_block }}", headerContent)
-    articleContent = articleContent.replace("{{ blog__footer_block }}", bottomContent)
+    const templateContent = fs.readFileSync(ARTICLE_FILE, { encoding: ENCODING }).replaceAll("{{ blog__assets }}", setAssetsFolder())
+        .replace("{{ blog__header_block }}", headerContent)
+        .replace("{{ blog__footer_block }}", bottomContent)
 
     // Assemble les fichiers
     listArticle.forEach(article => {
         const fullFilepath = BUILD_FOLDER + article.filename
 
-        articleContent = articleContent.replaceAll("{{ article__date_block }}", article.date)
-        articleContent = articleContent.replaceAll("{{ article__date_formatted_block }}", formatDate(article.date))
-        articleContent = articleContent.replaceAll("{{ article__tags_block }}", article.tags)
-        articleContent = articleContent.replaceAll("{{ article__tags_html_block }}", formatTagsHTML(article.tags))
-        articleContent = articleContent.replaceAll("{{ article__title_block }}", article.title)
-        articleContent = articleContent.replaceAll("{{ article__description_block }}", article.description)
-        articleContent = articleContent.replaceAll("{{ article__content_block }}", article.content)
+        // Utilise le bon dossier d'assets
+        var assetsFolder = setAssetsFolder()
+        var fullAssetsFolderPath = assetsFolder + "/blog/card/" + article.image
+
+        const imageHTML = article.image
+            ? `<img class="article-cover-image" src="${fullAssetsFolderPath}" alt="${article.title}" />`
+            : ''
+
+        const articleContent = templateContent
+            .replaceAll("{{ article__date_block }}", article.date)
+            .replaceAll("{{ article__date_formatted_block }}", formatDate(article.date))
+            .replaceAll("{{ article__tags_block }}", article.tags)
+            .replaceAll("{{ article__tags_html_block }}", formatTagsHTML(article.tags))
+            .replaceAll("{{ article__title_block }}", article.title)
+            .replaceAll("{{ article__description_block }}", article.description)
+            .replaceAll("{{ article__image_block }}", imageHTML)
+            .replaceAll("{{ article__content_block }}", article.content)
 
         fs.writeFileSync(fullFilepath, articleContent, { encoding: ENCODING })
     })
@@ -185,6 +208,14 @@ const formatDateShort = (dateStr) => {
 const formatDate = (dateStr) => {
     const date = new Date(dateStr + 'T00:00:00')
     return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
+}
+
+const setAssetsFolder = () => {
+    // Utilise le bon dossier d'assets
+    var assetsFolder = ""
+    if (PRODUCTION == false) assetsFolder = DEV_ASSETS_FOLDER
+    else assetsFolder = PROD_ASSETS_FOLDER
+    return assetsFolder
 }
 
 let listArticle = parseMarkdown()

@@ -2,7 +2,7 @@
 title: "Nix : Un gestionnaire de paquet, et plus encore"
 filename: Nix-un-gestionnaire-de-paquet-et-plus-encore
 description: "Nix est une CLI permettant de créer des environnements à la volée et de gérer facilement des dépendances. Cet article a pour but de la présenter."
-image: "nix-main.png"
+image: "nix_article.png"
 date: 2024-07-21
 dateText : 21 JUILLET 2024
 tags: TECH, NIX, ENVIRONNEMENT, GESTIONNAIRE DE PAQUET

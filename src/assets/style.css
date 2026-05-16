@@ -165,6 +165,11 @@ footer::before {
   color: var(--accent);
 }
 
+/* .hero-title em:hover {
+  color: blueviolet;
+  /* transition-duration: 0.5s; */
+} */
+
 .hero-sub {
   font-size: 0.9rem;
   color: var(--text-muted);
@@ -372,6 +377,16 @@ article > h1 {
   margin-bottom: 3rem;
   padding-bottom: 2rem;
   border-bottom: 1px solid var(--border);
+}
+
+/* ── Article cover image ─────────────────────────────────── */
+
+.article-cover-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 3rem;
 }
 
 /* ── Article content ─────────────────────────────────────── */

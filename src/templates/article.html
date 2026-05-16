@@ -11,7 +11,7 @@
   <meta name="keywords" content="{{ article__tags_block }}">
   <meta property="og:title" content="{{ article__title_block }}">
   <meta property="og:description" content="{{ article__description_block }}">
-  <link rel="stylesheet" href="/src/assets/style.css" type="text/css">
+  <link rel="stylesheet" href="{{ blog__assets }}/style.css" type="text/css">
 </head>
 <body>
   {{ blog__header_block }}
@@ -25,6 +25,7 @@
         <div class="tags">{{ article__tags_html_block }}</div>
       </div>
       <p class="article-description">{{ article__description_block }}</p>
+      {{ article__image_block }}
       <div class="article-content">
         {{ article__content_block }}
       </div>

@@ -21,7 +21,7 @@ Ces en-têtes sont utiles, car ils permettent de pouvoir faire passer des donné
 
 Parmi les différents en-têtes envoyés par le serveur en réponse existe **l’en-tête “server”** qui permet d'identifier le serveur que l'on utilise, dans le cas de NGINX, on reçoit une données sous la forme de **nginx/\<version\>**
 
-![Image mettant en évidence l'entete "Server" envoyé par le serveur NGINX](../../assets/blog/{{ filename }}/NGINX-header-show.png)
+![Image mettant en évidence l'entete "Server" envoyé par le serveur NGINX]({{ blog__assets }}/blog/other/NGINX-header-show.png)
 <p class="image-related-text">L'entête “server” par défaut de Nginx</p>
 
 Maintenant soyons honnête, vous pourriez vous en foutre, et continuer votre vie, grand bien vous fasse, mais vous pourriez aussi vous dire "Merde, j'ai pas envie que de potentiel attaquant sache quel technologie de serveur web j'utilise !"
@@ -77,7 +77,7 @@ Les Dockerfiles vont prendre deux arguments en paramètre  :
 
 À noter que pas tous les modules sont disponibles, vous trouverez la liste des modules dans [les dossiers "debian" ou "alpine" en fonction du Dockerfile utilisé](https://hg.nginx.org/pkg-oss/file/tip).
 
-![Image montrant les modules disponible pour NGINX Alpine](../../assets/blog/{{ filename }}/NGINX-repo-mercurial.png)
+![Image montrant les modules disponible pour NGINX Alpine]({{ blog__assets }}/blog/other/NGINX-repo-mercurial.png)
 <p class="image-related-text">La liste des modules disponible pour NGINX Alpine en version 1.25</p>
 
 En fonction de l'installation de NGINX que l'on veut (Debian / Ubuntu ou Alpine), on va installer le fichier Dockerfile correspondant sur notre machine local. 

@@ -53,7 +53,7 @@ Cette démarche nous permet de s'assurer que nos logiciels sont **sains**, et **
 ## L'enjeu des licences {#l-enjeu-des-licences}
 Aujourd'hui, nos logiciels dépendent de plus en plus d'outils, et **chaque dépendance est un arbre généalogique à lui tout seul**, susceptible de nécessiter plusieurs dizaines d'autres dépendances ayant elles-mêmes besoin d'autres dizaines de composants.
 
-![Image montrant un arbre de dépendance typique d'une dépendance informatique](../../assets/blog/{{ filename }}/dependency-tree-software.png)
+![Image montrant un arbre de dépendance typique d'une dépendance informatique]({{ blog__assets }}/blog/other/dependency-tree-software.png)
 <p class="image-related-text">Exemple d'un graphe de dépendance logiciel.</p>
 
 Et chacun de ses outils possède une ou plusieurs licences à leur actif, pouvant être plus ou moins contraignantes.

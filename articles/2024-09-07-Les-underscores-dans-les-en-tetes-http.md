@@ -2,7 +2,7 @@
 title: "Les underscores dans les en-têtes HTTP"
 filename: Les-underscores-dans-les-en-tetes-http
 description: "Un court article sur l'utilisation des underscores dans les en-têtes HTTP"
-image: "header-main.png"
+image: "undersocre_entete_http.png"
 date: 2024-09-07
 tags: TECH, WEB SERVER
 ---
