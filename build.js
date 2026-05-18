@@ -39,6 +39,9 @@ const PROD_ASSETS_FOLDER = "/assets/"
 // Encodage
 const ENCODING = "utf-8"
 
+// Domaine
+const DOMAIN = "https://bastienbyra.fr"
+
 // Templates
 const HEADER_FILE = TEMPLATE_FOLDER + "header.html"
 const FOOTER_FILE = TEMPLATE_FOLDER + "footer.html"
@@ -276,7 +279,55 @@ const generateSearchIndex = (listArticle) => {
     fs.writeFileSync(BUILD_FOLDER + "search.json", JSON.stringify(index), { encoding: ENCODING })
 }
 
+const generateRobotsTxt = () => {
+    const content = `User-agent: *
+Allow: /
+Disallow: /search.json
+
+Sitemap: ${DOMAIN}/sitemap.xml
+`
+    fs.writeFileSync(BUILD_FOLDER + "robots.txt", content, { encoding: ENCODING })
+}
+
+const generateSitemap = (listArticle) => {
+    const sorted = [...listArticle].sort((a, b) => new Date(b.date) - new Date(a.date))
+
+    const articleUrls = sorted.map(article => `  <url>
+    <loc>${DOMAIN}/${article.filename}</loc>
+    <lastmod>${article.date}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>`).join('\n')
+
+    const content = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${DOMAIN}/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+${articleUrls}
+</urlset>`
+
+    fs.writeFileSync(BUILD_FOLDER + "sitemap.xml", content, { encoding: ENCODING })
+}
+
+const generateSecurityTxt = () => {
+    const wellKnownDir = BUILD_FOLDER + ".well-known/"
+    if (!fs.existsSync(wellKnownDir)) {
+        fs.mkdirSync(wellKnownDir)
+    }
+    const content = `Contact: mailto:neitsabast@gmail.com
+Expires: 2027-05-18T00:00:00.000Z
+Preferred-Languages: fr, en
+`
+    fs.writeFileSync(wellKnownDir + "security.txt", content, { encoding: ENCODING })
+}
+
 let listArticle = parseMarkdown()
 generateIndex(listArticle)
 mergeFilesArticle(listArticle)
 generateSearchIndex(listArticle)
+generateRobotsTxt()
+generateSitemap(listArticle)
+generateSecurityTxt()
