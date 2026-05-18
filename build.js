@@ -236,6 +236,7 @@ const mergeFilesArticle = (listArticle) => {
             .replaceAll("{{ article__description_block }}", article.description)
             .replaceAll("{{ article__image_block }}", imageHTML)
             .replaceAll("{{ article__content_block }}", article.content)
+            .replaceAll("{{ article__schema_block }}", generateArticleSchema(article))
 
         fs.writeFileSync(fullFilepath, articleContent, { encoding: ENCODING })
     })
@@ -277,6 +278,30 @@ const generateSearchIndex = (listArticle) => {
         url: article.filename
     }))
     fs.writeFileSync(BUILD_FOLDER + "search.json", JSON.stringify(index), { encoding: ENCODING })
+}
+
+const generateArticleSchema = (article) => {
+    const schema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": article.title,
+        "description": article.description,
+        "datePublished": article.date,
+        "url": `${DOMAIN}/${article.filename}`,
+        "author": {
+            "@type": "Person",
+            "name": "Bastien BYRA",
+            "url": DOMAIN
+        },
+        "publisher": {
+            "@type": "Person",
+            "name": "Bastien BYRA",
+            "url": DOMAIN
+        }
+    }
+    if (article.image) schema.image = `${DOMAIN}/assets/blog/card/${article.image}`
+    if (article.tags) schema.keywords = article.tags.split(',').map(t => t.trim()).join(', ')
+    return `<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>`
 }
 
 const generateRSS = (listArticle) => {
