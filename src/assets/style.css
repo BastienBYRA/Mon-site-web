@@ -20,6 +20,8 @@
   --font-display: 'Cabin', sans-serif;
   --font-body: 'DM Sans', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --rss: orange;
+  --rss-color: white;
 }
 
 [data-theme="dark"] {
@@ -29,6 +31,8 @@
   --text-muted: #6b7d90;
   --border: #1e2030;
   --accent-soft: rgba(246, 40, 126, 0.12);
+  --rss: rgb(144, 93, 0);
+  --rss-color: rgb(184, 184, 184);
 }
 
 body {
@@ -648,6 +652,26 @@ article > h1 {
   border: none;
   border-top: 1px solid var(--border);
   margin: 2rem 0;
+}
+
+/* ── RSS link ────────────────────────────────────────────── */
+
+.rss-link {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.28rem 0.4rem;
+  transition: color 0.2s, border-color 0.2s;
+  line-height: 1;
+  text-decoration: none;
+  background: var(--rss) !important;
+  color: var(--rss-color) !important;
+}
+
+.rss-link:hover {
+  color: var(--accent) !important;
+  border-color: var(--accent);
 }
 
 /* ── Theme toggle ────────────────────────────────────────── */

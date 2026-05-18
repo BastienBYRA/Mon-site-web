@@ -279,6 +279,36 @@ const generateSearchIndex = (listArticle) => {
     fs.writeFileSync(BUILD_FOLDER + "search.json", JSON.stringify(index), { encoding: ENCODING })
 }
 
+const generateRSS = (listArticle) => {
+    const sorted = [...listArticle].sort((a, b) => new Date(b.date) - new Date(a.date))
+
+    const items = sorted.map(article => {
+        const pubDate = new Date(article.date + 'T00:00:00Z').toUTCString()
+        return `    <item>
+      <title><![CDATA[${article.title}]]></title>
+      <link>${DOMAIN}/${article.filename}</link>
+      <description><![CDATA[${article.description}]]></description>
+      <pubDate>${pubDate}</pubDate>
+      <guid>${DOMAIN}/${article.filename}</guid>
+    </item>`
+    }).join('\n')
+
+    const content = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog de Bastien</title>
+    <link>${DOMAIN}</link>
+    <description>Articles techniques sur le DevOps, le web et la sécurité.</description>
+    <language>fr</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <atom:link href="${DOMAIN}/feed.xml" rel="self" type="application/rss+xml" />
+${items}
+  </channel>
+</rss>`
+
+    fs.writeFileSync(BUILD_FOLDER + "feed.xml", content, { encoding: ENCODING })
+}
+
 const generateRobotsTxt = () => {
     const content = `User-agent: *
 Allow: /
@@ -331,3 +361,4 @@ generateSearchIndex(listArticle)
 generateRobotsTxt()
 generateSitemap(listArticle)
 generateSecurityTxt()
+generateRSS(listArticle)
