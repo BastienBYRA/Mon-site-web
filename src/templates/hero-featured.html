@@ -1,0 +1,12 @@
+<a href="./{{ featured__filename }}" class="hero-featured">
+  {{ featured__image }}
+  <div class="hero-featured-body">
+    <h2 class="hero-featured-title">{{ featured__title }}</h2>
+    <div class="hero-featured-meta">
+      <time datetime="{{ featured__date }}">{{ featured__date_formatted }}</time>
+      <span class="meta-sep">·</span>
+      <div class="tags">{{ featured__tags }}</div>
+    </div>
+    <p class="hero-featured-desc">{{ featured__description }}</p>
+  </div>
+</a>

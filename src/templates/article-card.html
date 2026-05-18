@@ -1,0 +1,14 @@
+<article class="article-preview">
+  <a href="/{{ card__filename }}" class="article-preview-link">
+    <div class="article-cover">{{ card__cover }}</div>
+    <div class="article-body">
+      <div class="article-meta">
+        <time datetime="{{ card__date }}">{{ card__date_formatted }}</time>
+        <span class="meta-sep">·</span>
+        <div class="tags">{{ card__tags }}</div>
+      </div>
+      <h2>{{ card__title }}</h2>
+      <p>{{ card__description }}</p>
+    </div>
+  </a>
+</article>

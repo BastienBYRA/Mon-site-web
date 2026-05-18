@@ -47,6 +47,10 @@ const HEADER_FILE = TEMPLATE_FOLDER + "header.html"
 const FOOTER_FILE = TEMPLATE_FOLDER + "footer.html"
 const INDEX_FILE = TEMPLATE_FOLDER + "index.html"
 const ARTICLE_FILE = TEMPLATE_FOLDER + "article.html"
+const ARTICLE_CARD_FILE = TEMPLATE_FOLDER + "article-card.html"
+const HERO_FEATURED_FILE = TEMPLATE_FOLDER + "hero-featured.html"
+const RELATED_ARTICLES_FILE = TEMPLATE_FOLDER + "related-articles.html"
+const BACK_BUTTON_FILE = TEMPLATE_FOLDER + "back-button.html"
 
 // Variables
 const FRONTMATTER_VARIABLE = ["title", "description", "date", "image", "tags"]
@@ -153,57 +157,47 @@ const generateIndex = (listArticle) => {
 
     const sorted = [...listArticle].sort((a, b) => new Date(b.date) - new Date(a.date))
 
+    const cardTemplate = fs.readFileSync(ARTICLE_CARD_FILE, { encoding: ENCODING })
+
     const articlesHTML = sorted.map(article => {
-        // Utilise le bon dossier d'assets
         var assetsFolder = setAssetsFolder()
         var fullAssetsFolderPath = assetsFolder + "/blog/card/" + article.image
-
-        // Génère le code HTML de la liste des articles
         const coverHTML = article.image
             ? `<img src="${fullAssetsFolderPath}" alt="" loading="lazy" />`
             : ''
-        return `<article class="article-preview">
-      <a href="/${article.filename}" class="article-preview-link">
-        <div class="article-cover">${coverHTML}</div>
-        <div class="article-body">
-          <div class="article-meta">
-            <time datetime="${article.date}">${formatDateShort(article.date)}</time>
-            <span class="meta-sep">·</span>
-            <div class="tags">${formatTagsHTML(article.tags)}</div>
-          </div>
-          <h2>${article.title}</h2>
-          <p>${article.description}</p>
-        </div>
-      </a>
-    </article>`
+        return cardTemplate
+            .replaceAll("{{ card__filename }}", article.filename)
+            .replaceAll("{{ card__cover }}", coverHTML)
+            .replaceAll("{{ card__date }}", article.date)
+            .replaceAll("{{ card__date_formatted }}", formatDateShort(article.date))
+            .replaceAll("{{ card__tags }}", formatTagsHTML(article.tags))
+            .replaceAll("{{ card__title }}", article.title)
+            .replaceAll("{{ card__description }}", article.description)
     }).join('\n    ')
 
     indexContent = indexContent.replace("{{ blog__articles_block }}", articlesHTML)
     indexContent = indexContent.replace("{{ blog__article_count_block }}", sorted.length.toString().padStart(2, '0'))
 
     const featured = sorted[0]
+    const featuredTemplate = fs.readFileSync(HERO_FEATURED_FILE, { encoding: ENCODING })
     const featuredImgPath = setAssetsFolder() + "/blog/card/" + featured.image
     const featuredImgHTML = featured.image
         ? `<img class="hero-featured-img" src="${featuredImgPath}" alt="" loading="lazy">`
         : ''
-    const featuredHTML = `<a href="./${featured.filename}" class="hero-featured">
-      ${featuredImgHTML}
-      <div class="hero-featured-body">
-        <h2 class="hero-featured-title">${featured.title}</h2>
-        <div class="hero-featured-meta">
-          <time datetime="${featured.date}">${formatDateShort(featured.date)}</time>
-          <span class="meta-sep">·</span>
-          <div class="tags">${formatTagsHTML(featured.tags)}</div>
-        </div>
-        <p class="hero-featured-desc">${featured.description}</p>
-      </div>
-    </a>`
+    const featuredHTML = featuredTemplate
+        .replaceAll("{{ featured__filename }}", featured.filename)
+        .replaceAll("{{ featured__image }}", featuredImgHTML)
+        .replaceAll("{{ featured__title }}", featured.title)
+        .replaceAll("{{ featured__date }}", featured.date)
+        .replaceAll("{{ featured__date_formatted }}", formatDateShort(featured.date))
+        .replaceAll("{{ featured__tags }}", formatTagsHTML(featured.tags))
+        .replaceAll("{{ featured__description }}", featured.description)
     indexContent = indexContent.replace("{{ blog__hero_featured_block }}", featuredHTML)
 
     fs.writeFileSync(BUILD_FOLDER + "index.html", indexContent, { encoding: ENCODING })
 }
 
-const generateRelatedArticlesHTML = (article, allArticles) => {
+const generateRelatedArticlesHTML = (article, allArticles, cardTemplate, relatedTemplate, backBtnTemplate) => {
     const currentTags = article.tags.split(',').map(t => t.trim().toLowerCase())
 
     const related = allArticles
@@ -215,42 +209,24 @@ const generateRelatedArticlesHTML = (article, allArticles) => {
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .slice(0, 3)
 
-    const backBtn = `<div class="article-footer-nav">
-      <a href="/" class="btn-back-articles">← Voir tous les articles</a>
-    </div>`
-
-    if (related.length === 0) return backBtn
+    if (related.length === 0) return backBtnTemplate
 
     const assetsFolder = setAssetsFolder()
 
     const cardsHTML = related.map(a => {
         const fullAssetsFolderPath = assetsFolder + "/blog/card/" + a.image
         const coverHTML = a.image ? `<img src="${fullAssetsFolderPath}" alt="" loading="lazy" />` : ''
-        return `<article class="article-preview">
-      <a href="/${a.filename}" class="article-preview-link">
-        <div class="article-cover">${coverHTML}</div>
-        <div class="article-body">
-          <div class="article-meta">
-            <time datetime="${a.date}">${formatDateShort(a.date)}</time>
-            <span class="meta-sep">·</span>
-            <div class="tags">${formatTagsHTML(a.tags)}</div>
-          </div>
-          <h2>${a.title}</h2>
-          <p>${a.description}</p>
-        </div>
-      </a>
-    </article>`
+        return cardTemplate
+            .replaceAll("{{ card__filename }}", a.filename)
+            .replaceAll("{{ card__cover }}", coverHTML)
+            .replaceAll("{{ card__date }}", a.date)
+            .replaceAll("{{ card__date_formatted }}", formatDateShort(a.date))
+            .replaceAll("{{ card__tags }}", formatTagsHTML(a.tags))
+            .replaceAll("{{ card__title }}", a.title)
+            .replaceAll("{{ card__description }}", a.description)
     }).join('\n    ')
 
-    return `<section class="related-articles">
-  <p class="related-label">Articles qui pourraient vous plaire</p>
-  <div class="related-list">
-    ${cardsHTML}
-  </div>
-  <div class="article-footer-nav">
-    <a href="/" class="btn-back-articles">← Voir tous les articles</a>
-  </div>
-</section>`
+    return relatedTemplate.replaceAll("{{ related__cards }}", cardsHTML)
 }
 
 const mergeFilesArticle = (listArticle) => {
@@ -264,6 +240,9 @@ const mergeFilesArticle = (listArticle) => {
     const templateContent = fs.readFileSync(ARTICLE_FILE, { encoding: ENCODING }).replaceAll("{{ blog__assets }}", setAssetsFolder())
         .replace("{{ blog__header_block }}", headerContent)
         .replace("{{ blog__footer_block }}", bottomContent)
+    const cardTemplate = fs.readFileSync(ARTICLE_CARD_FILE, { encoding: ENCODING })
+    const relatedTemplate = fs.readFileSync(RELATED_ARTICLES_FILE, { encoding: ENCODING })
+    const backBtnTemplate = fs.readFileSync(BACK_BUTTON_FILE, { encoding: ENCODING })
 
     // Assemble les fichiers
     listArticle.forEach(article => {
@@ -287,7 +266,7 @@ const mergeFilesArticle = (listArticle) => {
             .replaceAll("{{ article__image_block }}", imageHTML)
             .replaceAll("{{ article__content_block }}", article.content)
             .replaceAll("{{ article__schema_block }}", generateArticleSchema(article))
-            .replaceAll("{{ article__related_block }}", generateRelatedArticlesHTML(article, listArticle))
+            .replaceAll("{{ article__related_block }}", generateRelatedArticlesHTML(article, listArticle, cardTemplate, relatedTemplate, backBtnTemplate))
 
         fs.writeFileSync(fullFilepath, articleContent, { encoding: ENCODING })
     })
