@@ -203,6 +203,56 @@ const generateIndex = (listArticle) => {
     fs.writeFileSync(BUILD_FOLDER + "index.html", indexContent, { encoding: ENCODING })
 }
 
+const generateRelatedArticlesHTML = (article, allArticles) => {
+    const currentTags = article.tags.split(',').map(t => t.trim().toLowerCase())
+
+    const related = allArticles
+        .filter(a => a.filename !== article.filename)
+        .filter(a => {
+            const aTags = a.tags.split(',').map(t => t.trim().toLowerCase())
+            return aTags.some(tag => currentTags.includes(tag))
+        })
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 3)
+
+    const backBtn = `<div class="article-footer-nav">
+      <a href="/" class="btn-back-articles">← Voir tous les articles</a>
+    </div>`
+
+    if (related.length === 0) return backBtn
+
+    const assetsFolder = setAssetsFolder()
+
+    const cardsHTML = related.map(a => {
+        const fullAssetsFolderPath = assetsFolder + "/blog/card/" + a.image
+        const coverHTML = a.image ? `<img src="${fullAssetsFolderPath}" alt="" loading="lazy" />` : ''
+        return `<article class="article-preview">
+      <a href="/${a.filename}" class="article-preview-link">
+        <div class="article-cover">${coverHTML}</div>
+        <div class="article-body">
+          <div class="article-meta">
+            <time datetime="${a.date}">${formatDateShort(a.date)}</time>
+            <span class="meta-sep">·</span>
+            <div class="tags">${formatTagsHTML(a.tags)}</div>
+          </div>
+          <h2>${a.title}</h2>
+          <p>${a.description}</p>
+        </div>
+      </a>
+    </article>`
+    }).join('\n    ')
+
+    return `<section class="related-articles">
+  <p class="related-label">Articles qui pourraient vous plaire</p>
+  <div class="related-list">
+    ${cardsHTML}
+  </div>
+  <div class="article-footer-nav">
+    <a href="/" class="btn-back-articles">← Voir tous les articles</a>
+  </div>
+</section>`
+}
+
 const mergeFilesArticle = (listArticle) => {
     // Créer le dossier `build`
     if (!fs.existsSync(BUILD_FOLDER)){
@@ -237,10 +287,11 @@ const mergeFilesArticle = (listArticle) => {
             .replaceAll("{{ article__image_block }}", imageHTML)
             .replaceAll("{{ article__content_block }}", article.content)
             .replaceAll("{{ article__schema_block }}", generateArticleSchema(article))
+            .replaceAll("{{ article__related_block }}", generateRelatedArticlesHTML(article, listArticle))
 
         fs.writeFileSync(fullFilepath, articleContent, { encoding: ENCODING })
     })
-} 
+}
 
 /**
  * Génère du code HTML pour l'affichage des tags
