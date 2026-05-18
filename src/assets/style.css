@@ -130,6 +130,24 @@ footer::before {
   font-size: 0.65rem;
 }
 
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 0.85rem;
+}
+
+.footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.footer-social-link:hover {
+  color: var(--accent);
+}
+
 /* ── Tags ────────────────────────────────────────────────── */
 
 .tags {
