@@ -12,8 +12,7 @@
   --bg-code: #e8edf5;
   --text: #18222e;
   --text-muted: #5c6e82;
-  /* --accent: #f6287e; */
-  --accent: #f23252;
+  --accent: #8518e9;
   --accent-soft: rgba(246, 40, 126, 0.08);
   --border: #cfdce9;
   --max-width: 1200px;
@@ -30,6 +29,7 @@
   --text: #dee9f2;
   --text-muted: #6b7d90;
   --border: #1e2030;
+  --accent: #c998f6;
   --accent-soft: rgba(246, 40, 126, 0.12);
   --rss: rgb(144, 93, 0);
   --rss-color: rgb(184, 184, 184);
@@ -853,6 +853,10 @@ article > h1 {
 
   .nav-links a {
     display: none;
+  }
+
+  .tag {
+    font-weight: bold;
   }
 }
 
