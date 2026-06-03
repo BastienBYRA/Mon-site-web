@@ -57,7 +57,7 @@ header {
 header nav {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 6rem;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -108,7 +108,7 @@ main {
   max-width: var(--max-width);
   width: 100%;
   margin: 4rem auto 2.5rem;
-  padding: 0 2rem;
+  padding: 0 6rem;
   flex: 1;
 }
 
@@ -562,7 +562,6 @@ article > h1 {
   max-height: 420px;
   object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 3rem;
 }
 
 /* ── Article content ─────────────────────────────────────── */
@@ -613,6 +612,11 @@ article > h1 {
   color: var(--accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.article-content a:hover {
+  color: color-mix(in srgb, var(--accent) 60%, black);
 }
 
 .article-content code {
@@ -806,6 +810,14 @@ article > h1 {
 @media (max-width: 950px) {
   .hero-featured {
     display: none;
+  }
+
+  main {
+    padding: 0 3rem;
+  }
+
+  header nav {
+    padding: 0 3rem;
   }
 }
 
