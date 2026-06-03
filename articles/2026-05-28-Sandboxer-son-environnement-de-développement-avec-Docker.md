@@ -24,7 +24,7 @@ Bonjour à vous, cher lecteur,
 
 À l'heure où j'écris ces lignes, une nouvelle (et énième) attaque par la chaîne d'approvisionnement (*Supply Chain Attack*) a touché NPM.
 
-De son petit nom *Mini Shai-Hulud*, elle s'inscrit dans la famille des *Shai-Hulud*, un nom qui pourrait ne pas vous être inconnu.
+De son petit nom *[Mini Shai-Hulud](https://fr.aikido.dev/blog/mini-shai-hulud-is-back-tanstack-compromised)*, elle s'inscrit dans la famille des *Shai-Hulud*, un nom qui pourrait ne pas vous être inconnu.
 
 Pour faire court : cette nouvelle attaque est la troisième de la famille des Shai-Hulud, et toutes visent à injecter du code malveillant dans des dépendances JavaScript / Node.js afin de dérober des informations sur les systèmes informatiques.
 
@@ -47,7 +47,7 @@ Tout ce sur quoi l'on bâtit nos projets est un château de cartes qui n'attend 
 
 Quand on installe des dépendances, on croise simplement les doigts en se disant : "Ça ne peut pas m'arriver, ce serait trop bête, ça n'arrive qu'aux autres, et puis le projet est connu, il doit bien y avoir des sécurités solides !"
 
-D'autres prennent les devants. Pour rester dans l'écosystème JavaScript, cela peut être de passer de NPM à PNPM, qui ne lance pas les scripts `postinstall` des dépendances par défaut, ce qui permet d'éviter bien des problèmes.
+D'autres prennent les devants. Pour rester dans l'écosystème JavaScript, cela peut être de passer de [NPM](https://docs.npmjs.com/cli/v11) à [PNPM](https://pnpm.io/fr/), qui ne lance pas les scripts `postinstall` des dépendances par défaut, ce qui permet d'éviter bien des problèmes.
 
 D'autres encore, à tort ou à raison, vont rester sur des versions plus anciennes de leurs dépendances et attendre bien sagement que les nouvelles versions soient *battle-tested*. C'est, ironiquement, à la fois une solution qui fonctionne et une qui ferait s'arracher les cheveux à quiconque est soucieux de la sécurité : Après tout, les nouvelles versions existent aussi pour corriger les failles des anciennes.
 
@@ -67,7 +67,7 @@ Plutôt que d'utiliser son OS comme hôte d'un virus potentiel, il vaut peut-êt
 
 Et c'est possible : Une machine virtuelle, un serveur jetable, ou encore un conteneur... les solutions ne manquent pas.
 
-Dans cet article, je voudrais explorer cette dernière piste : L'utilisation d'un conteneur pour développer.
+Dans cet article, je voudrais explorer cette dernière piste : L'utilisation d'un [conteneur Docker](https://docs.docker.com/get-started/docker-overview/) pour développer.
 
 ### Conteneur et développement {#conteneur-et-developpement}
 
@@ -175,7 +175,7 @@ Cela ne rend pas la démarche inutile pour autant : Si une faille se trouve dans
 
 Le juste milieu, lorsque couper totalement le réseau n'est pas envisageable, consiste à filtrer le trafic sortant via un firewall : On n'autorise que les connexions vers la *registry* et l'on bloque tout le reste. Un script `postinstall` malveillant pourrait alors toujours installer ses dépendances, mais ne pourrait plus exfiltrer quoi que ce soit vers le serveur de l'attaquant. Le problème cependant est que ça nécéssite de faire des modifications au niveau de la machine hôte pour appliquer ces règles réseaux.
 
-**Note :** `--network none` désactive toutes les interfaces réseaux du conteneur, y compris le loopback. Cela rend impossible l'accès à un serveur de développement local depuis le navigateur de l'hôte (par exemple `localhost:3000`). Cette option ne convient pas à toutes les applications.
+**Note :** `--network none` [désactive toutes les interfaces réseaux du conteneur](https://docs.docker.com/engine/network/drivers/none/), y compris le loopback. Cela rend impossible l'accès à un serveur de développement local depuis le navigateur de l'hôte (par exemple `localhost:3000`). Cette option ne convient pas à toutes les applications.
 
 #### Durcir le conteneur {#durcir-le-conteneur}
 
@@ -209,7 +209,7 @@ En combinant chaque optionnn on diminue la surface d'attaque exploitable par un 
 
 ## Dev Containers {#dev-containers}
 
-Toute la gymnastique précédente ; Ecrire un Dockerfile, monter le code, récupérer les dépendances, recopier le volume à chaque modification, est précisément ce que les **Dev Containers** cherche à automatiser.
+Toute la gymnastique précédente ; Ecrire un Dockerfile, monter le code, récupérer les dépendances, recopier le volume à chaque modification, est précisément ce que **[Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers)** cherche à automatiser.
 
 Le principe est simple : Un fichier `devcontainer.json`, versionné avec le projet, décrit l'environnement de développement (image de base, outils à installer, extensions, ports à exposer...). Des outils comme VS Code, IntelliJ, Cursor ou la CLI `devcontainer` se chargent ensuite de construire le conteneur et d'y connecter l'éditeur.
 
@@ -217,7 +217,7 @@ Mais, peut-etre que vous l'avez vu venir, ce confort à un prix ; Dev Container 
 
 Je doute déjà que vous lisiez le code des dépendances que vous utilisez, mais lisez-vous le code des extensions de votre IDE, lisez-vous les commentaires des nouvelles versions ? Non, probablement pas.
 
-On retombe alors exactement sur le problème qui ouvrait cet article : Nous avons cloisonné nos dépendances logicielles pour ne plus avoir à leur accorder une confiance aveugle... et nous reportons cette même confiance aveugle sur notre outillage, susceptible eux aussi de subir une attaque de *supply chain*, comme l'a récemment prouvé l'extension Nx Console.
+On retombe alors exactement sur le problème qui ouvrait cet article : Nous avons cloisonné nos dépendances logicielles pour ne plus avoir à leur accorder une confiance aveugle... et nous reportons cette même confiance aveugle sur notre outillage, susceptible eux aussi de subir une attaque de *supply chain*, [comme l'a récemment prouvé l'extension Nx Console](https://fr.aikido.dev/blog/vs-code-extension-github-breach).
 
 ## Isolation et friction {#isolation-et-friction}
 

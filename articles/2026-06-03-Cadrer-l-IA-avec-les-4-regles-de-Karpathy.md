@@ -40,3 +40,6 @@ Ces 4 règles s'intègrent sans effort, que ce soit au début d'une nouvelle con
 <div class="article-sub-section">
     <img src="https://media.licdn.com/dms/image/v2/D4E10AQFRi1-1PEXSow/image-shrink_800/B4EZvC3lPxI8Ag-/0/1768500909507?e=2147483647&v=beta&t=PJ3q2t6kKIPHszc1NAytBDTu9zdOgWLRyAWe0SKsx_g" alt="Claude, ne fait aucune erreur" class="article-sub-img" />
 </div>
+
+## Source
+* Répertoire GitHub contenant les 4 règles de Karpathy : https://github.com/multica-ai/andrej-karpathy-skills
