@@ -193,11 +193,6 @@ footer::before {
   color: var(--accent);
 }
 
-/* .hero-title em:hover {
-  color: blueviolet;
-  /* transition-duration: 0.5s; */
-} */
-
 .hero-sub {
   font-size: 0.9rem;
   color: var(--text-muted);
@@ -652,12 +647,6 @@ article > h1 {
   font-style: italic;
 }
 
-.article-content img {
-  max-width: 100%;
-  border-radius: 6px;
-  margin: 1.5rem 0;
-}
-
 .article-content table {
   width: 100%;
   border-collapse: collapse;
@@ -877,4 +866,40 @@ article > h1 {
 
 .ultra-small {
   font-size: 0.60rem;
+}
+
+
+
+@media (min-width: 900px) {
+  .article-sub-section .article-sub-img {
+    max-width: 500px !important;
+    max-height: 300px !important;
+    display: flex;
+    justify-self: center;
+  }
+}
+
+@media (max-width: 899px) {
+  .article-sub-section .article-sub-img {
+    max-width: 400px !important;
+    max-height: 250px !important;
+    display: flex;
+    justify-self: center;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .article-sub-section .article-sub-img {
+    max-width: 300px !important;
+    max-height: 200px !important;
+    display: flex;
+    justify-self: center;
+  }
+}
+
+.article-sub-section i {
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 20px;
 }

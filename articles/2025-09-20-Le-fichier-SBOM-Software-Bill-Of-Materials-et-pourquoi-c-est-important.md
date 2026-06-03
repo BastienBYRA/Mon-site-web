@@ -1,7 +1,7 @@
 ---
 title: Le fichier SBOM (Software Bill Of Materials) et pourquoi c'est important
 filename: Le-fichier-SBOM-Software-Bill-Of-Materials-et-pourquoi-c-est-important
-description: "Présentation des SBOM (Software Bill Of Materials) : découvrez ce qu'est un fichier SBOM et son importance dans l'analyse des vulnérabilités, l'identification des licences et la sécurité de vos logiciels"
+description: "Présentation des SBOM (Software Bill Of Materials) : découvrez ce qu'est un fichier SBOM et son importance dans l'analyse des vulnérabilités, l'identification des licences et la sécurité de vos logiciels."
 image: "le-fichier-SBOM-Software-Bill-Of-Materials-et-pourquoi-c-est-important.png"
 date: 2025-09-20
 tags: SOFTWARE BILL OF MATERIALS, VULNERABILITE, SECURITE, CVE
@@ -53,8 +53,12 @@ Cette démarche nous permet de s'assurer que nos logiciels sont **sains**, et **
 ## L'enjeu des licences {#l-enjeu-des-licences}
 Aujourd'hui, nos logiciels dépendent de plus en plus d'outils, et **chaque dépendance est un arbre généalogique à lui tout seul**, susceptible de nécessiter plusieurs dizaines d'autres dépendances ayant elles-mêmes besoin d'autres dizaines de composants.
 
-![Image montrant un arbre de dépendance typique d'une dépendance informatique]({{ blog__assets }}/blog/other/dependency-tree-software.png)
-<p class="image-related-text">Exemple d'un graphe de dépendance logiciel.</p>
+<div class="article-sub-section">
+    <center>
+        <img src="{{ blog__assets }}/blog/other/dependency-tree-software.png" alt="Image montrant un arbre de dépendance typique d'une dépendance informatique" class="article-sub-img" />
+        <i>Exemple d'un graphe de dépendance logiciel.</i>
+    </center>
+</div>
 
 Et chacun de ses outils possède une ou plusieurs licences à leur actif, pouvant être plus ou moins contraignantes.
 
