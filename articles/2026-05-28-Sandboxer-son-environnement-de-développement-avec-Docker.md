@@ -71,6 +71,8 @@ Dans cet article, je voudrais explorer cette dernière piste : L'utilisation d'u
 
 ### Conteneur et développement {#conteneur-et-developpement}
 
+Parlons peu, parlons bien. La mise en place se fait par étapes successives, chacune ajoutant une couche d'isolation supplémentaire. Commençons simple, et on resserre la vis au fil des sections.
+
 #### Création de l'environnement {#creation-de-l-environnement}
 
 La première chose à faire pour développer dans un conteneur est d'en préparer l'environnement. Il faut créer un Dockerfile, qui servira de base à notre nouvel environnement.
@@ -92,7 +94,7 @@ USER dev
 WORKDIR /home/dev/app
 ```
 
-Dans cet exemple, l'environnement de base repose sur l'image officielle Go et installe l'outil `protoc`, nécessaire pour générer le code Go à partir des fichiers Protobuf. On y crée également un utilisateur non-root : si quelque chose tourne mal, le code malveillant s'exécutera avec des droits limités plutôt qu'en `root`.
+Dans cet exemple, l'environnement de base repose sur l'image officielle Go et installe l'outil `protoc`, nécessaire pour générer le code Go à partir des fichiers Protobuf. On y crée également un utilisateur non-root : Si quelque chose tourne mal, le code malveillant s'exécutera avec des droits limités plutôt qu'en `root`.
 
 #### Inclure son code {#inclure-son-code}
 
@@ -148,7 +150,7 @@ docker cp extract-code-container:/project-code/. ./
 docker rm extract-code-container
 ```
 
-À noter : pour Go, les dépendances téléchargées sont stockées dans le cache des modules plutôt que dans le répertoire du projet. Pour que l'IDE résolve correctement tout le code des dépendances, le plus simple est soit de vendoriser ces dernières avec `go mod vendor` (qui les place dans un dossier `vendor/` à la racine du projet, et donc dans le volume), soit de persister ce cache dans un second volume et de le copier lui aussi sur l'hôte.
+À noter : Pour Go, les dépendances téléchargées sont stockées dans le cache des modules plutôt que dans le répertoire du projet. Pour que l'IDE résolve correctement tout le code des dépendances, le plus simple est soit de vendoriser ces dernières avec `go mod vendor` (qui les place dans un dossier `vendor/` à la racine du projet, et donc dans le volume), soit de persister ce cache dans un second volume et de le copier lui aussi sur l'hôte.
 
 Du moment que l'on ne build pas le projet en local, il n'y a aucun risque que du code malveillant présent dans les dépendances s'exécute.
 
@@ -223,7 +225,7 @@ L'isolation du code apporte de la sécurité, mais avec ça vient aussi avec les
 
 Si vous utilisez la méthode du volume Docker pour faire transiter les données, vous bloquer complètement le fonctionnement du *hot reload* ; Il n'y a plus de feedback immédiat après chaque modification, il faut relancer la copie des fichiers
 
-Le *hot reload*, avec la méthode que je privilégie, le conteneur travaille sur une *copie* du code injectée via `docker cp` : il n'existe donc plus aucune synchronisation en direct entre la machine et le conteneur.
+Le *hot reload*, avec la méthode que je privilégie, le conteneur travaille sur une *copie* du code injectée via `docker cp` : Il n'existe donc plus aucune synchronisation en direct entre la machine et le conteneur.
 
 L'option `--network none` n'est pas adapté au application web, il bloque l'accès au conteneur depuis la machine hôte, seul des outils comme `curl` ou `wget` depuis l'intérieur du conteneur peuvent obtenir un retour de l'application.
 
@@ -233,7 +235,7 @@ En bref, chaque option, chaque sécurité, à un prix à payer, il n'y a pas de 
 
 Il est aussi important de noté que cela ne protège que le poste de travail. Une fois l'application déployée, elle doit bien parler au monde extérieur : Bases de données, service de cache, API tierces... Le réseau est de nouveau ouvert, et si du code malveillant embarqué dans une dépendance s'exécute au *runtime*, la porte de l'exfiltration se rouvre.
 
-(Notez que le vecteur `postinstall`, lui, se déclenche à l'installation : en production, où l'on lance un artefact déjà construit, ce risque-là est généralement derrière nous, c'est l'exécution du code de la dépendance qui demeure le danger.)
+(Notez que le vecteur `postinstall`, lui, se déclenche à l'installation : En production, où l'on lance un artefact déjà construit, ce risque-là est généralement derrière nous, c'est l'exécution du code de la dépendance qui demeure le danger.)
 
 Peut-on alors rejouer en production la même logique de cloisonnement ? En partie, oui. On peut n'autoriser que les destinations dont le service a réellement besoin et bloquer tout le reste via un firewall, on peut aussi mettre le système en *read-only*, mais il faut réfléchir à l'impact de ces choix, et être sûr que l'on ne crée pas d'effet de bord.
 
