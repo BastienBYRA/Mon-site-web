@@ -8,7 +8,7 @@
 }
 
 :root {
-  --bg: #f5f7fb;
+  --bg: #ffffff;
   --bg-code: #e8edf5;
   --text: #18222e;
   --text-muted: #5c6e82;
@@ -57,7 +57,7 @@ header {
 header nav {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 6rem;
+  padding: 0 9rem;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -107,8 +107,7 @@ header nav a:not(.logo):not(.search-result-item):hover {
 main {
   max-width: var(--max-width);
   width: 100%;
-  margin: 4rem auto 2.5rem;
-  padding: 0 6rem;
+  padding: 0 9rem;
   flex: 1;
 }
 
@@ -176,6 +175,7 @@ footer::before {
   padding-bottom: 3rem;
   border-bottom: 1px solid var(--border);
   animation: fadeSlideUp 0.5s ease both;
+  margin: 4rem auto 2.5rem;
 }
 
 .hero-title {
@@ -566,6 +566,10 @@ article > h1 {
 
 /* ── Article content ─────────────────────────────────────── */
 
+/* .article-content {
+  margin-top: -25px;
+} */
+
 .article-content h2 {
   font-family: var(--font-display);
   font-weight: 400;
@@ -823,7 +827,6 @@ article > h1 {
 
 @media (max-width: 600px) {
   main {
-    margin: 2.5rem auto;
     padding: 0 1.25rem;
   }
 
@@ -836,6 +839,7 @@ article > h1 {
     align-items: flex-start;
     gap: 1.5rem;
     padding-bottom: 2rem;
+    margin: 2rem auto 0rem;
   }
 
   .hero-aside {
@@ -880,7 +884,10 @@ article > h1 {
   font-size: 0.60rem;
 }
 
-
+.article-sub-section {
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
 
 @media (min-width: 900px) {
   .article-sub-section .article-sub-img {
@@ -913,5 +920,8 @@ article > h1 {
 .article-sub-section i {
   display: block;
   padding-top: 10px;
-  padding-bottom: 20px;
+}
+
+article {
+  margin: 2.5rem auto 2.5rem;
 }
